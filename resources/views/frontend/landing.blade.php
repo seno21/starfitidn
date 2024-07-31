@@ -88,7 +88,7 @@
         </section><!-- End Counts Section --> --}}
 
         <!-- ======= Portfolio Section ======= -->
-        <section id="portfolio" class="portfolio">
+        <section id="event" class="portfolio">
             <div class="container">
 
                 <div class="section-title">
@@ -272,7 +272,6 @@
 
                 <div class="section-title">
                     <h2>Testimonials</h2>
-                    <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem</p>
                 </div>
 
                 <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -371,7 +370,6 @@
 
                 <div class="section-title">
                     <h2>Team</h2>
-                    <p>Sit sint consectetur velit quos quisquam cupiditate nemo qui</p>
                 </div>
 
                 <div class="row">
@@ -421,7 +419,7 @@
 
                 <div class="section-title">
                     <h2>Contact</h2>
-                    <p>Magnam dolores commodi suscipit eius consequatur ex aliquid fuga</p>
+                    <p>Hubungi kami untuk pengalaman olahraga yang menakjubkan</p>
                 </div>
 
                 <div class="row mt-5 justify-content-center">
