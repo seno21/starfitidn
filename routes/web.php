@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('frontend.landing');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -17,8 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::get('/main', function () {
-//     return view('layouts.main');
-// });
+Route::get('/gallery', function () {
+    return view('frontend.gallery');
+})->name('gallery');
+
+Route::get('/event', function () {
+    return view('frontend.event');
+})->name('event');
 
 require __DIR__ . '/auth.php';

@@ -9,10 +9,11 @@
     </div>
     <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about">About</a></li>
-            <li><a class="nav-link scrollto " href="#event">Event</a></li>
-            <li><a class="nav-link scrollto" href="#testimonials">Testimonials</a></li>
+            <li><a class="nav-link scrollto active" href="{{ route('home') }}">Home</a></li>
+            <li><a class="nav-link scrollto" href="{{ route('home') }}#about">About</a></li>
+            <li><a class="nav-link scrollto " href="{{ route('home') }}#event">Event</a></li>
+            <li><a class="nav-link scrollto " href="{{ route('gallery') }}">Gallery</a></li>
+            <li><a class="nav-link scrollto" href="{{ route('home') }}#testimonials">Testimonials</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->

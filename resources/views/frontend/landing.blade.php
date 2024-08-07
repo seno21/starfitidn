@@ -1,11 +1,38 @@
 @extends('frontend.partials.main')
 @section('content')
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-        <div class="container text-center text-md-left" data-aos="fade-up">
+    <section id="">
+        {{-- <div class="container text-center text-md-left" data-aos="fade-up">
             <h1>Welcome to <span class="text-danger">StarfitIDN</span></h1>
             <h2>Kami menciptakan pengalaman olahraga yang tak terlupakan .</h2>
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        </div> --}}
+        <div class="row">
+            <div class="col-md-12">
+                <div id="carouselExample" class="carousel slide justify-content-center align-items-center">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="images/carousel/banner-1.jpeg" class="d-block w-100" alt="banner">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/carousel/banner-2.jpeg" class="d-block w-100" alt="banner">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/carousel/banner-3.jpeg" class="d-block w-100" alt="banner">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </section><!-- End Hero -->
 
@@ -95,24 +122,13 @@
                     <h2>DAFTAR EVENT</h2>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul id="portfolio-flters">
-                            <li data-filter="*" class="filter-active">All</li>
-                            <li data-filter=".filter-app">Ongoin</li>
-                            <li data-filter=".filter-card">Upcoming</li>
-                            <li data-filter=".filter-web">Completed</li>
-                        </ul>
-                    </div>
-                </div>
-
                 <div class="row portfolio-container">
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
                         <div class="portfolio-wrap">
                             <figure>
-                                <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
+                                <img src="images/poster/fun-run.jpeg" class="img-fluid" alt="">
+                                <a href="images/poster/fun-run.jpeg" data-gallery="portfolioGallery"
                                     class="link-preview portfolio-lightbox" title="Preview"><i class="bx bx-plus"></i></a>
                                 <a href="portfolio-details.html" class="link-details" title="More Details"><i
                                         class="bx bx-link"></i></a>
@@ -209,58 +225,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card wow fadeInUp">
-                        <div class="portfolio-wrap">
-                            <figure>
-                                <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-                                <a href="assets/img/portfolio/portfolio-7.jpg" class="link-preview portfolio-lightbox"
-                                    data-gallery="portfolioGallery" title="Preview"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" class="link-details" title="More Details"><i
-                                        class="bx bx-link"></i></a>
-                            </figure>
-
-                            <div class="portfolio-info">
-                                <h4><a href="portfolio-details.html">Card 1</a></h4>
-                                <p>Card</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="portfolio-wrap">
-                            <figure>
-                                <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-                                <a href="assets/img/portfolio/portfolio-8.jpg" class="link-preview portfolio-lightbox"
-                                    data-gallery="portfolioGallery" title="Preview"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" class="link-details" title="More Details"><i
-                                        class="bx bx-link"></i></a>
-                            </figure>
-
-                            <div class="portfolio-info">
-                                <h4><a href="portfolio-details.html">Card 3</a></h4>
-                                <p>Card</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="portfolio-wrap">
-                            <figure>
-                                <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-                                <a href="assets/img/portfolio/portfolio-9.jpg" class="link-preview portfolio-lightbox"
-                                    data-gallery="portfolioGallery" title="Preview"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" class="link-details" title="More Details"><i
-                                        class="bx bx-link"></i></a>
-                            </figure>
-
-                            <div class="portfolio-info">
-                                <h4><a href="portfolio-details.html">Web 1</a></h4>
-                                <p>Web</p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
@@ -281,15 +245,12 @@
                             <div class="testimonial-item">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit
-                                    rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                                    risus at semper.
+                                    Pengalaman berlari yang luar biasa! Semua peserta dan panitia sangat ramah dan
+                                    mendukung. Menyelesaikan lomba memberikan kepuasan tersendiri. Terima kasih untuk acara
+                                    yang tak terlupakan!
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
-                                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Saul Goodman</h3>
-                                <h4>Ceo &amp; Founder</h4>
+                                <h3>Dewi Susanti</h3>
                             </div>
                         </div><!-- End testimonial item -->
 
@@ -297,15 +258,11 @@
                             <div class="testimonial-item">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid
-                                    cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet
-                                    legam anim culpa.
+                                    Pertama kali saya ikut event lari dan langsung jatuh cinta! Semuanya teratur dengan
+                                    baik, dari registrasi hingga garis finish. Pengalaman yang sangat memotivasi!
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
-                                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Sara Wilsson</h3>
-                                <h4>Designer</h4>
+                                <h3>Siti Aisyah</h3>
                             </div>
                         </div><!-- End testimonial item -->
 
@@ -313,15 +270,12 @@
                             <div class="testimonial-item">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem
-                                    veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint
-                                    minim.
+                                    Pengalaman yang sangat mendebarkan! Melihat para peserta berjuang dengan beban yang
+                                    luar biasa sungguh menginspirasi. Organisasi acaranya sangat baik, dan semuanya berjalan
+                                    lancar.
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
-                                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Jena Karlis</h3>
-                                <h4>Store Owner</h4>
+                                <h3>Wahyu Utami</h3>
                             </div>
                         </div><!-- End testimonial item -->
 
@@ -329,15 +283,12 @@
                             <div class="testimonial-item">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim
-                                    fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem
-                                    dolore labore illum veniam.
+                                    Acara lari ini benar-benar menginspirasi! Saya merasa sangat didukung oleh komunitas
+                                    pelari yang positif. Rasanya luar biasa bisa mencapai garis finish dan mendapatkan
+                                    medali.
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
-                                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Matt Brandon</h3>
-                                <h4>Freelancer</h4>
+                                <h3>Bambang Santoso</h3>
                             </div>
                         </div><!-- End testimonial item -->
 
@@ -345,15 +296,12 @@
                             <div class="testimonial-item">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster
-                                    veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam
-                                    culpa fore nisi cillum quid.
+                                    Acara lari ini luar biasa! Rutenya menantang namun sangat memuaskan. Organisasinya
+                                    sangat baik, dan suasananya sangat mendukung. Saya tidak sabar untuk berpartisipasi lagi
+                                    tahun depan!
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
-                                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>John Larson</h3>
-                                <h4>Entrepreneur</h4>
+                                <h3>Andi Prasetyo</h3>
                             </div>
                         </div><!-- End testimonial item -->
 
@@ -363,55 +311,6 @@
 
             </div>
         </section><!-- End Testimonials Section -->
-
-        <!-- ======= Team Section ======= -->
-        <section id="team" class="team">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Team</h2>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
-                        <div class="member">
-                            <img src="assets/img/team/team-1.jpg" alt="">
-                            <h4>Walter White</h4>
-                            <span>Chief Executive Officer</span>
-                            <p>
-                                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis
-                                quaerat qui aut aut aut
-                            </p>
-                            <div class="social">
-                                <a href=""><i class="bi bi-twitter"></i></a>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
-                        <div class="member">
-                            <img src="assets/img/team/team-2.jpg" alt="">
-                            <h4>Sarah Jhinson</h4>
-                            <span>Product Manager</span>
-                            <p>
-                                Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum
-                                rerum temporibus
-                            </p>
-                            <div class="social">
-                                <a href=""><i class="bi bi-twitter"></i></a>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section><!-- End Team Section -->
 
         <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact section-bg">
@@ -431,7 +330,7 @@
                                 <div class="col-lg-4 info">
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Location:</h4>
-                                    <p>A108 Adam Street<br>New York, NY 535022</p>
+                                    <p>Perum Cikarang Griya Pratama<br>Blok G12 No.6</p>
                                 </div>
 
                                 <div class="col-lg-4 info mt-4 mt-lg-0">
@@ -443,7 +342,7 @@
                                 <div class="col-lg-4 info mt-4 mt-lg-0">
                                     <i class="bi bi-phone"></i>
                                     <h4>Call:</h4>
-                                    <p>+1 5589 55488 51<br>+1 5589 22475 14</p>
+                                    <p><a href="https://wa.me/081386286794">+62 8138 6286 794</a></p>
                                 </div>
                             </div>
                         </div>
