@@ -7,7 +7,7 @@
             <h2>Kami menciptakan pengalaman olahraga yang tak terlupakan .</h2>
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
         </div> --}}
-        <div class="row">
+        <div class="row m-0">
             <div class="col-md-12">
                 <div id="carouselExample" class="carousel slide justify-content-center align-items-center">
                     <div class="carousel-inner">
