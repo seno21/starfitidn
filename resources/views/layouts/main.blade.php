@@ -54,8 +54,12 @@
             <!-- partial -->
             <!-- partial:partials/_sidebar.html -->
             @include('partials.sidebar')
-            <!-- partial -->
-            @yield('content_backend')
+            <div class="main-panel">
+                <!-- partial -->
+                @yield('content_backend')
+
+                @include('partials.footer')
+            </div>
         </div>
         <!-- page-body-wrapper ends -->
     </div>
