@@ -2,7 +2,7 @@
 
     <div class="logo me-auto">
         <h1>
-            <img src="{{ asset('assets/img/favicon.png') }}" alt="" srcset="">
+            <img src="{{ asset('images/logo.png') }}" alt="" srcset="">
         </h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
