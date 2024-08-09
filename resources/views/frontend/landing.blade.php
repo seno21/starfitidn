@@ -67,7 +67,7 @@
         </section><!-- End About Section -->
 
 
-        {{-- <!-- ======= Counts Section ======= -->
+        <!-- ======= Counts Section ======= -->
         <section id="counts" class="counts">
             <div class="container">
 
@@ -76,43 +76,44 @@
                     <div class="col-lg-3 col-6">
                         <div class="count-box">
                             <i class="bi bi-emoji-smile"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
+                            <span data-purecounter-start="0" data-purecounter-end="15423" data-purecounter-duration="1"
                                 class="purecounter"></span>
-                            <p>Happy Clients</p>
+                            <p>Total Peserta</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-6">
                         <div class="count-box">
                             <i class="bi bi-journal-richtext"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
+                            <span data-purecounter-start="0" data-purecounter-end="92" data-purecounter-duration="1"
                                 class="purecounter"></span>
-                            <p>Projects</p>
+                            <p>Event Terselenggara</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-6 mt-5 mt-lg-0">
                         <div class="count-box">
                             <i class="bi bi-headset"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1"
+                            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1"
                                 class="purecounter"></span>
-                            <p>Hours Of Support</p>
+                            <p>Partnership terjalin</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-6 mt-5 mt-lg-0">
                         <div class="count-box">
                             <i class="bi bi-people"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1"
+                            <span data-purecounter-start="0" data-purecounter-end="3402" data-purecounter-duration="1"
                                 class="purecounter"></span>
-                            <p>Hard Workers</p>
+                            <p>Peserta Terakhir</p>
                         </div>
                     </div>
 
                 </div>
 
             </div>
-        </section><!-- End Counts Section --> --}}
+        </section>
+        <!-- End Counts Section -->
 
         <!-- ======= Portfolio Section ======= -->
         <section id="event" class="portfolio">
@@ -230,12 +231,65 @@
             </div>
         </section><!-- End Portfolio Section -->
 
+        <!-- Galery Section -->
+    <section class="portfolio" id="gallery">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>GALLERY</h2>
+            </div>
+
+            <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+                <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+                    <div class="col-lg-4 col-md-6 portfolio-item wow fadeInUp">
+                        <img src="images/poster/fun-run.jpeg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>App 1</h4>
+                            <p>Lorem ipsum, dolor sit</p>
+                            <a href="images/poster/fun-run.jpeg" title="App 1" data-gallery="portfolio-gallery-app"
+                                class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+                        <img src="images/poster/run-party.jpeg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>app 1</h4>
+                            <p>Lorem ipsum, dolor sit</p>
+                            <a href="images/poster/run-party.jpeg" title="app 1" data-gallery="portfolio-gallery-app"
+                                class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+                        <img src="images/poster/skrun.jpeg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>app 1</h4>
+                            <p>Lorem ipsum, dolor sit</p>
+                            <a href="images/poster/skrun.jpeg" title="app 1" data-gallery="portfolio-gallery-app"
+                                class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+                </div><!-- End Portfolio Container -->
+
+            </div>
+
+            <div class="mt-3 text-center">
+                <a href="{{route('gallery')}}" type="button" class="btn btn-outline-primary btn-fw btn-lg">Cari momen terbaikmu</a>
+            </div>
+
+        </div>
+
+    </section>
+
         <!-- ======= Testimonials Section ======= -->
         <section id="testimonials" class="testimonials section-bg">
             <div class="container">
 
                 <div class="section-title">
-                    <h2>Testimonials</h2>
+                    <h2>TESTIMONIALS</h2>
                 </div>
 
                 <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -317,7 +371,7 @@
             <div class="container">
 
                 <div class="section-title">
-                    <h2>Contact</h2>
+                    <h2>CONTACT</h2>
                     <p>Hubungi kami untuk pengalaman olahraga yang menakjubkan</p>
                 </div>
 
