@@ -8,6 +8,10 @@ class EventController extends Controller
 {
     public function create()
     {
-        return view('event.create');
+        $data = [
+            'title' => 'Create Event'
+        ];
+
+        return view('event.create', $data);
     }
 }

@@ -13,8 +13,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $data = [
+            'title' => 'List Users'
+        ];
         $users = User::whereNot('role', 'admin')->get();
-        return view('pages.list-akun', compact('users'));
+        return view('pages.list-akun', compact('users'), $data);
     }
 
     /**
@@ -55,13 +58,13 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = User::findOrFail($request->id);
-    $user->role = $request->input('currentRole') === 'user' ? 'partner' : 'user';
-    $user->save();
+        $user->role = $request->input('currentRole') === 'user' ? 'partner' : 'user';
+        $user->save();
 
-    return response()->json([
-        'success' => true,
-        'user' => $user
-    ]);
+        return response()->json([
+            'success' => true,
+            'user' => $user
+        ]);
     }
 
     /**
