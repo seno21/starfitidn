@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.cs') }}s">
+    <link rel="stylesheet" href="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('js/select.dataTables.min.css') }}">
     <!-- End plugin css for this page -->
@@ -70,6 +70,7 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('vendors/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('vendors/datatables.net/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
@@ -84,7 +85,13 @@
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="{{ asset('js/data-table.js') }}"></script>
+    <script src="{{ asset('js/alerts.js') }}"></script>
     <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
+
+    <!-- Add in your main layout -->
+
+
     <!-- End custom js for this page-->
 </body>
 

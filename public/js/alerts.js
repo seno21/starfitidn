@@ -30,7 +30,7 @@
         text: 'You entered the correct answer',
         icon: 'success',
         button: {
-          text: "Continue",
+          text: "ok",
           value: true,
           visible: true,
           className: "btn btn-primary"

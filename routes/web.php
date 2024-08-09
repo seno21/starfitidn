@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // FRONTEND - Route untuk Landing (Tanpa Login)
@@ -25,9 +26,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/list-akun', function () {
-        return view('pages.list-akun');
-    })->name('list-akun');
+    Route::get('/list-akun', [UserController::class, 'index'])->name('list-akun');
+    Route::post('/ganti-role', [UserController::class, 'update'])->name('ganti-role');
 });
 
 Route::middleware('auth')->group(function () {
