@@ -97,25 +97,6 @@
     <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
     <script src="{{ asset('js/file-upload.js') }}"></script>
     <!-- End custom js for this page-->
-
-
-    <script>
-        $('#summernote').summernote({
-            placeholder: 'Hello stand alone ui',
-            tabsize: 2,
-            height: 120,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]
-        });
-    </script>
-
 </body>
 
 </html>

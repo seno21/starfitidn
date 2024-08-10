@@ -3,7 +3,8 @@
     <div class="card min-vh-100">
         <div class="card-body">
             <h4 class="card-title">EVENT FORM</h4>
-            <form action="{{ route('event.eom.store') }}" class="form-sample" enctype="multipart/form-data">
+            <form class="form-sample" action="{{ route('event.eom.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">

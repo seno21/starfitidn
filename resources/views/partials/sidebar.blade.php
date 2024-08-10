@@ -21,7 +21,7 @@
     </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('event.eom.create') }}" aria-expanded="false" aria-controls="ui-basic">
+        <a class="nav-link" href="{{ route('event.eom.index') }}" aria-expanded="false" aria-controls="ui-basic">
             <i class="icon-layout menu-icon"></i>
             <span class="menu-title">Event Managemengt</span>
         </a>
