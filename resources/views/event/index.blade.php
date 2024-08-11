@@ -7,13 +7,14 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
-                            <table id="order-listing" class="table">
+                            <table id="event-listing" class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
+                                        <th>Nama Event</th>
+                                        <th>Waktu Pelaksanaan</th>
+                                        <th>Penyelengara</th>
+                                        <th>Kategori</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -23,11 +24,8 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td>
-                                            <button class="btn btn-outline-primary change-role-btn">
-                                                Ganti Role
-                                            </button>
-                                        </td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>

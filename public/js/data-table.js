@@ -12,6 +12,11 @@
             },
         });
 
+        // Data table Event
+        $(document).ready(function () {
+            $("#event-listing").DataTable();
+        });
+
         $("#order-listing").each(function () {
             var datatable = $(this);
             // SEARCH - Add the placeholder for Search and Turn this into in-line form control

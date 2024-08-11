@@ -3,34 +3,66 @@
     <div class="card min-vh-100">
         <div class="card-body">
             <h4 class="card-title">EVENT FORM</h4>
-            <form class="form-sample" action="{{ route('event.eom.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="eventForm" class="form-sample" action="{{ route('event.eom.store') }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="acara">Nama Acara</label>
-                            <input type="text" class="form-control" id="acara" placeholder="Aerobik Seru"
-                                name="acara">
+                            <input type="text" class="form-control @error('acara') is-invalid @enderror" id="acara"
+                                placeholder="Aerobik Seru" name="acara" value="{{ old('acara') }}">
+                            @error('acara')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="waktu">Waktu Pelaksanaan</label>
-                            <input type="datetime-local" class="form-control" id="waktu" name="waktu">
+                            <input type="datetime-local" class="form-control @error('waktu') is-invalid @enderror"
+                                id="waktu" name="waktu" value="{{ old('waktu') }}">
+                            @error('waktu')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="lokasi">Lokasi Acara</label>
-                            <textarea class="form-control" name="lokasi" id="lokasi" rows="6" placeholder="Jl. Jendral Sudirman, No. 3"></textarea>
+                            <textarea class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi" rows="6"
+                                placeholder="Jl. Jendral Sudirman, No. 3">{{ old('lokasi') }}</textarea>
                             {{-- <textarea id="summernote" name="summernote"></textarea> --}}
+                            @error('lokasi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="cp">No. Telepon / WhatsApp</label>
-                            <input type="text" class="form-control" id="cp" placeholder="08xxxxxx" name="telepon">
+                            <input type="text" class="form-control @error('telepon') is-invalid @enderror" id="cp"
+                                placeholder="08123456789" name="telepon" value="{{ old('telepon') }}">
+                            @error('telepon')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Poster Acara</label>
-                            <input type="file" name="img[]" class="file-upload-default">
+                            <img class="rounded d-block m-3 col-md-4" id="posterView">
+                            <input type="file" name="poster" class="file-upload-default" id="poster"
+                                onchange="viewImage()">
                             <div class="input-group col-xs-12">
-                                <input type="text" class="form-control file-upload-info" disabled
-                                    placeholder="Upload Image" name="poster">
+                                <input type="text"
+                                    class="form-control @error('poster') is-invalid @enderror file-upload-info" disabled
+                                    placeholder="Upload Image">
+                                @error('file')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 <span class="input-group-append">
                                     <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                                 </span>
@@ -40,8 +72,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="penyelenggara">Penyelengara Acara</label>
-                            <input type="text" class="form-control" id="penyelenggara" placeholder="Starfit Indonesia"
-                                name="penyelenggara">
+                            <input type="text" class="form-control @error('penyelenggara') is-invalid @enderror"
+                                id="penyelenggara" placeholder="Starfit Indonesia" name="penyelenggara"
+                                value="{{ old('penyelenggara') }}">
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 col-form-label">Kategori</label>
@@ -58,7 +91,7 @@
                                 <div class="col-sm-5">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="kategori" id="P"
+                                            <input type="radio" class="form-check-input" name="kategori" id="NL"
                                                 value="non-lari">
                                             Event Non-Lari
                                         </label>
@@ -76,7 +109,8 @@
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi Acara</label>
-                            <textarea class="form-control" name="deskripsi" id="deskripsi" rows="6" placeholder="Isikan detail acara"></textarea>
+                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi" rows="6"
+                                placeholder="Isikan detail acara">{{ old('deskripsi') }}</textarea>
                             {{-- <textarea id="summernote" name="summernote"></textarea> --}}
                         </div>
                     </div>
