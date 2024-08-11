@@ -1,4 +1,4 @@
 *
 !public/
 !.gitignore
-!/public/storage/poster-img/bekasi-fun-run.jpeg
+!public/poster-img/bekasi-fun-run.jpeg
