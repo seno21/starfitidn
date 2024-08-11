@@ -15,6 +15,7 @@ class Events extends Model
     {
         return DB::table('events')
             ->limit(6)
+            ->orderBy('waktu_pelaksanaan', 'desc')
             ->get();
     }
 }
