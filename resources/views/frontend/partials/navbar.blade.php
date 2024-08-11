@@ -18,8 +18,17 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->
 
-    <div class="header-social-links d-flex align-items-center">
-        <a href="{{ route('login') }}" class="btn btn-primary btn-lg text-sm text-light p-3">Login</a>
-    </div>
+
+
+    @if (Auth::check() == true)
+        <div class="header-social-links d-flex align-items-center">
+            <a href="{{ route('login') }}" class="btn btn-danger btn-lg text-sm text-light p-3 "><i
+                    class="bx bx-exit pl-1 mr-2"></i>Logout</a>
+        </div>
+    @else
+        <div class="header-social-links d-flex align-items-center">
+            <a href="{{ route('login') }}" class="btn btn-primary btn-lg text-sm text-light p-3">Login</a>
+        </div>
+    @endif
 
 </div>
