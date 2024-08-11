@@ -3,7 +3,14 @@
     <div class="content-wrapper">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">List Event</h4>
+                <div class="row mb-3">
+                    <div class="col-md-10">
+                        <h4 class="card-title">List Event</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{{route('event.eom.create')}}" class="btn btn-primary btn-block btn-rounded btn-fw">Tambah Event</a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
