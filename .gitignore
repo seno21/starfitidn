@@ -3,7 +3,6 @@
 /public/build
 /public/hot
 /public/storage
-!/public/storage/poster-img/bekasi-fun-run.jpeg
 /storage/*.key
 /vendor
 .env
