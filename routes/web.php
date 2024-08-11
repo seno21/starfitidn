@@ -4,13 +4,12 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 
 // FRONTEND - Route untuk Landing (Tanpa Login)
 
-Route::get('/', function () {
-    return view('frontend.landing');
-})->name('home');
+Route::get('/', [LandingController::class, 'index'])->name('home');
 
 Route::get('/event', function () {
     return view('frontend.event');

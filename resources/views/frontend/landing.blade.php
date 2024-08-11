@@ -125,24 +125,27 @@
 
                 <div class="row portfolio-container">
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
-                        <div class="portfolio-wrap">
-                            <figure>
-                                <img src="images/poster/fun-run.jpeg" class="img-fluid" alt="">
-                                <a href="images/poster/fun-run.jpeg" data-gallery="portfolioGallery"
-                                    class="link-preview portfolio-lightbox" title="Preview"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" class="link-details" title="More Details"><i
-                                        class="bx bx-link"></i></a>
-                            </figure>
+                    @foreach ($events as $event)
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+                            <div class="portfolio-wrap">
+                                <figure>
+                                    <img src="{{ asset('storage/' . $event->poster) }}" class="img-fluid" alt="">
+                                    <a href="{{ asset('storage/' . $event->poster) }}" data-gallery="portfolioGallery"
+                                        class="link-preview portfolio-lightbox" title="Preview"><i
+                                            class="bx bx-plus"></i></a>
+                                    <a href="portfolio-details.html" class="link-details" title="More Details"><i
+                                            class="bx bx-link"></i></a>
+                                </figure>
 
-                            <div class="portfolio-info">
-                                <h4><a href="portfolio-details.html">App 1</a></h4>
-                                <p>App</p>
+                                <div class="portfolio-info">
+                                    <h4><a href="portfolio-details.html">App 1</a></h4>
+                                    <p>App</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web wow fadeInUp" data-wow-delay="0.1s">
+                    {{-- <div class="col-lg-4 col-md-6 portfolio-item filter-web wow fadeInUp" data-wow-delay="0.1s">
                         <div class="portfolio-wrap">
                             <figure>
                                 <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
@@ -225,64 +228,66 @@
                                 <p>App</p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>
         </section><!-- End Portfolio Section -->
 
         <!-- Galery Section -->
-    <section class="portfolio" id="gallery">
+        <section class="portfolio" id="gallery">
 
-        <div class="container">
+            <div class="container">
 
-            <div class="section-title">
-                <h2>GALLERY</h2>
+                <div class="section-title">
+                    <h2>GALLERY</h2>
+                </div>
+
+                <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+                    <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+                        <div class="col-lg-4 col-md-6 portfolio-item wow fadeInUp">
+                            <img src="images/poster/fun-run.jpeg" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <h4>App 1</h4>
+                                <p>Lorem ipsum, dolor sit</p>
+                                <a href="images/poster/fun-run.jpeg" title="App 1" data-gallery="portfolio-gallery-app"
+                                    class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
+                            </div>
+                        </div><!-- End Portfolio Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+                            <img src="images/poster/run-party.jpeg" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <h4>app 1</h4>
+                                <p>Lorem ipsum, dolor sit</p>
+                                <a href="images/poster/run-party.jpeg" title="app 1"
+                                    data-gallery="portfolio-gallery-app" class="link-preview portfolio-lightbox"><i
+                                        class="bx bx-show"></i></a>
+                            </div>
+                        </div><!-- End Portfolio Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+                            <img src="images/poster/skrun.jpeg" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <h4>app 1</h4>
+                                <p>Lorem ipsum, dolor sit</p>
+                                <a href="images/poster/skrun.jpeg" title="app 1" data-gallery="portfolio-gallery-app"
+                                    class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
+                            </div>
+                        </div><!-- End Portfolio Item -->
+                    </div><!-- End Portfolio Container -->
+
+                </div>
+
+                <div class="mt-3 text-center">
+                    <a href="{{ route('gallery') }}" type="button" class="btn btn-outline-primary btn-fw btn-lg">Cari
+                        momen terbaikmu</a>
+                </div>
+
             </div>
 
-            <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-                <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-                    <div class="col-lg-4 col-md-6 portfolio-item wow fadeInUp">
-                        <img src="images/poster/fun-run.jpeg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>App 1</h4>
-                            <p>Lorem ipsum, dolor sit</p>
-                            <a href="images/poster/fun-run.jpeg" title="App 1" data-gallery="portfolio-gallery-app"
-                                class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
-                        </div>
-                    </div><!-- End Portfolio Item -->
-
-                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                        <img src="images/poster/run-party.jpeg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>app 1</h4>
-                            <p>Lorem ipsum, dolor sit</p>
-                            <a href="images/poster/run-party.jpeg" title="app 1" data-gallery="portfolio-gallery-app"
-                                class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
-                        </div>
-                    </div><!-- End Portfolio Item -->
-
-                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                        <img src="images/poster/skrun.jpeg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>app 1</h4>
-                            <p>Lorem ipsum, dolor sit</p>
-                            <a href="images/poster/skrun.jpeg" title="app 1" data-gallery="portfolio-gallery-app"
-                                class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
-                        </div>
-                    </div><!-- End Portfolio Item -->
-                </div><!-- End Portfolio Container -->
-
-            </div>
-
-            <div class="mt-3 text-center">
-                <a href="{{route('gallery')}}" type="button" class="btn btn-outline-primary btn-fw btn-lg">Cari momen terbaikmu</a>
-            </div>
-
-        </div>
-
-    </section>
+        </section>
 
         <!-- ======= Testimonials Section ======= -->
         <section id="testimonials" class="testimonials section-bg">

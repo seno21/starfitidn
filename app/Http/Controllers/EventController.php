@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\events;
-use Illuminate\Auth\Events\Validated;
+use App\Models\Events;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -14,7 +13,7 @@ class EventController extends Controller
 
         $data = [
             'title' => 'List Event',
-            'events' => events::All(),
+            'events' => Events::All(),
         ];
 
         return view('event.index', $data);
@@ -46,7 +45,7 @@ class EventController extends Controller
         // return $request->file('poster')->store('poster');
         // alert()->success('SuccessAlert', 'Lorem ipsum dolor sit amet.');
 
-        $event = new events();
+        $event = new Events();
 
         $event->nama_event = $request->acara;
         $event->waktu_pelaksanaan = $request->waktu;
@@ -60,6 +59,9 @@ class EventController extends Controller
         $event->active = 1;
         $event->save();
 
-        return redirect()->route('event.eom.index')->with('success', 'Berhasil Update data');
+        // Alert::success('Success Title', 'Success Message');
+        alert('Success Title', 'Success Message');
+
+        return redirect()->route('event.eom.index');
     }
 }
