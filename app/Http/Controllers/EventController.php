@@ -11,8 +11,10 @@ class EventController extends Controller
 {
     public function index()
     {
+
         $data = [
-            'title' => 'List Event'
+            'title' => 'List Event',
+            'events' => events::All(),
         ];
 
         return view('event.index', $data);
@@ -51,13 +53,13 @@ class EventController extends Controller
         $event->lokasi  = $request->lokasi;
         $event->kontak = $request->telepon;
         $event->poster = $request->file('poster')->store('poster-img');
+        $event->penyelenggara = $request->penyelenggara;
         $event->kategori = $request->kategori;
         $event->status = $request->status;
         $event->deskripsi = $request->deskripsi;
         $event->active = 1;
         $event->save();
 
-        Alert::success('Berhasil', 'Data berhasil disimpan!');
-        return redirect()->back();
+        return redirect()->route('event.eom.index')->with('success', 'Berhasil Update data');
     }
 }

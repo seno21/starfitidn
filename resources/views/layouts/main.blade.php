@@ -71,7 +71,8 @@
         <!-- page-body-wrapper ends -->
     </div>
     {{-- weet-alert  --}}
-    {{-- @include('sweetalert::alert') --}}
+    @include('sweetalert::alert')
+
     <!-- plugins:js -->
     <script src="{{ asset('frontend/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
@@ -82,7 +83,6 @@
     <script src="{{ asset('vendors/datatables.net/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
-    {{-- <script src="{{ asset('vendors/tinymce/tinymce.min.js') }}"></script> --}}
 
     <!-- End plugin js for this page -->
     <!-- inject:js -->
@@ -98,7 +98,7 @@
     <script src="{{ asset('js/alerts.js') }}"></script>
     <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
     <script src="{{ asset('js/file-upload.js') }}"></script>
-    <script src="{{ asset('js/form-validation.js') }}"></script>
+    {{-- <script src="{{ asset('js/form-validation.js') }}"></script> --}}
     <!-- End custom js for this page-->
 
     <script>

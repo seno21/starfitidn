@@ -8,7 +8,8 @@
                         <h4 class="card-title">List Event</h4>
                     </div>
                     <div class="col-md-2">
-                        <a href="{{route('event.eom.create')}}" class="btn btn-primary btn-block btn-rounded btn-fw">Tambah Event</a>
+                        <a href="{{ route('event.eom.create') }}" class="btn btn-primary btn-block btn-rounded btn-fw">Tambah
+                            Event</a>
                     </div>
                 </div>
                 <div class="row">
@@ -26,14 +27,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    @foreach ($events as $event)
+                                        <tr>
+                                            <td>{{ $event->nama_event }}</td>
+                                            <td>{{ $event->waktu_pelaksanaan }}</td>
+                                            <td>{{ $event->penyelenggara }}</td>
+                                            <td>{{ $event->kategori }}</td>
+                                            <td>{{ $event->status }}</td>
+                                            <td>
+                                                <a href="" class="btn btn-sm btn-info">Detail</a>
+                                                <a href="" class="btn btn-sm btn-success">Edit</a>
+                                                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->string('kontak');
             $table->string('poster');
+            $table->string('penyelenggara');
             $table->string('kategori');
             $table->string('status');
             $table->boolean('active');

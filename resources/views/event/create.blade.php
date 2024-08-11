@@ -58,11 +58,6 @@
                                 <input type="text"
                                     class="form-control @error('poster') is-invalid @enderror file-upload-info" disabled
                                     placeholder="Upload Image">
-                                @error('file')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
                                 <span class="input-group-append">
                                     <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                                 </span>
