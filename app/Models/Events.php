@@ -11,10 +11,26 @@ class Events extends Model
 {
     use HasFactory, HasUuids;
 
+    // Method untuk landing event - FrontEnd
+    public function allEvent()
+    {
+        return DB::table('events')
+            ->orderBy('waktu_pelaksanaan', 'desc')
+            ->where('events.active', 1)
+            ->get();
+    }
+
+
+    // Method untuk Admin event dashboard - BackEnd
+    public function showIndex()
+    {
+        return DB::table('events')->where('events.active', 1)->get();
+    }
+
     public function showEventLanding()
     {
         return DB::table('events')
-            ->limit(6)
+            ->limit(4)
             ->orderBy('waktu_pelaksanaan', 'desc')
             ->get();
     }

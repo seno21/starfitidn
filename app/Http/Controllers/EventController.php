@@ -10,10 +10,12 @@ class EventController extends Controller
 {
     public function index()
     {
+        $event = new Events();
+
 
         $data = [
             'title' => 'List Event',
-            'events' => Events::All(),
+            'events' => $event->showIndex(),
         ];
 
         return view('event.index', $data);
@@ -60,7 +62,7 @@ class EventController extends Controller
         $event->save();
 
         // Alert::success('Success Title', 'Success Message');
-        alert('Success Title', 'Success Message');
+        alert()->success('SuccessAlert', 'Event Berhasil Dibuat');
 
         return redirect()->route('event.eom.index');
     }

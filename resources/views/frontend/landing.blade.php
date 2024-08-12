@@ -116,36 +116,64 @@
         <!-- End Counts Section -->
 
         <!-- ======= Portfolio Section ======= -->
-        <section id="event" class="portfolio">
+        <section id="event">
             <div class="container">
 
                 <div class="section-title">
                     <h2>DAFTAR EVENT</h2>
                 </div>
-
-                <div class="row portfolio-container">
-
+                <div class="row">
                     @foreach ($events as $event)
-                        <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
-                            <div class="portfolio-wrap">
-                                <figure>
-                                    <img src="{{ asset('storage/' . $event->poster) }}" class="img-fluid" alt="">
-                                    <a href="{{ asset('storage/' . $event->poster) }}" data-gallery="portfolioGallery"
-                                        class="link-preview portfolio-lightbox btn btn-outline-primary" title="Preview"><i
-                                            class="bx bx-show"></i></a>
-                                    {{-- <a href="portfolio-details.html" class="link-details btn btn-sm btn-primary"
-                                        title="More Details">Daftar</a> --}}
-                                </figure>
-
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html">App 1</a></h4>
-                                    <p>App</p>
+                        <div class="col-md-3">
+                            <div class="card border-primary border-3 m-1">
+                                {{-- <div class="portfolio-item filter-app wow fadeInUp"> --}}
+                                <div class="portfolio-wrap">
+                                    <figure class="figure p-2 img-thumbnail">
+                                        <a href="{{ asset('storage/' . $event->poster) }}" data-gallery="portfolioGallery"
+                                            class="link-preview portfolio-lightbox">
+                                            <img src="{{ asset('storage/' . $event->poster) }}"
+                                                class="img-fluid rounded fixed-image" alt=""></a>
+                                    </figure>
+                                </div>
+                                {{-- </div> --}}
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold text-uppercase">{{ $event->nama_event }}</h5>
+                                    <hr>
+                                    <div class="card-text " style="min-height: 150px; overflow-y: auto;">
+                                        <table class="table table-borderless">
+                                            <tr class="font-weight-bold">
+                                                <td class="fw-bold">WAKTU</td>
+                                                <td>: </td>
+                                                <td>{{ $event->waktu_pelaksanaan }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">LOKASI</td>
+                                                <td>: </td>
+                                                <td>{{ $event->lokasi }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <p class="card-text">
+                                        <small class="text-muted">{{ $event->status }}</small>
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">
+                                        <a href="" class="btn btn-outline-primary btn-block fw-bold border-2"><i
+                                                class='bx bxs-mouse mr-1'></i> Daftar Event</a>
+                                    </small>
                                 </div>
                             </div>
                         </div>
                     @endforeach
-
                 </div>
+
+                <div class="mt-3 text-center">
+                    <a href="{{ route('event') }}" type="button" class="btn btn-primary btn-fw btn-lg"> Lihat
+                        Seluruh Event</a>
+                </div>
+
+
 
             </div>
         </section><!-- End Portfolio Section -->
@@ -198,7 +226,7 @@
 
                 <div class="mt-3 text-center">
                     <a href="{{ route('gallery') }}" type="button" class="btn btn-outline-primary btn-fw btn-lg">Cari
-                        momen terbaikmu</a>
+                        Momen Terbaikmu</a>
                 </div>
 
             </div>
@@ -315,8 +343,8 @@
                                 </div>
 
                                 <div class="col-lg-4 info mt-4 mt-lg-0">
-                                    <i class="bi bi-phone"></i>
-                                    <h4>Call:</h4>
+                                    <i class='bx bxl-whatsapp'></i>
+                                    <h4>WhatsApp:</h4>
                                     <p><a href="https://wa.me/081386286794">+62 8138 6286 794</a></p>
                                 </div>
                             </div>
