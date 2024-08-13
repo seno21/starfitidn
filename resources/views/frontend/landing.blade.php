@@ -9,7 +9,7 @@
         </div> --}}
         <div class="row m-0">
             <div class="col-md-12">
-                <div id="carouselExample" class="carousel slide justify-content-center align-items-center">
+                <div id="carouselExample" class="carousel slide justify-content-center align-items-center p-0">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="images/carousel/banner-1.jpeg" class="d-block w-100" alt="banner">
@@ -57,7 +57,7 @@
                         </p>
                         <div>
                             <p class="mt-5">
-                                <a href="#about" class="btn-get-started scrollto">Join Partner</a>
+                                <a href="#about" class="btn btn-outline-primary text-uppercase scrollto">Join Partner</a>
                             </p>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
         <!-- End Counts Section -->
 
         <!-- ======= Portfolio Section ======= -->
-        <section id="event">
+        <section id="event" class="section-bg">
             <div class="container">
 
                 <div class="section-title">
@@ -124,22 +124,34 @@
                 </div>
                 <div class="row">
                     @foreach ($events as $event)
-                        <div class="col-md-3">
-                            <div class="card border-primary border-3 m-1">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card shadow-sm m-1 border-0 mt-3">
                                 {{-- <div class="portfolio-item filter-app wow fadeInUp"> --}}
-                                <div class="portfolio-wrap">
-                                    <figure class="figure p-2 img-thumbnail">
-                                        <a href="{{ asset('storage/' . $event->poster) }}" data-gallery="portfolioGallery"
-                                            class="link-preview portfolio-lightbox">
-                                            <img src="{{ asset('storage/' . $event->poster) }}"
-                                                class="img-fluid rounded fixed-image" alt=""></a>
-                                    </figure>
+                                <div class="position-relative p-3">
+                                    <a href="{{ asset('storage/' . $event->poster) }}" data-gallery="portfolioGallery"
+                                        class="link-preview portfolio-lightbox">
+                                        <img src="{{ asset('storage/' . $event->poster) }}"
+                                            class="img-fluid rounded w-100 card-img-top shadow border-0" alt=""
+                                            style="object-fit: cover; height: 200px;">
+                                    </a>
+                                    <label
+                                        class="badge position-absolute rounded top-0 end-0 m-2 fs-6 text-uppercase {{ $event->status == 'ongoing' ? 'bg-primary' : ($event->status == 'upcoming' ? 'bg-warning' : 'bg-danger') }}">
+                                        {{ $event->status }}
+                                    </label>
+                                    <label
+                                        class="badge position-absolute rounded bottom-0 start-0 end-0 m-2 border bg-white text-primary border-primary fs-6 text-uppercase">
+                                        {{ $event->penyelenggara }}
+                                    </label>
                                 </div>
+                                {{-- <div class="portfolio-wrap card-img-top">
+                                    <figure class="figure p-2 img-thumbnail">
+                                    </figure>
+                                </div> --}}
                                 {{-- </div> --}}
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold text-uppercase">{{ $event->nama_event }}</h5>
                                     <hr>
-                                    <div class="card-text " style="min-height: 150px; overflow-y: auto;">
+                                    <div class="card-text" style="min-height: 100px; max-height: 150px; overflow-y: auto;">
                                         <table class="table table-borderless">
                                             <tr class="font-weight-bold">
                                                 <td class="fw-bold">WAKTU</td>
@@ -153,14 +165,14 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <p class="card-text">
+                                    {{-- <p class="card-text">
                                         <small class="text-muted">{{ $event->status }}</small>
-                                    </p>
+                                    </p> --}}
                                 </div>
-                                <div class="card-footer">
+                                <div class="card-footer m-0 bg-white">
                                     <small class="text-muted">
-                                        <a href="" class="btn btn-outline-primary btn-block fw-bold border-2"><i
-                                                class='bx bxs-mouse mr-1'></i> Daftar Event</a>
+                                        <a href="" class="btn btn-primary btn-block fw-bold border-2 w-100"><i
+                                                class='bx bxs-mouse'></i> Daftar Event</a>
                                     </small>
                                 </div>
                             </div>
@@ -245,7 +257,7 @@
                     <div class="swiper-wrapper">
 
                         <div class="swiper-slide">
-                            <div class="testimonial-item">
+                            <div class="testimonial-item rounded">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                     Pengalaman berlari yang luar biasa! Semua peserta dan panitia sangat ramah dan
@@ -258,7 +270,7 @@
                         </div><!-- End testimonial item -->
 
                         <div class="swiper-slide">
-                            <div class="testimonial-item">
+                            <div class="testimonial-item rounded">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                     Pertama kali saya ikut event lari dan langsung jatuh cinta! Semuanya teratur dengan
@@ -270,7 +282,7 @@
                         </div><!-- End testimonial item -->
 
                         <div class="swiper-slide">
-                            <div class="testimonial-item">
+                            <div class="testimonial-item rounded">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                     Pengalaman yang sangat mendebarkan! Melihat para peserta berjuang dengan beban yang
@@ -283,7 +295,7 @@
                         </div><!-- End testimonial item -->
 
                         <div class="swiper-slide">
-                            <div class="testimonial-item">
+                            <div class="testimonial-item rounded">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                     Acara lari ini benar-benar menginspirasi! Saya merasa sangat didukung oleh komunitas
@@ -296,7 +308,7 @@
                         </div><!-- End testimonial item -->
 
                         <div class="swiper-slide">
-                            <div class="testimonial-item">
+                            <div class="testimonial-item rounded">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                     Acara lari ini luar biasa! Rutenya menantang namun sangat memuaskan. Organisasinya
@@ -326,9 +338,9 @@
 
                 <div class="row mt-5 justify-content-center">
 
-                    <div class="col-lg-10">
+                    <div class="col-lg-12">
 
-                        <div class="info-wrap">
+                        <div class="info-wrap rounded">
                             <div class="row">
                                 <div class="col-lg-4 info">
                                     <i class="bi bi-geo-alt"></i>

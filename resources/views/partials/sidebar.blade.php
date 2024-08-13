@@ -16,17 +16,16 @@
             <div class="collapse" id="data-master">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('list-akun') }}">List Akun</a></li>
+                </ul>
+            </div>
         </li>
-    </ul>
-    </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('event.eom.index') }}" aria-expanded="false" aria-controls="ui-basic">
-            <i class="icon-layout menu-icon"></i>
-            <span class="menu-title">Event Managemengt</span>
-        </a>
-    </li>
-    <li class="nav-item">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('event.eom.index') }}" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-layout menu-icon"></i>
+                <span class="menu-title">Event Management</span>
+            </a>
+        </li>
+        {{-- <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
             aria-controls="form-elements">
             <i class="icon-columns menu-icon"></i>
@@ -113,6 +112,6 @@
             <i class="icon-paper menu-icon"></i>
             <span class="menu-title">Documentation</span>
         </a>
-    </li>
+    </li> --}}
     </ul>
 </nav>
