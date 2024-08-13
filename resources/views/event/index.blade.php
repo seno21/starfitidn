@@ -36,8 +36,9 @@
                                             <td>{{ $event->status }}</td>
                                             <td>
                                                 <a href="" class="btn btn-sm btn-info">Detail</a>
-                                                <a href="" class="btn btn-sm btn-success">Edit</a>
-                                                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                                <a href="{{ route('event.eom.edit', $event->id) }}"
+                                                    class="btn btn-sm btn-success">Edit</a>
+                                                <a href="" class="btn btn-sm btn-danger" id="btnDelete">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -49,4 +50,8 @@
             </div>
         </div>
     </div>
+
+    {{-- <script>
+        $(document)
+    </script> --}}
 @endsection()

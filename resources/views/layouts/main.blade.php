@@ -115,6 +115,31 @@
                 imgPreview.src = oFREvent.target.result;
             }
         }
+
+
+        // Delete alert confirm
+        $(document).on('click', '#btnDelete', function(e) {
+            e.preventDefault();
+            let form = $(this).parents('form');
+
+            Swal({
+                title: 'Yakin menghapus ini ?',
+                text: "Data tidak bisa di kembalikan",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1BCFB4',
+                cancelButtonColor: '#FE7C96',
+                confirmButtonText: 'Yes!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit()
+                    //Disini bisa di masukan swal (sweetalert2)
+                } else {
+                    Swal.close()
+                }
+
+            })
+        })
     </script>
 </body>
 
