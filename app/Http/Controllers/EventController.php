@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Events;
+use App\Models\Tikets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 // use RealRashid\SweetAlert\Facades\Alert;
@@ -140,9 +141,39 @@ class EventController extends Controller
 
     public function show(Request $request, $id)
     {
+        // $data = [
+        //     'title' => 'Ticketing Category'
+        // ];
+        // return view('event.show', $data);
+
+
         $data = [
-            'title' => 'Ticketing Category'
+            'title' => 'Tiket Event',
+            'id_event' => $id,
         ];
+
+        if ($request->ajax()) {
+            $tikets = new Tikets();
+            $tikets = $tikets->showTikets($id);
+
+            return DataTables::of($tikets)
+                ->addIndexColumn()
+                ->make(true);
+        }
+
         return view('event.show', $data);
+    }
+
+    public function insertTiket(Request $request, $id)
+    {
+        $tikets = new Tikets();
+
+        $tikets->id_event = $id;
+        dd($id);
+        $tikets->nama_promo = $request->tiket;
+        $tikets->tgl_mulai = $request->tgl_mulai;
+        $tikets->tgl_selesai = $request->tgl_selesai;
+        $tikets->quota = $request->quota;
+        $tikets->harga = $request->harga;
     }
 }

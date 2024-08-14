@@ -18,7 +18,8 @@ return new class extends Migration
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->integer('quota');
-            $table->integer('harga_tiket');
+            $table->integer('harga');
+            $table->boolean('active');
             $table->timestamps();
         });
     }
