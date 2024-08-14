@@ -61,6 +61,11 @@
                                 <span class="input-group-append">
                                     <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                                 </span>
+                                @error('poster')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -70,6 +75,11 @@
                             <input type="text" class="form-control @error('penyelenggara') is-invalid @enderror"
                                 id="penyelenggara" placeholder="Starfit Indonesia" name="penyelenggara"
                                 value="{{ old('penyelenggara') }}">
+                            @error('penyelenggara')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 col-form-label">Kategori</label>
@@ -104,8 +114,13 @@
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi Acara</label>
-                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi" rows="6"
-                                placeholder="Isikan detail acara">{{ old('deskripsi') }}</textarea>
+                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi"
+                                rows="6" placeholder="Isikan detail acara">{{ old('deskripsi') }}</textarea>
+                            @error('deskripsi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             {{-- <textarea id="summernote" name="summernote"></textarea> --}}
                         </div>
                     </div>

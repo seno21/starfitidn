@@ -13,9 +13,9 @@
         });
 
         // Data table Event
-        $(document).ready(function () {
-            $("#event-listing").DataTable();
-        });
+        // $(document).ready(function () {
+        //     $("#event-table").DataTable();
+        // });
 
         $("#order-listing").each(function () {
             var datatable = $(this);

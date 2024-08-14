@@ -44,6 +44,7 @@ Route::group([
     'as' => 'event.'
 ], function () {
     Route::resource('eom', EventController::class);
+    // Route::get('eom/data', [EventController::class, 'getData'])->name('event.getData');
 });
 
 
