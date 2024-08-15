@@ -14,9 +14,11 @@ class Tikets extends Model
     // Method untuk Admin event dashboard - BackEnd
     public function showTikets($id_event)
     {
+
+        // dd($id_event);
         return DB::table('tikets')
             ->where('active', 1)
-            ->where('id', $id_event)
+            ->where('id_event', $id_event)
             ->get();
     }
 }

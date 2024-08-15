@@ -44,7 +44,8 @@ Route::group([
     'as' => 'event.'
 ], function () {
     Route::resource('eom', EventController::class);
-    Route::get('tiket', [EventController::class, 'insertTiket'])->name('eom.insertTiket');
+    Route::post('tiket', [EventController::class, 'insertTiket'])->name('eom.insertTiket');
+    Route::post('del/{id}', [EventController::class, 'remove'])->name('eom.remove');
 });
 
 

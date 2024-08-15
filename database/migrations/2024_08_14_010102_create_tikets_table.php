@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('tikets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_tikets');
+            $table->uuid('id_event');
             $table->string('nama_promo');
+            $table->string('kategori')->nullable();
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->integer('quota');

@@ -88,92 +88,99 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <form method="POST" action="{{ route('event.eom.insertTiket', $id_event) }}">
-                                                @csrf
-                                                @method('PUT')
+                                    <form method="POST" action="{{ route('event.eom.insertTiket') }}">
+                                        @csrf
+                                        {{-- @method('PUT') --}}
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <input type="hidden" name="id_event" value="{{ $id_event }}">
                                                 <div class="form-group">
                                                     <label for="tiket">Nama Promo Tiket</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="tiket"
-                                                            id="tiket">
+                                                        <input type="text"
+                                                            class="form-control @error('tiket') is-invalid @enderror"
+                                                            name="tiket" id="tiket" value="{{ old('tiket') }}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="kategori">Kategori </label>
+                                                    <div class="input-group">
+                                                        <input type="text"
+                                                            class="form-control @error('kategori') is-invalid @enderror"
+                                                            name="kategori" id="kategori" value="{{ old('kategori') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="quota">Quota Peserta</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="quota"
-                                                            id="quota">
+                                                        <input type="text"
+                                                            class="form-control @error('acara') is-invalid @enderror"
+                                                            name="quota" id="quota" value="{{ old('quota') }}">
                                                         <div class="input-group-append">
                                                             <span class="input-group-text">ORANG</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tgl_mulai">Tanggal Periode Mulai</label>
+                                                        <div class="input-group">
+                                                            <input type="date"
+                                                                class="form-control @error('acara') is-invalid @enderror"
+                                                                name="tgl_mulai" id="tgl_mulai"
+                                                                value="{{ old('tgl_mulai') }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tgl_selesai">Tanggal Periode Selesai</label>
+                                                        <div class="input-group">
+                                                            <input type="date"
+                                                                class="form-control @error('acara') is-invalid @enderror"
+                                                                name="tgl_selesai" id="tgl_selesai"
+                                                                value="{{ old('tgl_selesai') }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group">
-                                                    <label for="tgl_mulai">Tanggal Periode Mulai</label>
+                                                    <label for="harga">Harga Tiket</label>
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" name="tgl_mulai"
-                                                            id="tgl_mulai">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Rp.</span>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control @error('harga') is-invalid @enderror"
+                                                            name="harga" id="harga" value="{{ old('harga') }}">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="tgl_selesai">Tanggal Periode Selesai</label>
-                                                    <div class="input-group">
-                                                        <input type="date" class="form-control" name="tgl_selesai"
-                                                            id="tgl_selesai">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="harga">Harga Tiket</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Rp.</span>
-                                                    </div>
-                                                    <input type="text" class="form-control" name="harga"
-                                                        id="harga">
-                                                </div>
-                                            </div>
-
-                                            </form>
                                         </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary">Buat Tiket</button>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary">Buat Tiket</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <table id="tikets-table" class="table table-responsive-md">
                             <thead>
                                 <tr>
-                                    <th>Jarak Lari</th>
-                                    <th>Usia Peserta</th>
-                                    <th>Jenis Kelamin</th>
+                                    <th>Nama Promo tiket</th>
+                                    <th>Kategori Tiket</th>
+                                    <th>Periode Mulai</th>
+                                    <th>Periode Selesai</th>
+                                    <th>Quota Peserta</th>
+                                    <th>Harga Tiket</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- <tr>
-                                    <td>cell</td>
-                                    <td>cell</td>
-                                    <td>cell</td>
-                                    <td>
-                                        <a href="" class="btn btn-sm btn-primary"><i class="mdi mdi-ticket"></i></a>
-                                        <a href="" class="btn btn-sm btn-success"><i
-                                                class="mdi mdi-pencil-box-outline"></i></a>
-                                        <a href="" id="btnDelete" class="btn btn-sm btn-danger"><i
-                                                class="mdi mdi-delete"></i></a>
-                                    </td>
-                                </tr> --}}
+                                {{-- Otomatis di isi oleh yajra datatable --}}
                             </tbody>
                         </table>
                     </div>
@@ -208,6 +215,7 @@
             }
         });
 
+
         $(document).ready(function() {
             $("#tikets-table").DataTable({
                 processing: true,
@@ -218,20 +226,24 @@
                         name: "nama_promo",
                     },
                     {
-                        data: "gtl_mulai",
+                        data: "kategori",
+                        name: "kategori",
+                    },
+                    {
+                        data: "tgl_mulai",
                         name: "tgl_mulai",
                     },
                     {
-                        data: "gtl_selesai",
-                        name: "gtl_selesai",
+                        data: "tgl_selesai",
+                        name: "tgl_selesai",
                     },
                     {
                         data: "quota",
                         name: "quota",
                     },
                     {
-                        data: "harga_tiket",
-                        name: "harga_tiket",
+                        data: "harga",
+                        name: "harga",
                     },
                     {
                         data: "action",
