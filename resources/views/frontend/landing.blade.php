@@ -124,8 +124,7 @@
                 <div class="row">
                     @foreach ($events as $event)
                         <div class="col-md-6 col-lg-3">
-                            <div class="card shadow-sm m-1 border-0 mt-3">
-                                {{-- <div class="portfolio-item filter-app wow fadeInUp"> --}}
+                            <div class="card shadow-sm m-1 border-0 mt-3 d-flex flex-column h-100">
                                 <div class="position-relative p-3">
                                     <a href="{{ asset('storage/' . $event->poster) }}" data-gallery="portfolioGallery"
                                         class="link-preview portfolio-lightbox">
@@ -142,12 +141,7 @@
                                         {{ $event->penyelenggara }}
                                     </label>
                                 </div>
-                                {{-- <div class="portfolio-wrap card-img-top">
-                                    <figure class="figure p-2 img-thumbnail">
-                                    </figure>
-                                </div> --}}
-                                {{-- </div> --}}
-                                <div class="card-body">
+                                <div class="card-body flex-grow-1 d-flex flex-column">
                                     <h5 class="card-title fw-bold text-uppercase">{{ $event->nama_event }}</h5>
                                     <hr>
                                     <div class="card-text" style="min-height: 100px; max-height: 150px; overflow-y: auto;">
@@ -164,9 +158,6 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    {{-- <p class="card-text">
-                                        <small class="text-muted">{{ $event->status }}</small>
-                                    </p> --}}
                                 </div>
                                 <div class="card-footer m-0 bg-white">
                                     <small class="text-muted">
@@ -175,11 +166,12 @@
                                     </small>
                                 </div>
                             </div>
+
                         </div>
                     @endforeach
                 </div>
 
-                <div class="mt-3 text-center">
+                <div class="mt-5 text-center">
                     <a href="{{ route('event') }}" type="button" class="btn btn-primary btn-fw btn-lg"> Lihat
                         Seluruh Event</a>
                 </div>
