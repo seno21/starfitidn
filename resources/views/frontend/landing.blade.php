@@ -113,9 +113,8 @@
 
             </div>
         </section>
-        <!-- End Counts Section -->
 
-        <!-- ======= Portfolio Section ======= -->
+        <!-- ======= Event Section ======= -->
         <section id="event" class="section-bg">
             <div class="container">
 
@@ -188,7 +187,7 @@
 
 
             </div>
-        </section><!-- End Portfolio Section -->
+        </section>
 
         <!-- Galery Section -->
         <section class="portfolio" id="gallery">

@@ -57,7 +57,7 @@ class EventController extends Controller
             'waktu' => 'required',
             'lokasi' => 'required|max:255',
             'telepon' => 'required|numeric|digits_between:11,13',
-            'deskripsi' => 'required|max:1000',
+            'deskripsi' => 'required',
             'penyelenggara' => 'required',
             'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024'
         ]);
@@ -102,7 +102,7 @@ class EventController extends Controller
             'waktu' => 'required',
             'lokasi' => 'required|max:255',
             'telepon' => 'required|numeric|digits_between:11,13',
-            'deskripsi' => 'required|max:1000',
+            'deskripsi' => 'required',
             'penyelenggara' => 'required',
             // 'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024'
         ]);
@@ -152,24 +152,23 @@ class EventController extends Controller
 
     public function show(Request $request, $id)
     {
-        $tikets = new Tikets();
-        $tikets = $tikets->showTikets($id);
-
-        // dd($tikets);
-
+        $event = new Events();
+        $tiket = new Tikets();
+        $tiket = $tiket->showTikets($id);
 
         $data = [
             'title' => 'Tiket Event',
             'id_event' => $id,
+            'event' => $event->find($id)
         ];
 
         if ($request->ajax()) {
-            $tikets = new Tikets();
-            $tikets = $tikets->showTikets($id);
+            // Ini sudah di inisiasi di atas
 
-            // dd($tikets);
+            // $tiket = new Tikets();
+            // $tiket = $tiket->showTikets($id);
 
-            return DataTables::of($tikets)
+            return DataTables::of($tiket)
                 ->addIndexColumn()
                 ->addColumn('action', function ($event) {
                     return '
@@ -191,7 +190,7 @@ class EventController extends Controller
             'tiket' => 'required|max:255',
             'kategori' => 'required',
             'tgl_mulai' => 'required',
-            'tgl_selesai' => 'required||digits_between:11,13',
+            'tgl_selesai' => 'required',
             'quota' => 'required|numeric',
             'harga' => 'required|numeric',
         ]);
