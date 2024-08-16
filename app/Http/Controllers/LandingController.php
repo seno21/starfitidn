@@ -23,6 +23,16 @@ class LandingController extends Controller
         return view('frontend.event', $data);
     }
 
+    public function showEvent($id)
+    {
+        $events = new Events();
+
+        $data = [
+            'event' => $events->find($id),
+        ];
+
+        return view('frontend.detailevent', $data);
+    }
 
 
     // Methode Event Dashboard - BackEnd

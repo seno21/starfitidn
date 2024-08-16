@@ -4,71 +4,67 @@
         <div class="card">
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="col-md-10">
-                        <h4 class="card-title font-bold">Detail Event</h4>
+                    <div class="col-md-12">
+                        <h2 class="font-bold">DETAIL EVENT</h2>
+                        <hr class="border border-primary border-5">
+                        <a href="{{ route('event.eom.index') }}" class="btn btn-danger"></a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        Anu
+                    <div class="col-md-4">
+                        <img src="{{ asset('storage/' . $event->poster) }}"
+                            class="img-fluid rounded-4 w-100 card-img-top shadow-lg border-0 p-2 mb-3 "
+                            style="object-fit: cover; height: 500px;">
                     </div>
-                    {{-- <div class="col-md-3">
-                        <h4>BUAT KATEGORI UNTUK EVENT INI</h4>
-                        <hr class="border border-5 border-primary">
-                        <form action="" method="post">
-                            <div class="form-group">
-                                <label for="jarak">Jarak</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="jarak" id="jarak">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">KM</span>
-                                    </div>
-                                </div>
+                    <div class="col-md-8 p-5">
+                        <h1>{{ $event->nama_event }}</h1>
+                        <div class="row mt-3">
+                            <div class="col-md-2">
+                                <p class="fw-bold fs-4">
+                                    WAKTU
+                                </p>
                             </div>
-                            <div class="form-group">
-                                <label for="usia">Usia</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="usia" id="usia">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">TAHUN</span>
-                                    </div>
-                                </div>
+                            <div class="col-md-6">
+                                <p class="fs-4">
+                                    {{ $event->waktu_pelaksanaan }}
+                                </p>
                             </div>
-                            <div class="form-group">
-                                @csrf
-                                <label class="col-form-label">Jenis Kelamin</label>
-                                <div class="d-flex">
-                                    <div class="col-sm-6">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="kelamin" value="L"
-                                                    checked>
-                                                Laki-laki
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="kelamin"
-                                                    value="P">
-                                                Perempuan
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-2">
+                                <p class="fw-bold fs-4">
+                                    LOKASI
+                                </p>
                             </div>
-                            <div class="row">
-                                <button type="submit" class="btn btn-primary mb-3">Tambah Kategori</button>
+                            <div class="col-md-6">
+                                <p class="fs-4">
+                                    {{ $event->lokasi }}
+                                </p>
                             </div>
-                        </form>
-                    </div> --}}
+                        </div>
+                        <div class="row mt-3">
+                            <div class="mt-3">
+                                <p class="fw-bold fs-4">
+                                    Tentang Event.
+                                </p>
+                                <p class="fs-5 mt-3">
+                                    {{ $event->deskripsi }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </div>
         <div class="card mt-3">
             <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <h3 class="font-bold">List Tiket Untuk Event Ini</h3>
+                        <hr class="border border-primary border-5">
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Button trigger modal -->
@@ -159,14 +155,24 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger"
-                                                data-bs-dismiss="modal">Batal</button>
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                                id="btn-batal">Batal</button>
                                             <button type="submit" class="btn btn-primary">Buat Tiket</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
+
+                        @if ($errors->any())
+                            <script>
+                                $(document).ready(function() {
+                                    var myModal = new bootstrap.Modal($('#staticBackdrop')[0]);
+                                    myModal.show();
+                                });
+                            </script>
+                        @endif
+
                         <table id="tikets-table" class="table table-responsive-md">
                             <thead>
                                 <tr>
