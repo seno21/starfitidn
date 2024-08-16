@@ -84,12 +84,13 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form method="POST" action="{{ route('event.eom.insertTiket') }}">
+                                    <form id="tiketForm" method="POST" action="{{ route('event.eom.insertTiket') }}">
                                         @csrf
-                                        {{-- @method('PUT') --}}
+                                        <input type="hidden" name="_method" value="POST">
+                                        <input type="hidden" name="id_event" value="{{ $id_event }}">
+                                        <input type="hidden" name="id" id="tiket_id">
                                         <div class="modal-body">
                                             <div class="row">
-                                                <input type="hidden" name="id_event" value="{{ $id_event }}">
                                                 <div class="form-group">
                                                     <label for="tiket">Nama Promo Tiket</label>
                                                     <div class="input-group">
@@ -99,7 +100,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="kategori">Kategori </label>
+                                                    <label for="kategori">Kategori</label>
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class="form-control @error('kategori') is-invalid @enderror"
@@ -110,8 +111,10 @@
                                                     <label for="quota">Quota Peserta</label>
                                                     <div class="input-group">
                                                         <input type="text"
-                                                            class="form-control @error('acara') is-invalid @enderror"
-                                                            name="quota" id="quota" value="{{ old('quota') }}">
+                                                            class="form-control @error('quota') is-invalid @enderror"
+                                                            name="quota" id="quota" value="{{ old('quota') }}"
+                                                            inputmode="numeric" pattern="\d*"
+                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                                         <div class="input-group-append">
                                                             <span class="input-group-text">ORANG</span>
                                                         </div>
@@ -124,7 +127,7 @@
                                                         <label for="tgl_mulai">Tanggal Periode Mulai</label>
                                                         <div class="input-group">
                                                             <input type="date"
-                                                                class="form-control @error('acara') is-invalid @enderror"
+                                                                class="form-control @error('tgl_mulai') is-invalid @enderror"
                                                                 name="tgl_mulai" id="tgl_mulai"
                                                                 value="{{ old('tgl_mulai') }}">
                                                         </div>
@@ -135,7 +138,7 @@
                                                         <label for="tgl_selesai">Tanggal Periode Selesai</label>
                                                         <div class="input-group">
                                                             <input type="date"
-                                                                class="form-control @error('acara') is-invalid @enderror"
+                                                                class="form-control @error('tgl_selesai') is-invalid @enderror"
                                                                 name="tgl_selesai" id="tgl_selesai"
                                                                 value="{{ old('tgl_selesai') }}">
                                                         </div>
@@ -157,7 +160,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                                                 id="btn-batal">Batal</button>
-                                            <button type="submit" class="btn btn-primary">Buat Tiket</button>
+                                            <button type="submit" class="btn btn-primary" id="btn-submit">Buat Tiket</button>
                                         </div>
                                     </form>
                                 </div>
@@ -221,6 +224,45 @@
             rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
             return prefix === undefined ? rupiah : (rupiah ? prefix + rupiah : '');
         }
+
+        $(document).ready(function() {
+            $(document).on('click', '.edit-tiket', function() {
+                // Ambil data dari atribut tombol edit
+                var id = $(this).data('id');
+                var nama_promo = $(this).data('nama_promo');
+                var kategori = $(this).data('kategori');
+                var quota = $(this).data('quota');
+                var tgl_mulai = $(this).data('tgl_mulai');
+                var tgl_selesai = $(this).data('tgl_selesai');
+                var harga = $(this).data('harga');
+
+                // Isi form modal dengan data yang diambil
+                $('#tiket').val(nama_promo);
+                $('#kategori').val(kategori);
+                $('#quota').val(quota);
+                $('#tgl_mulai').val(tgl_mulai);
+                $('#tgl_selesai').val(tgl_selesai);
+                $('#harga').val(harga);
+                $('#tiket_id').val(id); // Set hidden ID for updating
+
+                // Ubah form action agar mengarah ke rute update dengan ID tiket
+                $('#tiketForm').attr('action', '{{ route('event.eom.updateTiket', '') }}/' + id);
+                $('#tiketForm').find('input[name="_method"]').val('PUT');
+
+                $('#btn-submit').text('Update Tiket');
+
+                // Tampilkan modal
+                $('#staticBackdrop').modal('show');
+            });
+
+            $('#btn-submit').click(function() {
+                // Reset form
+                // $('#tiketForm').attr('action', '{{ route('event.eom.insertTiket') }}');
+                // $('#tiketForm').find('input[name="_method"]').val('POST');
+                // $('#tiketForm')[0].reset();
+                // $('#tiket_id').val(''); // Clear hidden input
+            });
+        });
 
 
         $(document).ready(function() {

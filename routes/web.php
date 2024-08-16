@@ -42,8 +42,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->prefix('event')->name('event.')->group(function () {
     Route::resource('eom', EventController::class);
     Route::post('tiket', [EventController::class, 'insertTiket'])->name('eom.insertTiket');
+    Route::post('tiketDel/{id}', [EventController::class, 'removeTiket'])->name('eom.removeTiket');
+    Route::put('updateTiket/{id}', [EventController::class, 'updateTiket'])->name('eom.updateTiket');
     Route::post('del/{id}', [EventController::class, 'remove'])->name('eom.remove');
 });
+
 
 
 

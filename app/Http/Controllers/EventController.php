@@ -86,7 +86,7 @@ class EventController extends Controller
         $events = new Events();
 
         $data = [
-            'title' => 'Create Event',
+            'title' => 'Edit Event',
             'event' => $events->find($id),
         ];
 
@@ -150,6 +150,18 @@ class EventController extends Controller
         return redirect()->route('event.eom.index');
     }
 
+    public function removeTiket(Request $request, $id)
+    {
+        // Set active to 0
+        $event = Tikets::find($id);
+
+        $event->active = 0;
+        $event->save();
+
+
+        return redirect()->route('event.eom.show', $event->id_event);
+    }
+
     public function show(Request $request, $id)
     {
         $tikets = new Tikets();
@@ -172,19 +184,59 @@ class EventController extends Controller
 
             return DataTables::of($tikets)
                 ->addIndexColumn()
-                ->addColumn('action', function ($event) {
+                ->addColumn('action', function ($tiket) { // Ubah $event ke $tiket
                     return '
-                        <a href="' . route('event.eom.edit', $event->id) . '" class="btn btn-sm btn-success"><i class="mdi mdi-pencil-box-outline"></i></a>
-                        <form method="POST" action="' . route('event.eom.remove', $event->id) . '" style="display:inline;">
-                            ' . csrf_field() . '
-                            <button type="submit" class="btn btn-sm btn-danger" id="btnDelete"><i class="mdi mdi-delete"></i></button>
-                        </form>';
+        <button
+            type="button"
+            class="btn btn-sm btn-success edit-tiket"
+            data-id="' . $tiket->id . '"
+            data-nama_promo="' . $tiket->nama_promo . '" // Ubah dari data-tiket ke data-nama_promo
+            data-kategori="' . $tiket->kategori . '"
+            data-quota="' . $tiket->quota . '"
+            data-tgl_mulai="' . $tiket->tgl_mulai . '"
+            data-tgl_selesai="' . $tiket->tgl_selesai . '"
+            data-harga="' . $tiket->harga . '">
+            <i class="mdi mdi-pencil-box-outline"></i>
+        </button>
+        <form method="POST" action="' . route('event.eom.removeTiket', $tiket->id) . '" style="display:inline;">
+            ' . csrf_field() . '
+            <button type="submit" class="btn btn-sm btn-danger" id="btnDelete"><i class="mdi mdi-delete"></i></button>
+        </form>';
                 })
                 ->make(true);
         }
 
         return view('event.show', $data);
     }
+
+    public function updateTiket(Request $request, $id)
+    {
+        $tiket = Tikets::find($id);
+
+        // Validasi data
+        $request->validate([
+            'tiket' => 'required|string|max:255',
+            'kategori' => 'required|string|max:255',
+            'quota' => 'required|integer',
+            'tgl_mulai' => 'required|date',
+            'tgl_selesai' => 'required|date',
+            'harga' => 'required|numeric',
+        ]);
+
+        // Update data tiket
+        $tiket->id_event = $request->id_event;
+        $tiket->nama_promo = $request->tiket;
+        $tiket->kategori = $request->kategori;
+        $tiket->tgl_mulai = $request->tgl_mulai;
+        $tiket->tgl_selesai = $request->tgl_selesai;
+        $tiket->quota = intval($request->quota);
+        $tiket->harga = intval(str_replace('.', '', $request->harga));
+        $tiket->save();
+
+        // Redirect kembali ke halaman event dengan pesan sukses
+        return redirect()->route('event.eom.show', $tiket->id_event)->with('success', 'Tiket berhasil diperbarui');
+    }
+
 
     public function insertTiket(Request $request)
     {
@@ -206,7 +258,7 @@ class EventController extends Controller
         $tikets->tgl_mulai = $request->tgl_mulai;
         $tikets->tgl_selesai = $request->tgl_selesai;
         $tikets->quota = intval($request->quota);
-        $tikets->harga = intval(str_replace('.', '', $request->harga));;
+        $tikets->harga = intval(str_replace('.', '', $request->harga));
         $tikets->active = 1;
         $tikets->save();
 
