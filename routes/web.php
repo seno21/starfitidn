@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingController::class, 'index'])->name('home');
 
 Route::get('/event', [LandingController::class, 'allEvent'])->name('event');
-Route::get('/event/{id}', [LandingController::class, 'showEvent'])->name('show.event');
+Route::get('/event/detail/{id}', [LandingController::class, 'showEvent'])->name('show.event');
 
 
 

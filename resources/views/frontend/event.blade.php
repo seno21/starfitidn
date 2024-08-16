@@ -1,7 +1,7 @@
 @extends('frontend.partials.main')
 @section('content')
     <!-- ======= Event Section ======= -->
-    <section id="event" class="section-bg">
+    <section id="event" class="section-bg min-vh-100">
         <div class="container mt-3">
 
             <div class="section-title">

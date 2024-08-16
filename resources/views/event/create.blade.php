@@ -121,7 +121,6 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                            {{-- <textarea id="summernote" name="summernote"></textarea> --}}
                         </div>
                     </div>
                 </div>
@@ -133,6 +132,12 @@
                 </div>
             </form>
         </div>
-
     </div>
+
+
+    <script>
+        var simplemde = new SimpleMDE({
+            element: $("#deskripsi")[0]
+        });
+    </script>
 @endsection()

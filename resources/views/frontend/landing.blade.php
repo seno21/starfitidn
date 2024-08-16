@@ -161,14 +161,14 @@
                                 </div>
                                 <div class="card-footer m-0 bg-white">
                                     <small class="text-muted">
-                                        @auth
-                                            <a href="" class="btn btn-primary btn-block fw-bold border-2 w-100"><i
-                                                class='bx bxs-mouse'></i> Daftar Event</a>
-                                        @endauth
-                                        @guest
-                                        <a href="{{route('login')}}" class="btn btn-primary btn-block fw-bold border-2 w-100"><i
-                                            ></i>Login untuk beli tiket</a>
-                                        @endguest
+                                        <small class="text-muted">
+                                            <a href="{{ route('show.event', $event->id) }}"
+                                                class="btn btn-info btn-block fw-bold border-2 w-100 text-light"><i
+                                                    class='bx bxs-info-circle'></i> Detail Event</a>
+                                            <a href=""
+                                                class="btn btn-primary btn-block fw-bold border-2 w-100 mt-2"><i
+                                                    class='bx bxs-mouse'></i> Join Event Ini</a>
+                                        </small>
                                     </small>
                                 </div>
                             </div>

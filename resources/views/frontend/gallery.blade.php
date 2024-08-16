@@ -1,7 +1,7 @@
 @extends('frontend.partials.main')
 @section('content')
     <!-- Portfolio Section -->
-    <section class="portfolio">
+    <section class="portfolio min-vh-100">
 
         <div class="container pt-3 mt-4">
 

@@ -1,12 +1,8 @@
 @extends('frontend.partials.main')
 @section('content')
     <!-- ======= Event Section ======= -->
-    <section id="event" class="">
+    <section id="event" class="min-vh-100">
         <div class="container mt-5">
-
-            {{-- <div class="section-title">
-                <h2>DAFTAR EVENT</h2>
-            </div> --}}
             <div class="row">
                 <div class="col-md-4">
                     <img src="{{ asset('storage/' . $event->poster) }}"
@@ -41,7 +37,7 @@
                             </p>
                             <p class="fs-5 mt-3">
                                 <pre>
-                                    {{-- {{ $event->deskripsi }} --}}
+                                    {{ $event->deskripsi }}
                                 </pre>
                             </p>
                         </div>
