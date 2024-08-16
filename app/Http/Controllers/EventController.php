@@ -205,10 +205,12 @@ class EventController extends Controller
         $tikets->kategori = $request->kategori;
         $tikets->tgl_mulai = $request->tgl_mulai;
         $tikets->tgl_selesai = $request->tgl_selesai;
-        $tikets->quota = $request->quota;
-        $tikets->harga = $request->harga;
+        $tikets->quota = intval($request->quota);
+        $tikets->harga = intval(str_replace('.', '', $request->harga));;
         $tikets->active = 1;
         $tikets->save();
+
+        // dd($request, $tikets);
 
 
         // toast('Tiket Berhasil Dibuat', 'success');
