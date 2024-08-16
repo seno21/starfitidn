@@ -13,7 +13,7 @@
             <li><a class="nav-link scrollto" href="{{ route('home') }}#about">About</a></li>
             <li><a class="nav-link scrollto " href="{{ route('home') }}#event">Event</a></li>
             <li><a class="nav-link scrollto " href="{{ route('home') }}#gallery">Gallery</a></li>
-            <li><a class="nav-link scrollto" href="{{ route('home') }}#testimonials">Testimonials</a></li>
+            <li><a class="nav-link scrollto" href="{{ route('home') }}#testimonials">Testimoni</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->

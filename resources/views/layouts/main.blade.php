@@ -18,10 +18,11 @@
     <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/summernote/summernote.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
-
-    {{-- Test --}}
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
+
+    <!-- include summernote css/js -->
+    <link href="{{ asset('vendors/simplemde/dist/simplemde.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('vendors/simplemde/dist/simplemde.min.js') }}"></script>
 
 </head>
 

@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
 
-Route::get('/events', [LandingController::class, 'allEvent'])->name('event');
-Route::get('/events/{id}', [LandingController::class, 'showEvent'])->name('show.event');
+Route::get('/event', [LandingController::class, 'allEvent'])->name('event');
+Route::get('/event/detail/{id}', [LandingController::class, 'showEvent'])->name('show.event');
 
 
 
