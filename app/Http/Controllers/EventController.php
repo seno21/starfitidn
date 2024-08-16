@@ -57,7 +57,7 @@ class EventController extends Controller
             'waktu' => 'required',
             'lokasi' => 'required|max:255',
             'telepon' => 'required|numeric|digits_between:11,13',
-            'deskripsi' => 'required',
+            'deskripsi' => 'required|max:1000',
             'penyelenggara' => 'required',
             'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024'
         ]);
@@ -78,7 +78,7 @@ class EventController extends Controller
 
         // toast('Event Berhasil Dibuat', 'success');
 
-        return redirect()->route('event.eom.index')->with('success', 'test');
+        return redirect()->route('event.eom.index')->with('success', 'Event berhasil dibuat');
     }
 
     public function edit($id)
@@ -102,7 +102,7 @@ class EventController extends Controller
             'waktu' => 'required',
             'lokasi' => 'required|max:255',
             'telepon' => 'required|numeric|digits_between:11,13',
-            'deskripsi' => 'required',
+            'deskripsi' => 'required|max:1000',
             'penyelenggara' => 'required',
             // 'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024'
         ]);
@@ -152,23 +152,25 @@ class EventController extends Controller
 
     public function show(Request $request, $id)
     {
-        $event = new Events();
-        $tiket = new Tikets();
-        $tiket = $tiket->showTikets($id);
+        $tikets = new Tikets();
+        $tikets = $tikets->showTikets($id);
+
+        $event = Events::find($id);
+
 
         $data = [
             'title' => 'Tiket Event',
             'id_event' => $id,
-            'event' => $event->find($id)
+            'event' => $event
         ];
 
         if ($request->ajax()) {
-            // Ini sudah di inisiasi di atas
+            $tikets = new Tikets();
+            $tikets = $tikets->showTikets($id);
 
-            // $tiket = new Tikets();
-            // $tiket = $tiket->showTikets($id);
+            // dd($tikets);
 
-            return DataTables::of($tiket)
+            return DataTables::of($tikets)
                 ->addIndexColumn()
                 ->addColumn('action', function ($event) {
                     return '
@@ -190,7 +192,7 @@ class EventController extends Controller
             'tiket' => 'required|max:255',
             'kategori' => 'required',
             'tgl_mulai' => 'required',
-            'tgl_selesai' => 'required',
+            'tgl_selesai' => 'required||digits_between:11,13',
             'quota' => 'required|numeric',
             'harga' => 'required|numeric',
         ]);

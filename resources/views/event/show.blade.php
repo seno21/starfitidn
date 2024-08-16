@@ -7,7 +7,7 @@
                     <div class="col-md-12">
                         <h2 class="font-bold">DETAIL EVENT</h2>
                         <hr class="border border-primary border-5">
-                        <a href="{{ route('event.eom.index') }}" class="btn btn-danger"></a>
+                        <a href="{{ route('event.eom.index') }}" class="btn btn-outline-primary">Kembali ke List Event</a>
                     </div>
                 </div>
                 <div class="row">

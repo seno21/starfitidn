@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
 
-Route::get('/event', [LandingController::class, 'allEvent'])->name('event');
-Route::get('/event/{id}', [LandingController::class, 'showEvent'])->name('show.event');
+Route::get('/events', [LandingController::class, 'allEvent'])->name('event');
+Route::get('/events/{id}', [LandingController::class, 'showEvent'])->name('show.event');
 
 
 
@@ -39,15 +39,12 @@ Route::middleware('auth')->group(function () {
 });
 
 // Route untuke Event Organizer Management
-Route::group([
-    'middleware' => 'auth',
-    'prefix' => 'event',
-    'as' => 'event.'
-], function () {
+Route::middleware('auth')->prefix('event')->name('event.')->group(function () {
     Route::resource('eom', EventController::class);
     Route::post('tiket', [EventController::class, 'insertTiket'])->name('eom.insertTiket');
     Route::post('del/{id}', [EventController::class, 'remove'])->name('eom.remove');
 });
+
 
 
 

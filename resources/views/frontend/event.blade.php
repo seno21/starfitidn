@@ -54,21 +54,6 @@
                                             class='bx bxs-mouse'></i> Join Event Ini</a>
                                 </small>
                             </div>
-                            {{-- <p class="card-text">
-                                <small class="text-muted">{{ $event->status }}</small>
-                            </p> --}}
-                        </div>
-                        <div class="card-footer m-0 bg-white">
-                            <small class="text-muted">
-                                @auth
-                                    <a href="" class="btn btn-primary btn-block fw-bold border-2 w-100"><i
-                                        class='bx bxs-mouse'></i> Daftar Event</a>
-                                @endauth
-                                @guest
-                                <a href="{{route('login')}}" class="btn btn-primary btn-block fw-bold border-2 w-100"><i
-                                    ></i>Login untuk beli tiket</a>
-                                @endguest
-                            </small>
                         </div>
 
                     </div>

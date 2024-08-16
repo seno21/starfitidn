@@ -22,19 +22,19 @@
 
     @if (Auth::check() == true && Auth::user()->role == 'admin')
         <div class="header-social-links d-flex align-items-center m-2">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="btn btn-sm btn-danger text-light"><i
-                        class="bx bx-exit pl-1 mr-2"></i>Logout</button>
-            </form>
             <form action="{{ route('dashboard') }}">
                 @csrf
 
                 <button type="submit" class="btn btn-sm btn-primary text-light m-1"><i
-                        class='bx bxs-dashboard'></i>Admin
+                    class='bx bxs-dashboard'></i>Admin
                     Panel</button>
-            </form>
+                </form>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <button type="submit" class="btn btn-sm btn-danger text-light"><i
+                            class="bx bx-exit pl-1 mr-2"></i>Logout</button>
+                </form>
         </div>
     @elseif (Auth::check() == true)
         <div class="header-social-links d-flex align-items-center m-2">
