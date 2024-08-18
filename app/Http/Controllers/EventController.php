@@ -170,49 +170,47 @@ class EventController extends Controller
         $tikets = $tikets->showTikets($id);
 
         $event = Events::find($id);
-        //Parse markdown to html dan clear bug xss
-        // $parsedown = new Parsedown();
-        // $parsedown = $parsedown->text($event->deskripsi);
+        $today = \Carbon\Carbon::now();
+        $eventDate = \Carbon\Carbon::parse($event->waktu_pelaksanaan);
 
         $data = [
             'title' => 'Tiket Event',
             'id_event' => $id,
             'event' => $event,
-            // 'parsedown' => $parsedown
         ];
 
         if ($request->ajax()) {
-            $tikets = new Tikets();
-            $tikets = $tikets->showTikets($id);
-
-            // dd($tikets);
-
             return DataTables::of($tikets)
                 ->addIndexColumn()
-                ->addColumn('action', function ($tiket) { // Ubah $event ke $tiket
-                    return '
-        <button
-            type="button"
-            class="btn btn-sm btn-success edit-tiket"
-            data-id="' . $tiket->id . '"
-            data-nama_promo="' . $tiket->nama_promo . '" // Ubah dari data-tiket ke data-nama_promo
-            data-kategori="' . $tiket->kategori . '"
-            data-quota="' . $tiket->quota . '"
-            data-tgl_mulai="' . $tiket->tgl_mulai . '"
-            data-tgl_selesai="' . $tiket->tgl_selesai . '"
-            data-harga="' . $tiket->harga . '">
-            <i class="mdi mdi-pencil-box-outline"></i>
-        </button>
-        <form method="POST" action="' . route('event.eom.removeTiket', $tiket->id) . '" style="display:inline;">
-            ' . csrf_field() . '
-            <button type="submit" class="btn btn-sm btn-danger" id="btnDelete"><i class="mdi mdi-delete"></i></button>
-        </form>';
+                ->addColumn('action', function ($tiket) use ($eventDate, $today) {
+                    if ($eventDate->greaterThanOrEqualTo($today)) {
+                        return '
+                        <button
+                            type="button"
+                            class="btn btn-sm btn-success edit-tiket"
+                            data-id="' . $tiket->id . '"
+                            data-nama_promo="' . $tiket->nama_promo . '"
+                            data-kategori="' . $tiket->kategori . '"
+                            data-quota="' . $tiket->quota . '"
+                            data-tgl_mulai="' . $tiket->tgl_mulai . '"
+                            data-tgl_selesai="' . $tiket->tgl_selesai . '"
+                            data-harga="' . $tiket->harga . '">
+                            <i class="mdi mdi-pencil-box-outline"></i>
+                        </button>
+                        <form method="POST" action="' . route('event.eom.removeTiket', $tiket->id) . '" style="display:inline;">
+                            ' . csrf_field() . '
+                            <button type="submit" class="btn btn-sm btn-danger" id="btnDelete"><i class="mdi mdi-delete"></i></button>
+                        </form>';
+                    }
+                    // Jika waktu_pelaksanaan sudah melewati hari ini, kembalikan string kosong sehingga tidak ada tombol yang ditampilkan
+                    return '';
                 })
                 ->make(true);
         }
 
         return view('event.show', $data);
     }
+
 
     public function updateTiket(Request $request, $id)
     {
@@ -222,7 +220,6 @@ class EventController extends Controller
         $request->validate([
             'tiket' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
-            'quota' => 'required|integer',
             'tgl_mulai' => 'required|date',
             'tgl_selesai' => 'required|date',
             'harga' => 'required|numeric',
@@ -234,7 +231,7 @@ class EventController extends Controller
         $tiket->kategori = $request->kategori;
         $tiket->tgl_mulai = $request->tgl_mulai;
         $tiket->tgl_selesai = $request->tgl_selesai;
-        $tiket->quota = intval($request->quota);
+        $tiket->quota = $request->quota ? intval($request->quota) : null;
         $tiket->harga = intval(str_replace('.', '', $request->harga));
         $tiket->save();
 
@@ -250,7 +247,6 @@ class EventController extends Controller
             'kategori' => 'required',
             'tgl_mulai' => 'required',
             'tgl_selesai' => 'required',
-            'quota' => 'required|numeric',
             'harga' => 'required|numeric',
         ]);
 
@@ -262,7 +258,7 @@ class EventController extends Controller
         $tikets->kategori = $request->kategori;
         $tikets->tgl_mulai = $request->tgl_mulai;
         $tikets->tgl_selesai = $request->tgl_selesai;
-        $tikets->quota = intval($request->quota);
+        $tikets->quota = $request->quota ? intval($request->quota) : null;
         $tikets->harga = intval(str_replace('.', '', $request->harga));
         $tikets->active = 1;
         $tikets->save();

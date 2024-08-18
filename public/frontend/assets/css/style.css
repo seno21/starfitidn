@@ -45,6 +45,16 @@ h6 {
     object-fit: cover; /* Memastikan gambar memenuhi area dengan benar */
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: #888;
+  }
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -142,7 +152,7 @@ h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 .navbar {
     padding: 0;
@@ -254,7 +264,7 @@ h6 {
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 .mobile-nav-toggle {
     color: #384046;

@@ -70,10 +70,22 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            Tambahkan Tiket
-                        </button>
+                        @php
+                            $today = \Carbon\Carbon::now();
+                            $eventDate = \Carbon\Carbon::parse($event->waktu_pelaksanaan);
+                        @endphp
+
+                        @if ($eventDate->greaterThanOrEqualTo($today))
+                            <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Tambahkan Tiket
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-secondary mb-2" disabled>
+                                Tambahkan Tiket (Tidak Tersedia)
+                            </button>
+                        @endif
+
 
                         <!-- Modal -->
                         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -131,7 +143,7 @@
                                                             <input type="date"
                                                                 class="form-control @error('tgl_mulai') is-invalid @enderror"
                                                                 name="tgl_mulai" id="tgl_mulai"
-                                                                value="{{ old('tgl_mulai') }}">
+                                                                value="{{ old('tgl_mulai', now()->format('Y-m-d')) }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -142,7 +154,7 @@
                                                             <input type="date"
                                                                 class="form-control @error('tgl_selesai') is-invalid @enderror"
                                                                 name="tgl_selesai" id="tgl_selesai"
-                                                                value="{{ old('tgl_selesai') }}">
+                                                                value="{{ old('tgl_selesai', \Carbon\Carbon::parse($event->waktu_pelaksanaan)->format('Y-m-d')) }}">
                                                         </div>
                                                     </div>
                                                 </div>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('kategori')->nullable();
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
-            $table->integer('quota');
+            $table->integer('quota')->nullable();
             $table->integer('harga');
             $table->boolean('active');
             $table->timestamps();
