@@ -51,7 +51,7 @@
                                         class="btn btn-info btn-block fw-bold border-2 w-100 text-light"><i
                                             class='bx bxs-info-circle'></i> Detail Event</a>
                                     <a href="" class="btn btn-primary btn-block fw-bold border-2 w-100 mt-2"><i
-                                            class='bx bxs-mouse'></i> Join Event Ini</a>
+                                            class='bx bxs-mouse'></i> Klik Untuk Daftar</a>
                                 </small>
                             </div>
                         </div>

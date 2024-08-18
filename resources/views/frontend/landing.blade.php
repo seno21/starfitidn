@@ -164,10 +164,8 @@
                                         <small class="text-muted">
                                             <a href="{{ route('show.event', $event->id) }}"
                                                 class="btn btn-info btn-block fw-bold border-2 w-100 text-light"><i
-                                                    class='bx bxs-info-circle'></i> Detail Event</a>
-                                            <a href=""
-                                                class="btn btn-primary btn-block fw-bold border-2 w-100 mt-2"><i
-                                                    class='bx bxs-mouse'></i> Join Event Ini</a>
+                                                    class='bx bxs-info-circle'></i> Detail Event
+                                            </a>
                                         </small>
                                     </small>
                                 </div>
@@ -178,7 +176,7 @@
                 </div>
 
                 <div class="mt-5 text-center">
-                    <a href="{{ route('event') }}" type="button" class="btn btn-primary btn-fw btn-lg"> Lihat
+                    <a href="{{ route('event') }}" type="button" class="btn btn-outline-primary btn-fw btn-lg"> Lihat
                         Seluruh Event</a>
                 </div>
 

@@ -7,7 +7,7 @@
 
           <div class="me-md-auto text-center text-md-start">
               <div class="copyright">
-                  &copy; Made With <i class="bx bxs-heart"></i></span></strong> by ON {IT Solution}
+                  &copy; Made With <i class="bx bxs-heart"></i></span></strong> by ON - Digital Solution
               </div>
               {{-- <div class="credits">
                   Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>

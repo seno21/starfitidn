@@ -7,7 +7,9 @@
                     <div class="col-md-12">
                         <h2 class="font-bold">DETAIL EVENT</h2>
                         <hr class="border border-primary border-5">
-                        <a href="{{ route('event.eom.index') }}" class="btn btn-outline-primary">Kembali ke List Event</a>
+                        <a href="{{ route('event.eom.index') }}" class="btn btn-danger">Kembali ke
+                            List
+                            Event</a>
                     </div>
                 </div>
                 <div class="row">
@@ -47,9 +49,9 @@
                                 <p class="fw-bold fs-4">
                                     Tentang Event.
                                 </p>
-                                <p class="fs-5 mt-3">
-                                    {{ $event->deskripsi }}
-                                </p>
+                                <div class="fs-4 mt-3">
+                                    {!! $event->deskripsi !!}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,7 +162,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                                                 id="btn-batal">Batal</button>
-                                            <button type="submit" class="btn btn-primary" id="btn-submit">Buat Tiket</button>
+                                            <button type="submit" class="btn btn-primary" id="btn-submit">Buat
+                                                Tiket</button>
                                         </div>
                                     </form>
                                 </div>

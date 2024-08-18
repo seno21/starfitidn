@@ -20,10 +20,16 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
 
-    <!-- include summernote css/js -->
-    <link href="{{ asset('vendors/simplemde/dist/simplemde.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('vendors/simplemde/dist/simplemde.min.js') }}"></script>
-
+    <!-- include simplemde css/js -->
+    <link href="{{ asset('vendors/trix-main/trix.css') }}" rel="stylesheet">
+    <script src="{{ asset('vendors/trix-main/trix.js') }}"></script>
+    <script>
+        // DIsable attach file
+        $(document).on('trix-file-accept', function(e) {
+            e.preventDefault(); // Prevent the file from being attached
+            alert("File attachment is not allowed!");
+        });
+    </script>
 </head>
 
 <body>
@@ -136,22 +142,8 @@
 
 
     <script>
-        // load image preview
-        function viewImage() {
-            const gambar = document.querySelector('#poster');
-            const imgPreview = document.querySelector('#posterView');
-
-            const oFReader = new FileReader();
-            // Jika gambar ada
-            oFReader.readAsDataURL(gambar.files[0]);
-
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result;
-            }
-        }
-
         // ALERTING Delete alert confirm
-        $(document).on('click', '#btnDelete', function(e) {
+        $(document).on('click', '#btnDel', function(e) {
             e.preventDefault();
             let form = $(this).parents('form');
 
@@ -169,10 +161,29 @@
                         });
                         form.submit();
                     } else {
-                        swal("Your imaginary file is safe!");
+                        swal("Data batal dihapus!");
                     }
                 });
         })
+
+        // Simplemde
+        var simplemde = new SimpleMDE({
+            element: $("#deskripsi")[0]
+        });
+
+        // load image preview
+        function viewImage() {
+            const gambar = document.querySelector('#poster');
+            const imgPreview = document.querySelector('#posterView');
+
+            const oFReader = new FileReader();
+            // Jika gambar ada
+            oFReader.readAsDataURL(gambar.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
     </script>
 </body>
 

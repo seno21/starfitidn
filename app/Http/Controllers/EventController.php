@@ -6,6 +6,7 @@ use App\Models\Events;
 use App\Models\Tikets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Parsedown;
 // use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -29,7 +30,7 @@ class EventController extends Controller
                         <a href="' . route('event.eom.edit', $event->id) . '" class="btn btn-sm btn-success"><i class="mdi mdi-pencil-box-outline"></i></a>
                         <form method="POST" action="' . route('event.eom.remove', $event->id) . '" style="display:inline;">
                             ' . csrf_field() . '
-                            <button type="submit" class="btn btn-sm btn-danger" id="btnDelete"><i class="mdi mdi-delete"></i></button>
+                            <button type="submit" class="btn btn-sm btn-danger" id="btnDel"><i class="mdi mdi-delete"></i></button>
                         </form>';
                 })->make(true);
         }
@@ -63,6 +64,7 @@ class EventController extends Controller
         ]);
 
         $event = new Events();
+
 
         $event->nama_event = $request->acara;
         $event->waktu_pelaksanaan = $request->waktu;
@@ -138,7 +140,7 @@ class EventController extends Controller
     }
 
 
-    public function remove(Request $request, $id)
+    public function remove($id)
     {
         // Set active to 0
         $event = Events::find($id);
@@ -168,12 +170,15 @@ class EventController extends Controller
         $tikets = $tikets->showTikets($id);
 
         $event = Events::find($id);
-
+        //Parse markdown to html dan clear bug xss
+        // $parsedown = new Parsedown();
+        // $parsedown = $parsedown->text($event->deskripsi);
 
         $data = [
             'title' => 'Tiket Event',
             'id_event' => $id,
-            'event' => $event
+            'event' => $event,
+            // 'parsedown' => $parsedown
         ];
 
         if ($request->ajax()) {

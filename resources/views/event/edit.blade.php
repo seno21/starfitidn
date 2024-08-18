@@ -108,9 +108,14 @@
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi Acara</label>
-                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi" rows="6"
-                                placeholder="Isikan detail acara">{{ $event->deskripsi }}</textarea>
-                            {{-- <textarea id="summernote" name="summernote"></textarea> --}}
+                            <input id="deskripsi" type="hidden" name="deskripsi">
+                            <trix-editor class="@error('deskripsi') is-invalid @enderror"
+                                input="deskripsi">{!! $event->deskripsi !!}</trix-editor>
+                            @error('deskripsi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -122,6 +127,5 @@
                 </div>
             </form>
         </div>
-
     </div>
 @endsection()
