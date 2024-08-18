@@ -6,11 +6,11 @@
             {{-- <h1 class="fw-bold">{{ strtoupper($event->nama_event) }}</h1>
             <hr class="border-3 shadow rounded border border-primary"> --}}
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 order-1 order-md-0 mt-2 mt-md-0 text-center">
                     {{-- <img src="{{ asset('storage/' . $event->poster) }}"
                         class="img-fluid rounded-3 w-100 card-img-top shadow-lg border-0 p-4 mb-3 bg-white"
                         style="object-fit: cover; height: auto;"> --}}
-                    <p class="fw-bold fs-5">
+                    <p class="fw-bold fs-4">
                         Tiket
                     </p>
 
@@ -56,13 +56,12 @@
                         </div>
                     @endif
                 </div>
-                <div class="col-md-6" style="padding-left: 30px;">
-                    <div class="card">
+                <div class="col-md-6 order-0" style="padding-left: 30px;">
+                    <div class="card p-4">
                         <div class="top-section" style="background-image: url('{{ asset('storage/' . $event->poster) }}')">
-                            <div class="border border-0"></div>
+                            <div class="border border-0">{{ $event->penyelenggara }}</div>
                             <div class="icons">
                                 <div class="logo">
-                                    {{ $event->penyelenggara }}
                                 </div>
                                 <div class="social-media">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" class="svg">
@@ -145,7 +144,7 @@
                         </div>
                     </div> --}}
                 </div>
-                <div class="col-md-2 mt-3">
+                <div class="col-md-2 mt-3 order-2">
                     <div class="card border rounded rounded-3 border-2 border-info p-2">
                         <div class="row">
                             <div class="col-md-12 text-center">
@@ -245,7 +244,7 @@
             border-top-left-radius: 10px;
             border: none;
             height: 30px;
-            padding: 10px 20px;
+            padding: 2px 20px;
             width: 50%;
             color: white;
             background: #1b233d;
@@ -254,7 +253,6 @@
         }
 
         .card .top-section .icons {
-            position: absolute;
             top: 0;
             width: 100%;
             height: 30px;
@@ -266,7 +264,7 @@
             /* height: 100%; */
             /* aspect-ratio: 1; */
             color: white;
-            margin: 7px 15px;
+            /* margin: 7px 15px; */
             font-weight: 700;
             /* padding: 7px 0 7px 15px; */
         }
