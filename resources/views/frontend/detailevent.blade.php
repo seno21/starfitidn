@@ -2,14 +2,149 @@
 @section('content')
     <!-- ======= Event Section ======= -->
     <section id="event" class="min-vh-100 section-bg">
+        <div class="modal fade" id="modalTiket" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Konfirmasi Pembelian
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="tiketForm" method="POST" action="{{ route('event.eom.insertTiket') }}">
+                                @csrf
+                                <input type="hidden" name="_method" value="POST">
+                                <input type="hidden" name="id_event" value="{{ $event->id }}">
+                                <input type="hidden" name="id" id="tiket_id">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">Nama Lengkap</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('nama_lengkap') is-invalid @enderror"
+                                                        name="nama_lengkap" id="nama_lengkap"
+                                                        value="{{ old('nama_lengkap') }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">NIK</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('nik') is-invalid @enderror"
+                                                        name="nik" id="nik" value="{{ old('nik') }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">Jenis Kelamin</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('jk') is-invalid @enderror"
+                                                        name="jk" id="jk" value="{{ old('jk') }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">Tempat Lahir</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('tempat_lahir') is-invalid @enderror"
+                                                        name="tempat_lahir" id="tempat_lahir"
+                                                        value="{{ old('tempat_lahir') }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">Tanggal Lahir</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('tanggal_lahir') is-invalid @enderror"
+                                                        name="tanggal_lahir" id="tanggal_lahir"
+                                                        value="{{ old('tanggal_lahir') }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">Usia</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('usia') is-invalid @enderror"
+                                                        name="usia" id="usia" value="{{ old('usia') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">No Handphone</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('no_hp') is-invalid @enderror"
+                                                        name="no_hp" id="no_hp" value="{{ old('no_hp') }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">Email</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('email') is-invalid @enderror"
+                                                        name="email" id="email" value="{{ old('email') }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">Kontak Darurat</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('kontak_darurat') is-invalid @enderror"
+                                                        name="kontak_darurat" id="kontak_darurat"
+                                                        value="{{ old('kontak_darurat') }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">Domisili</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('domisili') is-invalid @enderror"
+                                                        name="domisili" id="domisili" value="{{ old('domisili') }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="tiket">Ukuran Jersey</label>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        class="form-control @error('ukuran_jersey') is-invalid @enderror"
+                                                        name="ukuran_jersey" id="ukuran_jersey"
+                                                        value="{{ old('ukuran_jersey') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 p-4">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-muted">Detail Pembayaran</span>
+                                        <span class="badge badge-secondary badge-pill">3</span>
+                                    </h4>
+                                    <ul class="list-group mb-3" id="detailTiket">
+
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                        id="btn-batal">Batal</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-submit">Proses
+                                        Pembayaran</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container mt-5">
-            {{-- <h1 class="fw-bold">{{ strtoupper($event->nama_event) }}</h1>
-            <hr class="border-3 shadow rounded border border-primary"> --}}
             <div class="row">
                 <div class="col-md-4 order-1 order-md-0 mt-2 mt-md-0 text-center">
-                    {{-- <img src="{{ asset('storage/' . $event->poster) }}"
-                        class="img-fluid rounded-3 w-100 card-img-top shadow-lg border-0 p-4 mb-3 bg-white"
-                        style="object-fit: cover; height: auto;"> --}}
                     <p class="fw-bold fs-4">
                         Tiket
                     </p>
@@ -22,7 +157,8 @@
                             </div>
                         </div>
                     @else
-                        <div style="min-height: 100px; max-height: 80vh; overflow-y: auto; overflow-x: hidden" class="px-4">
+                        <div style="min-height: 100px; max-height: 80vh; overflow-y: auto; overflow-x: hidden"
+                            class="px-4">
                             @foreach ($tikets as $tiket)
                                 <div class="card mb-2">
                                     <div class="card-body">
@@ -47,6 +183,19 @@
                                                     aria-valuemax="{{ $tiket->quota }}">
                                                     {{ 25 }} Terjual</div>
                                             </div>
+                                            @auth
+                                                <div class="mt-2">
+                                                    {{-- <button class="btn btn-block w-100 btn-outline-primary">Beli Tiket</button> --}}
+                                                    <button type="button"
+                                                        class="btn btn-block w-100 btn-outline-primary edit-tiket"
+                                                        data-target="#modalTiket" data-toggle="modal"
+                                                        data-id="{{ $tiket->id }}"
+                                                        data-nama_promo="{{ $tiket->nama_promo }}"
+                                                        data-harga="{{ $tiket->harga }}">
+                                                        Beli Tiket
+                                                    </button>
+                                                </div>
+                                            @endauth
                                         @else
                                             <p class="text-danger">Penjualan sudah ditutup</p>
                                         @endif
@@ -58,7 +207,8 @@
                 </div>
                 <div class="col-md-6 order-0" style="padding-left: 30px;">
                     <div class="card p-4">
-                        <div class="top-section" style="background-image: url('{{ asset('storage/' . $event->poster) }}')">
+                        <div class="top-section"
+                            style="background-image: url('{{ asset('storage/' . $event->poster) }}')">
                             <div class="border border-0">{{ $event->penyelenggara }}</div>
                             <div class="icons">
                                 <div class="logo">
@@ -91,7 +241,8 @@
                                 </div>
                                 <div class="item">
                                     <span class="regular-text">Waktu</span>
-                                    <span class="big-text text-center">{{ \Carbon\Carbon::parse($event->waktu_pelaksanaan)->translatedFormat('d F Y H:m') }}</span>
+                                    <span
+                                        class="big-text text-center">{{ \Carbon\Carbon::parse($event->waktu_pelaksanaan)->translatedFormat('d F Y H:m') }}</span>
                                 </div>
                             </div>
                             <div class="row row1">
@@ -103,46 +254,6 @@
 
                         </div>
                     </div>
-                    {{-- <div class="card card-title p-4 border-0 rounded-3 shadow">
-                        <div class="row mt-3">
-                            <div class="col-md-5">
-                                <p class="fw-bold fs-5">
-                                    WAKTU
-                                </p>
-                                <p class="fs-6">
-
-                                </p>
-                            </div>
-                            <div class="col-md-7">
-                                <p class="fw-bold fs-5">
-                                    LOKASI
-                                </p>
-                                <p class="fs-6">
-
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <p class="fw-bold fs-4">
-                                    PENYELENGGARA
-                                </p>
-                                <p class="fs-4">
-                                    {{ $event->penyelenggara }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="mt-3">
-                            <p class="fw-bold fs-4">
-                                Tentang Event.
-                            </p>
-                            <p class="fs-5 mt-3">
-                                {!! $event->deskripsi !!}
-                            </p>
-                        </div>
-                    </div> --}}
                 </div>
                 <div class="col-md-2 mt-3 order-2">
                     <div class="card border rounded rounded-3 border-2 border-info p-2">
@@ -150,11 +261,18 @@
                             <div class="col-md-12 text-center">
                                 <h3 class="fs-5 fw-bold">YUK JOIN EVENT</h3>
                                 <hr class="border border-1 border-info">
-                                <a href="" class="btn btn-outline-primary d-block mt-2"><i
-                                        class='bx bxs-mouse'></i>Klik
-                                    Untuk
-                                    Daftar
-                                </a>
+                                @auth
+                                    <a href="" class="btn btn-outline-primary d-block mt-2"><i
+                                            class='bx bxs-mouse'></i>Klik
+                                        Untuk
+                                        Daftar
+                                    </a>
+                                @endauth
+                                @guest
+                                    <a href="{{ route('login') }}" class="btn btn-outline-primary d-block mt-2">Login untuk
+                                        daftar
+                                    </a>
+                                @endguest
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -188,7 +306,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tikets = @json($tikets);
-
+            // Untuk countdown
             tikets.forEach(tiket => {
                 if (tiket.tgl_selesai) {
                     const countdownDate = new Date(tiket.tgl_selesai).getTime();
@@ -214,11 +332,36 @@
                     }, 1000);
                 }
             });
+
+
+            const btnBeliTiket = document.querySelectorAll('.edit-tiket')
+            const modalBeliTiket = new bootstrap.Modal(document.getElementById('modalTiket'));
+
+            btnBeliTiket.forEach(btnBeli => {
+                btnBeli.addEventListener('click', () => {
+                    modalBeliTiket.show()
+                    const userLogin = @json(Auth::user());
+                    // document.querySelector('#tiket').value = btnBeli.dataset.nama_promo
+                    // document.querySelector('#harga').value = btnBeli.dataset.harga
+                    document.querySelector('#detailTiket').innerHTML = `
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">${btnBeli.dataset.nama_promo}</h6>
+                            </div>
+                            <span class="text-muted">Rp. ${btnBeli.dataset.harga}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total (IDR)</span>
+                            <strong>Rp. ${btnBeli.dataset.harga}</strong>
+                        </li>
+                    `
+                })
+            })
+
         });
     </script>
 
     <style>
-        /* From Uiverse.io by Smit-Prajapati */
         .card {
             padding: 5px;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 20px 0px;
@@ -261,12 +404,8 @@
         }
 
         .card .top-section .icons .logo {
-            /* height: 100%; */
-            /* aspect-ratio: 1; */
             color: white;
-            /* margin: 7px 15px; */
             font-weight: 700;
-            /* padding: 7px 0 7px 15px; */
         }
 
         .card .top-section .icons .logo .top-section {
@@ -299,7 +438,6 @@
             display: block;
             font-size: 3rem;
             font-weight: bolder;
-            /* color: white; */
             text-align: center;
             letter-spacing: 2px;
         }
@@ -314,7 +452,6 @@
             flex: 30%;
             text-align: center;
             padding: 5px;
-            /* color: rgba(170, 222, 243, 0.721); */
         }
 
         .card .bottom-section .row .item .big-text {

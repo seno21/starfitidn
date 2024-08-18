@@ -148,12 +148,14 @@
                                         <table class="table table-borderless">
                                             <tr class="font-weight-bold">
                                                 <td class="fw-bold">WAKTU</td>
-                                                <td>: </td>
-                                                <td>{{ $event->waktu_pelaksanaan }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ \Carbon\Carbon::parse($event->waktu_pelaksanaan)->translatedFormat('d F Y H:m') }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="fw-bold">LOKASI</td>
-                                                <td>: </td>
+                                            </tr>
+                                            <tr>
                                                 <td>{{ $event->lokasi }}</td>
                                             </tr>
                                         </table>
