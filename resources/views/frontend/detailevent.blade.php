@@ -280,7 +280,7 @@
                                 <h3 class="fs-5 fw-bold">HUBUNGI KAMI</h3>
                                 <hr class="border border-1 border-info">
                                 <div class="mt-3">
-                                    <a href="" class="btn btn-outline-primary d-block mt-2"><i
+                                    <a href="" class="btn btn-outline-primary text-center mt-2"><i
                                             class='bx bxs-user'></i>Contact
                                         Person
                                     </a>

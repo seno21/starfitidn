@@ -6,8 +6,8 @@ use App\Models\Events;
 use App\Models\Tikets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Parsedown;
-// use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class EventController extends Controller
@@ -67,6 +67,7 @@ class EventController extends Controller
 
 
         $event->nama_event = $request->acara;
+        $event->slug = Str::slug($request->acara, '-');
         $event->waktu_pelaksanaan = $request->waktu;
         $event->lokasi  = $request->lokasi;
         $event->kontak = $request->telepon;

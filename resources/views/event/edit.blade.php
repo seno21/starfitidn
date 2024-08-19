@@ -108,7 +108,8 @@
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi Acara</label>
-                            <input id="deskripsi" type="hidden" name="deskripsi" value="{{ old('deskripsi', $event->deskripsi) }}">
+                            <input id="deskripsi" type="hidden" name="deskripsi"
+                                value="{{ old('deskripsi', $event->deskripsi) }}">
                             <trix-editor class="@error('deskripsi') is-invalid @enderror" input="deskripsi"></trix-editor>
                             @error('deskripsi')
                                 <div class="invalid-feedback">

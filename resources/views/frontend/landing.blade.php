@@ -150,7 +150,8 @@
                                                 <td class="fw-bold">WAKTU</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ \Carbon\Carbon::parse($event->waktu_pelaksanaan)->translatedFormat('d F Y H:m') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($event->waktu_pelaksanaan)->translatedFormat('d F Y H:m') }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="fw-bold">LOKASI</td>
