@@ -31,11 +31,15 @@ class LandingController extends Controller
         $events = $events->find($id);
         $userLogin = Auth::user();
 
-        $detailUser = DB::table('users as us')
-                    ->leftjoin('detail_users as du', 'du.id_user', 'us.id')
-                    ->where('us.id', $userLogin->id)
-                    ->select('du.*', 'us.id as id_user', 'us.email')
-                    ->first();
+        $detailUser = array();
+
+        if(isset($userLogin->id)){
+            $detailUser = DB::table('users as us')
+                        ->leftjoin('detail_users as du', 'du.id_user', 'us.id')
+                        ->where('us.id', $userLogin->id)
+                        ->select('du.*', 'us.id as id_user', 'us.email')
+                        ->first();
+        }
 
         $today = \Carbon\Carbon::now();
         $eventDate = \Carbon\Carbon::parse($events->waktu_pelaksanaan);
