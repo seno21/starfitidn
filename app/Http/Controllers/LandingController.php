@@ -6,6 +6,7 @@ use App\Models\Events;
 use App\Models\Tikets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LandingController extends Controller
 {
@@ -28,6 +29,13 @@ class LandingController extends Controller
     {
         $events = new Events();
         $events = $events->find($id);
+        $userLogin = Auth::user();
+
+        $detailUser = DB::table('users as us')
+                    ->leftjoin('detail_users as du', 'du.id_user', 'us.id')
+                    ->where('us.id', $userLogin->id)
+                    ->select('du.*', 'us.id as id_user', 'us.email')
+                    ->first();
 
         $today = \Carbon\Carbon::now();
         $eventDate = \Carbon\Carbon::parse($events->waktu_pelaksanaan);
@@ -37,10 +45,13 @@ class LandingController extends Controller
         }else{
             $tickets = Tikets::where('id_event', $id)->where('active', 1)->orderBy('tgl_mulai')->get();
         }
+        $transaksis = DB::table('transaksi')->where('active', 1)->where('id_event', $id)->first();
 
         $data = [
             'event' => $events,
             'tikets' => $tickets,
+            'detailUsers' => $detailUser,
+            'transaksi' => $transaksis,
         ];
 
         return view('frontend.detailevent', $data);

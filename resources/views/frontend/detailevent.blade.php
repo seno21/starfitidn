@@ -13,110 +13,131 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <form id="tiketForm" method="POST" action="{{ route('event.eom.insertTiket') }}">
+                            <form id="tiketForm" method="POST" action="{{ route('transaksi') }}">
                                 @csrf
                                 <input type="hidden" name="_method" value="POST">
                                 <input type="hidden" name="id_event" value="{{ $event->id }}">
-                                <input type="hidden" name="id" id="tiket_id">
+                                <input type="hidden" name="id_user" value="{{$detailUsers->id_user}}">
+                                <input type="hidden" name="id_tiket" id="tiket_id">
+                                <input type="hidden" name="harga" id="harga">
+                                <input type="hidden" name="qty" id="qty">
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-6">
 
-                                            <div class="form-group mb-2">
+                                            <div class="form-group my-3">
                                                 <label for="tiket">Nama Lengkap</label>
                                                 <div class="input-group">
                                                     <input type="text"
                                                         class="form-control @error('nama_lengkap') is-invalid @enderror"
                                                         name="nama_lengkap" id="nama_lengkap"
-                                                        value="{{ old('nama_lengkap') }}">
+                                                        value="{{ $detailUsers->nama_lengkap ?? old('nama_lengkap') }}">
                                                 </div>
                                             </div>
-                                            <div class="form-group mb-2">
+                                            <div class="form-group my-3">
                                                 <label for="tiket">NIK</label>
                                                 <div class="input-group">
                                                     <input type="text"
                                                         class="form-control @error('nik') is-invalid @enderror"
-                                                        name="nik" id="nik" value="{{ old('nik') }}">
+                                                        name="nik" id="nik" value="{{ $detailUsers->nik ?? old('nik') }}">
                                                 </div>
                                             </div>
-                                            <div class="form-group mb-2">
+                                            <div class="form-group my-3">
+                                                <label class="col-sm-3 col-form-label">Kategori</label>
+                                                <div class="d-flex">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                                                <input type="radio" class="form-check-input" name="jenis_kelamin" id="L"
+                                                                    value="laki-laki" {{ $detailUsers->jenis_kelamin == 'laki-laki' ? 'checked' : '' }}>
+                                                                Laki-laki
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                                                <input type="radio" class="form-check-input" name="jenis_kelamin" id="NL"
+                                                                    value="perempuan" {{ $detailUsers->jenis_kelamin == 'perempuan' ? 'checked' : '' }}>
+                                                                Perempuan
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="form-group my-3">
                                                 <label for="tiket">Jenis Kelamin</label>
                                                 <div class="input-group">
                                                     <input type="text"
                                                         class="form-control @error('jk') is-invalid @enderror"
-                                                        name="jk" id="jk" value="{{ old('jk') }}">
+                                                        name="jk" id="jk" value="{{ old('jk'), $detailUsers->jenis_kelamin ?? '' }}">
                                                 </div>
-                                            </div>
-                                            <div class="form-group mb-2">
+                                            </div> --}}
+                                            <div class="form-group my-3">
                                                 <label for="tiket">Tempat Lahir</label>
                                                 <div class="input-group">
                                                     <input type="text"
                                                         class="form-control @error('tempat_lahir') is-invalid @enderror"
                                                         name="tempat_lahir" id="tempat_lahir"
-                                                        value="{{ old('tempat_lahir') }}">
+                                                        value="{{  $detailUsers->tempat_lahir ?? old('tempat_lahir') }}">
                                                 </div>
                                             </div>
-                                            <div class="form-group mb-2">
+                                            <div class="form-group my-3">
                                                 <label for="tiket">Tanggal Lahir</label>
                                                 <div class="input-group">
-                                                    <input type="text"
-                                                        class="form-control @error('tanggal_lahir') is-invalid @enderror"
-                                                        name="tanggal_lahir" id="tanggal_lahir"
-                                                        value="{{ old('tanggal_lahir') }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-2">
-                                                <label for="tiket">Usia</label>
-                                                <div class="input-group">
-                                                    <input type="text"
-                                                        class="form-control @error('usia') is-invalid @enderror"
-                                                        name="usia" id="usia" value="{{ old('usia') }}">
+                                                        <input type="date"
+                                                        class="form-control @error('tgl_lahir') is-invalid @enderror"
+                                                        name="tgl_lahir" id="tgl_lahir"
+                                                        value="{{  $detailUsers->tgl_lahir ?? old('tgl_lahir')}}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
 
-                                            <div class="form-group mb-2">
+                                            <div class="form-group my-3">
                                                 <label for="tiket">No Handphone</label>
                                                 <div class="input-group">
                                                     <input type="text"
-                                                        class="form-control @error('no_hp') is-invalid @enderror"
-                                                        name="no_hp" id="no_hp" value="{{ old('no_hp') }}">
+                                                        class="form-control @error('no_telp') is-invalid @enderror"
+                                                        name="no_telp" id="no_telp" value="{{ $detailUsers->no_telp ?? old('no_telp') }}">
                                                 </div>
                                             </div>
-                                            <div class="form-group mb-2">
+                                            <div class="form-group my-3">
                                                 <label for="tiket">Email</label>
                                                 <div class="input-group">
                                                     <input type="text"
                                                         class="form-control @error('email') is-invalid @enderror"
-                                                        name="email" id="email" value="{{ old('email') }}">
+                                                        name="email" id="email" value="{{ $detailUsers->email ?? '' }}">
                                                 </div>
                                             </div>
-                                            <div class="form-group mb-2">
+                                            <div class="form-group my-3">
                                                 <label for="tiket">Kontak Darurat</label>
                                                 <div class="input-group">
                                                     <input type="text"
                                                         class="form-control @error('kontak_darurat') is-invalid @enderror"
                                                         name="kontak_darurat" id="kontak_darurat"
-                                                        value="{{ old('kontak_darurat') }}">
+                                                        value="{{ old('kontak_darurat'), $detailUsers->kontak_darurat ?? '' }}">
                                                 </div>
                                             </div>
-                                            <div class="form-group mb-2">
+                                            <div class="form-group my-3">
                                                 <label for="tiket">Domisili</label>
                                                 <div class="input-group">
                                                     <input type="text"
                                                         class="form-control @error('domisili') is-invalid @enderror"
-                                                        name="domisili" id="domisili" value="{{ old('domisili') }}">
+                                                        name="domisili" id="domisili" value="{{ old('domisili'), $detailUsers->domisili ?? '' }}">
                                                 </div>
                                             </div>
-                                            <div class="form-group mb-2">
-                                                <label for="tiket">Ukuran Jersey</label>
-                                                <div class="input-group">
-                                                    <input type="text"
-                                                        class="form-control @error('ukuran_jersey') is-invalid @enderror"
-                                                        name="ukuran_jersey" id="ukuran_jersey"
-                                                        value="{{ old('ukuran_jersey') }}">
-                                                </div>
+                                            <div class="form-group my-3">
+                                                <label for="ukuran_jersey">Ukuran Jersey</label>
+                                                <select class="form-control form-select" id="status" name="ukuran_jersey">
+                                                    <option value="s" {{ $detailUsers->domisili == 's' ? 'selected' : '' }}>S</option>
+                                                    <option value="m" {{ $detailUsers->domisili == 'm' ? 'selected' : '' }}>M</option>
+                                                    <option value="l" {{ $detailUsers->domisili == 'l' ? 'selected' : '' }}>L</option>
+                                                    <option value="xl" {{ $detailUsers->domisili == 'xl' ? 'selected' : '' }}>XL</option>
+                                                    <option value="xxl" {{ $detailUsers->domisili == 'xxl' ? 'selected' : '' }}>XXL</option>
+                                                    <option value="xxxl" {{ $detailUsers->domisili == 'xxxl' ? 'selected' : '' }}>XXXL</option>
+                                                    <option value="4xl" {{ $detailUsers->domisili == '4xl' ? 'selected' : '' }}>4XL</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -133,8 +154,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                                         id="btn-batal">Batal</button>
-                                    <button type="submit" class="btn btn-primary" id="btn-submit">Proses
-                                        Pembayaran</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-submit">Konfirmasi</button>
                                 </div>
                             </form>
                         </div>
@@ -184,8 +204,8 @@
                                                     {{ 25 }} Terjual</div>
                                             </div>
                                             @auth
+                                            @if (!isset($transaksi))
                                                 <div class="mt-2">
-                                                    {{-- <button class="btn btn-block w-100 btn-outline-primary">Beli Tiket</button> --}}
                                                     <button type="button"
                                                         class="btn btn-block w-100 btn-outline-primary edit-tiket"
                                                         data-target="#modalTiket" data-toggle="modal"
@@ -195,6 +215,17 @@
                                                         Beli Tiket
                                                     </button>
                                                 </div>
+                                            @endif
+                                            @if (isset($transaksi) && $transaksi->id_tiket == $tiket->id)
+                                                <button type="button"
+                                                class="btn btn-block w-100 mt-3 btn-outline-primary edit-tiket"
+                                                data-target="#modalTiket" data-toggle="modal"
+                                                data-id="{{ $tiket->id }}"
+                                                data-nama_promo="{{ $tiket->nama_promo }}"
+                                                data-harga="{{ $tiket->harga }}">
+                                                Proses Bayar
+                                            </button>
+                                            @endif
                                             @endauth
                                         @else
                                             <p class="text-danger">Penjualan sudah ditutup</p>
@@ -323,9 +354,9 @@
             btnBeliTiket.forEach(btnBeli => {
                 btnBeli.addEventListener('click', () => {
                     modalBeliTiket.show()
-                    const userLogin = @json(Auth::user());
-                    // document.querySelector('#tiket').value = btnBeli.dataset.nama_promo
-                    // document.querySelector('#harga').value = btnBeli.dataset.harga
+                    document.querySelector('#tiket_id').value = btnBeli.dataset.id
+                    document.querySelector('#qty').value = 1
+                    document.querySelector('#harga').value = btnBeli.dataset.harga
                     document.querySelector('#detailTiket').innerHTML = `
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>

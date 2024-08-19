@@ -15,9 +15,15 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('id_user');
             $table->string('no_telp');
-            $table->string('alamat');
-            $table->string('jenis_kelamin')->nullable();
-            $table->string('tgl_lahir');
+            $table->string('nama_lengkap');
+            $table->string('nik');
+            $table->string('kontak_darurat');
+            $table->string('domisili');
+            $table->string('usia');
+            $table->string('ukuran_jersey');
+            $table->string('jenis_kelamin');
+            $table->date('tgl_lahir');
+            $table->string('tempat_lahir');
             $table->string('logo_partner')->nullable();
             $table->timestamps();
         });
@@ -28,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_users');
+        Schema::dropIfExists('detail_user');
     }
 };

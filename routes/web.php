@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\TransaksiTiketController;
 use Illuminate\Support\Facades\Route;
 
 // FRONTEND - Route untuk Landing (Tanpa Login)
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/list-akun', [UserController::class, 'index'])->name('list-akun');
     Route::post('/ganti-role', [UserController::class, 'update'])->name('ganti-role');
+    Route::post('/transaksi', [TransaksiTiketController::class, 'store'])->name('transaksi');
 });
 
 Route::middleware('auth')->group(function () {
