@@ -204,12 +204,12 @@
                             @endforeach
                         </div>
                     @endif
-                    <div style="min-height: 100px; max-height: 80vh; overflow-y: auto; overflow-x: hidden"
-                        class=" border-primary rounded mt-4 border shadow border-2 p-4">
+                    <div style="min-height: 100px; max-height: 80vh; overflow-y: auto; overflow-x: hidden; background: white;"
+                        class="border-2 rounded mt-4 shadow border p-4">
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <h3 class="fs-5 fw-bold">YUK JOIN EVENT</h3>
-                                <hr class="border border-1 border-info">
+                                <hr class="border border-1 border-secondary">
                                 @auth
                                     <a href="" class="btn btn-outline-primary mt-2"><i
                                             class='bx bxs-mouse'></i>Mendaftar Evenr
@@ -225,7 +225,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12 text-center">
                                 <h3 class="fs-5 fw-bold">HUBUNGI KAMI</h3>
-                                <hr class="border border-1 border-info">
+                                <hr class="border border-1 border-secondary">
                                 <div class="mt-3">
                                     <a href="" class="btn btn-outline-primary text-center mt-2"><i
                                             class='bx bxs-user'></i>Contact
@@ -237,7 +237,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12 text-center">
                                 <h3 class="fs-5 fw-bold">BAGIKAN EVENT</h3>
-                                <hr class="border border-1 border-info">
+                                <hr class="border border-1 border-secondary">
                                 <div class="social-links m-2">
                                     <a href="#" class="btn btn-md btn-outline-primary m-2" target="_blank"><i
                                             class="bx bxl-facebook "></i></a>
@@ -282,55 +282,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-md-2 mt-3 order-2">
-                    <div class="card border rounded rounded-3 border-2 border-info p-2">
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <h3 class="fs-5 fw-bold">YUK JOIN EVENT</h3>
-                                <hr class="border border-1 border-info">
-                                @auth
-                                    <a href="" class="btn btn-outline-primary d-block mt-2"><i
-                                            class='bx bxs-mouse'></i>Mendaftar Evenr
-                                    </a>
-                                @endauth
-                                @guest
-                                    <a href="{{ route('login') }}" class="btn btn-outline-primary d-block mt-2">Login untuk
-                                        daftar
-                                    </a>
-                                @endguest
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12 text-center">
-                                <h3 class="fs-5 fw-bold">HUBUNGI KAMI</h3>
-                                <hr class="border border-1 border-info">
-                                <div class="mt-3">
-                                    <a href="" class="btn btn-outline-primary text-center mt-2"><i
-                                            class='bx bxs-user'></i>Contact
-                                        Person
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12 text-center">
-                                <h3 class="fs-5 fw-bold">BAGIKAN EVENT</h3>
-                                <hr class="border border-1 border-info">
-                                <div class="social-links m-2">
-                                    <a href="#" class="btn btn-md btn-outline-primary m-2" target="_blank"><i
-                                            class="bx bxl-facebook "></i></a>
-                                    <a href="#" class="btn btn-md btn-outline-primary m-2" target="_blank"><i
-                                            class="bx bxl-instagram "></i></a>
-                                    <a href="#" class="btn btn-md btn-outline-primary m-2" target="_blank"><i
-                                            class="bx bxl-whatsapp "></i></a>
-                                    <a href="#" class="btn btn-md btn-outline-primary m-2" target="_blank"><i
-                                            class="bx bxl-telegram "></i></a>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
+                {{-- Lolasi share event sebelum update --}}
             </div>
         </div>
     </section>
