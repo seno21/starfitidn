@@ -200,7 +200,7 @@ class EventController extends Controller
                         </button>
                         <form method="POST" action="' . route('event.eom.removeTiket', $tiket->id) . '" style="display:inline;">
                             ' . csrf_field() . '
-                            <button type="submit" class="btn btn-sm btn-danger" id="btnDelete"><i class="mdi mdi-delete"></i></button>
+                            <button type="submit" class="btn btn-sm btn-danger" id="btnDel"><i class="mdi mdi-delete"></i></button>
                         </form>';
                     }
                     // Jika waktu_pelaksanaan sudah melewati hari ini, kembalikan string kosong sehingga tidak ada tombol yang ditampilkan

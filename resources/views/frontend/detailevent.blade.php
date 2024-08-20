@@ -2,7 +2,8 @@
 @section('content')
     <!-- ======= Event Section ======= -->
     <section id="event" class="min-vh-100 section-bg">
-        @if (count($detailUsers) > 0)
+        {{-- @if (count($detailUsers) > 0) --}}
+        @if (isset($detailUsers))
             <div class="modal fade" id="modalTiket" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog modal-lg">
@@ -191,12 +192,12 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-4 order-1 order-md-0 mt-2 mt-md-0 text-center">
-                    <p class="fw-bold fs-3">
+                    <p class="fw-bold fs-3 m-3 shadow rounded border-secondary" style="background: white;">
                         TIKET EVENT
                     </p>
 
                     @if (count($tikets) == 0)
-                        <div class="card">
+                        <div class="card m-3">
                             <div class="card-body">
                                 <h4 class="card-title">Mohon Maaf 👏</h4>
                                 <p>Tiket tidak tersedia</p>
@@ -204,12 +205,12 @@
                         </div>
                     @else
                         <div style="min-height: 100px; max-height: 80vh; overflow-y: auto; overflow-x: hidden"
-                            class="px-4">
+                            class="px-4 pt-2">
                             @foreach ($tikets as $tiket)
-                                <div class="card mb-2">
+                                <div class="card mb-3">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
-                                            <h4 class="card-title">{{ $tiket->nama_promo }}</h4>
+                                            <h4 class="card-title text-uppercase">{{ $tiket->nama_promo }}</h4>
                                             <div id="countdown-{{ $tiket->id }}" class="text-danger fw-bold"></div>
                                             @if ($tiket->tgl_selesai)
                                             @endif
@@ -230,7 +231,8 @@
                                                     {{ 25 }} Terjual</div>
                                             </div>
                                             @guest
-                                            <a class="btn btn-block btn-outline-primary mt-2 w-100" href="{{route('login')}}">Login untuk Beli Tiket</a>
+                                                <a class="btn btn-block btn-outline-primary mt-2 w-100"
+                                                    href="{{ route('login') }}">Login untuk Beli Tiket</a>
                                             @endguest
                                             @auth
                                                 @if (!isset($transaksi))
@@ -264,15 +266,15 @@
                             @endforeach
                         </div>
                     @endif
-                    <div style="min-height: 100px; max-height: 80vh; overflow-y: auto; overflow-x: hidden; background: white;"
-                        class="border-2 rounded mt-4 shadow border p-4">
+                    <div style="min-height: 100px; max-height: 80vh; overflow-y: auto; overflow-x: hidden;"
+                        class="border-2 rounded mt-4 shadow border p-4 px-4 card m-3">
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <h3 class="fs-5 fw-bold">YUK JOIN EVENT</h3>
                                 <hr class="border border-1 border-secondary">
                                 @auth
                                     <a href="" class="btn btn-outline-primary mt-2"><i
-                                            class='bx bxs-mouse'></i>Mendaftar Evenr
+                                            class='bx bxs-mouse'></i>Mendaftar Event
                                     </a>
                                 @endauth
                                 @guest
@@ -320,7 +322,7 @@
                             <div class="border border-0">{{ $event->penyelenggara }}</div>
                         </div>
                         <div class="bottom-section">
-                            <span class="title">{{ $event->nama_event }}</span>
+                            <span class="title text-uppercase">{{ $event->nama_event }}</span>
                             <div class="row row1">
                                 <div class="item">
                                     <span class="regular-text fw-bold fs-4">Lokasi</span>

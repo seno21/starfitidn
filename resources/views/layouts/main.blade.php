@@ -160,8 +160,6 @@
                             icon: "success",
                         });
                         form.submit();
-                    } else {
-                        swal("Data batal dihapus!");
                     }
                 });
         })
