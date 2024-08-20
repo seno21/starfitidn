@@ -11,7 +11,8 @@
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Konfirmasi Pembelian
                             </h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -125,7 +126,7 @@
                                                         <input type="text"
                                                             class="form-control @error('kontak_darurat') is-invalid @enderror"
                                                             name="kontak_darurat" id="kontak_darurat"
-                                                            value="{{ old('kontak_darurat'), $detailUsers->kontak_darurat ?? '' }}">
+                                                            value="{{ $detailUsers->kontak_darurat ?? old('kontak_darurat') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group my-3">
@@ -134,7 +135,7 @@
                                                         <input type="text"
                                                             class="form-control @error('domisili') is-invalid @enderror"
                                                             name="domisili" id="domisili"
-                                                            value="{{ old('domisili'), $detailUsers->domisili ?? '' }}">
+                                                            value="{{ $detailUsers->domisili ?? old('domisili') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group my-3">
@@ -142,25 +143,28 @@
                                                     <select class="form-control form-select" id="status"
                                                         name="ukuran_jersey">
                                                         <option value="s"
-                                                            {{ $detailUsers->domisili == 's' ? 'selected' : '' }}>S
+                                                            {{ $detailUsers->ukuran_jersey == 's' ? 'selected' : '' }}>S
                                                         </option>
                                                         <option value="m"
-                                                            {{ $detailUsers->domisili == 'm' ? 'selected' : '' }}>M
+                                                            {{ $detailUsers->ukuran_jersey == 'm' ? 'selected' : '' }}>M
                                                         </option>
                                                         <option value="l"
-                                                            {{ $detailUsers->domisili == 'l' ? 'selected' : '' }}>L
+                                                            {{ $detailUsers->ukuran_jersey == 'l' ? 'selected' : '' }}>L
                                                         </option>
                                                         <option value="xl"
-                                                            {{ $detailUsers->domisili == 'xl' ? 'selected' : '' }}>XL
+                                                            {{ $detailUsers->ukuran_jersey == 'xl' ? 'selected' : '' }}>XL
                                                         </option>
                                                         <option value="xxl"
-                                                            {{ $detailUsers->domisili == 'xxl' ? 'selected' : '' }}>XXL
+                                                            {{ $detailUsers->ukuran_jersey == 'xxl' ? 'selected' : '' }}>
+                                                            XXL
                                                         </option>
                                                         <option value="xxxl"
-                                                            {{ $detailUsers->domisili == 'xxxl' ? 'selected' : '' }}>XXXL
+                                                            {{ $detailUsers->ukuran_jersey == 'xxxl' ? 'selected' : '' }}>
+                                                            XXXL
                                                         </option>
                                                         <option value="4xl"
-                                                            {{ $detailUsers->domisili == '4xl' ? 'selected' : '' }}>4XL
+                                                            {{ $detailUsers->ukuran_jersey == '4xl' ? 'selected' : '' }}>
+                                                            4XL
                                                         </option>
                                                     </select>
                                                 </div>
@@ -177,7 +181,7 @@
                                         </ul>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                        <button type="button" class="btn btn-danger close" data-bs-dismiss="modal"
                                             id="btn-batal">Batal</button>
                                         <button type="submit" class="btn btn-primary"
                                             id="btn-submit">Konfirmasi</button>
@@ -248,13 +252,18 @@
                                                     </div>
                                                 @endif
                                                 @if (isset($transaksi) && $transaksi->id_tiket == $tiket->id)
-                                                    <button type="button"
-                                                        class="btn btn-block w-100 mt-3 btn-outline-primary edit-tiket"
-                                                        data-target="#modalTiket" data-toggle="modal"
-                                                        data-id="{{ $tiket->id }}"
-                                                        data-nama_promo="{{ $tiket->nama_promo }}"
-                                                        data-harga="{{ $tiket->harga }}">
-                                                        Proses Bayar
+                                                    <a href="{{route('checkout')}}">
+                                                        <button type="button"
+                                                            class="btn btn-block w-100 mt-3 btn-outline-primary"
+                                                            data-id="{{ $tiket->id }}"
+                                                            data-nama_promo="{{ $tiket->nama_promo }}"
+                                                            data-harga="{{ $tiket->harga }}">
+                                                            Proses Bayar
+                                                        </button>
+                                                    </a>
+                                                    <button class="btn btn-outline-danger change-role-btn mt-2 w-100"
+                                                        data-id="{{ $tiket->id }}">
+                                                        Batalkan Pesanan
                                                     </button>
                                                 @endif
                                             @endauth
@@ -316,6 +325,9 @@
                         </div>
                     </div>
                 </div>
+                @if ($errors->any())
+                    {{ dd($errors) }}
+                @endif
                 <div class="col-md-8 order-0" style="padding-left: 25px;">
                     <div class="card p-4 shadow">
                         <div class="top-section"
@@ -364,7 +376,7 @@
 
                         if (distance < 0) {
                             clearInterval(countdownFunction);
-                            countdownElement.innerHTML = "Penjualan sudah ditutup";
+                            countdownElement.innerHTML = "Closed";
                         } else {
                             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 *
@@ -386,6 +398,13 @@
             btnBeliTiket.forEach(btnBeli => {
                 btnBeli.addEventListener('click', () => {
                     modalBeliTiket.show()
+
+                    // const btnClose = document.querySelectorAll(".close")
+                    // btnClose.forEach(close => {
+                    //     close.addEventListener('click', () => {
+                    //         modalBeliTiket.hide()
+                    //     })
+                    // })
                     document.querySelector('#tiket_id').value = btnBeli.dataset.id
                     document.querySelector('#qty').value = 1
                     document.querySelector('#harga').value = btnBeli.dataset.harga
@@ -403,7 +422,84 @@
                     `
                 })
             })
+        });
 
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get all buttons with the class 'change-role-btn'
+            const changeRoleButtons = document.querySelectorAll('.change-role-btn');
+            let selectedTiketID = null;
+
+            changeRoleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Get user ID and role from the data attributes
+                    selectedTiketID = button.getAttribute('data-id');
+
+                    // Show SweetAlert2 confirmation dialog
+                    swal({
+                        title: 'Pembatalan Pesanan',
+                        text: `Anda yakin ingin membatalkan pesanan?`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3f51b5',
+                        cancelButtonColor: '#ff4081',
+                        confirmButtonText: 'Great ',
+                        buttons: {
+                            cancel: {
+                                text: "Cancel",
+                                value: null,
+                                visible: true,
+                                className: "btn btn-danger",
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "OK",
+                                value: true,
+                                visible: true,
+                                className: "btn btn-primary",
+                                closeModal: true
+                            }
+                        }
+                    }).then((result) => {
+                        if (result) {
+                            // Perform the AJAX request to change the role using Fetch API
+                            fetch("{{ route('cancel-pesanan') }}", {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    },
+                                    body: new URLSearchParams({
+                                        id: selectedTiketID,
+                                    })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        location.reload()
+                                        // Show success alert
+                                        showSwal('success-message')
+                                    } else {
+                                        throw new Error('Something went wrong');
+                                    }
+                                })
+                                .catch(error => {
+                                    swal({
+                                        title: 'Ada Kesalahan',
+                                        text: 'Terdapat error silakan periksa',
+                                        icon: 'error',
+                                        button: {
+                                            text: "ok",
+                                            value: true,
+                                            visible: true,
+                                            className: "btn btn-primary"
+                                        }
+                                    })
+                                    console.error('Error:', error);
+                                });
+                        }
+                    });
+                });
+            });
         });
     </script>
 

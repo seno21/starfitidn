@@ -33,6 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/list-akun', [UserController::class, 'index'])->name('list-akun');
     Route::post('/ganti-role', [UserController::class, 'update'])->name('ganti-role');
     Route::post('/transaksi', [TransaksiTiketController::class, 'store'])->name('transaksi');
+    Route::post('/cancel-pesanan', [TransaksiTiketController::class, 'cancel'])->name('cancel-pesanan');
+    Route::get('/checkout', [TransaksiTiketController::class, 'checkout'])->name('checkout');
 });
 
 Route::middleware('auth')->group(function () {

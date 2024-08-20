@@ -6,6 +6,13 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Xendit\Configuration;
+use Xendit\Invoice\CreateInvoiceRequest;
+use Xendit\Invoice\Invoice;
+use Xendit\Invoice\InvoiceApi;
+use Xendit\XenditSdkException;
+use Xendit\Exceptions\ApiException;
 
 class TransaksiTiketController extends Controller
 {
@@ -98,6 +105,64 @@ class TransaksiTiketController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack(); // Rollback jika terjadi error
             return redirect()->back()->withErrors(['error' => $th->getMessage()]);
+        }
+    }
+
+    public function cancel(Request $request)
+    {
+        $transaksi = DB::table('transaksi')
+            ->where('id_tiket', $request->id)
+            ->where('active', 1)
+            ->where('id_user', Auth::user()->id)
+            ->first();
+
+        if ($transaksi) {
+            DB::table('transaksi')
+                ->where('id', $transaksi->id)
+                ->update(['active' => 0]);
+        } else {
+            // Handle the case where no transaction is found
+            return response()->json(['message' => 'Transaction not found'], 404);
+        }
+        return response()->json([
+            'success' => true,
+        ]);
+    }
+
+    public function checkout()
+    {
+        // Initialize Xendit with the API key
+        Configuration::setXenditKey(env('XENDIT_SECRET_KEY'));
+
+        // Create an instance of the InvoiceApi class
+        $apiInstance = new InvoiceApi();
+
+        // Prepare the invoice creation request
+        $create_invoice_request = new CreateInvoiceRequest([
+            'external_id' => 'invoice-' . uniqid(),
+            'description' => 'Sistem kalau udah dipakai itu harus dibayar, jangan bilangnya ga dipake tapi hari H full akses',
+            'amount' => 25000000,
+            'invoice_duration' => 172800, // Invoice is valid for 48 hours
+            'currency' => 'IDR',
+            'reminder_time' => 1,
+            'success_redirect_url' => route('home') // Reminder will be sent after 1 hour
+        ]);
+
+        try {
+            // Create the invoice
+            $result = $apiInstance->createInvoice($create_invoice_request);
+
+            // Redirect the user to the payment URL
+            dd($result);
+            return redirect($result['invoice_url']);
+        } catch (XenditSdkException $e) {
+            // Handle any SDK exceptions
+            echo 'SDK Exception when creating invoice: ', $e->getMessage(), PHP_EOL;
+            echo 'Full Error: ', json_encode($e->getFullError()), PHP_EOL;
+        } catch (\App\Http\Controllers\ApiException $e) {
+            // Handle API exceptions
+            echo 'API Exception when creating invoice: ', $e->getMessage(), PHP_EOL;
+            echo 'Full Error: ', json_encode($e->getResponseObject()), PHP_EOL;
         }
     }
 
