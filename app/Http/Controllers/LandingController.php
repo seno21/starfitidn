@@ -28,7 +28,7 @@ class LandingController extends Controller
     public function showEvent($id)
     {
         $events = new Events();
-        $events = $events->find($id);
+        $events = $events->where('slug', $id)->first();
         $userLogin = Auth::user();
 
         $detailUser = array();

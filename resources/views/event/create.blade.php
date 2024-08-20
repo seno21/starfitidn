@@ -116,9 +116,8 @@
                             <label for="deskripsi">Deskripsi Acara</label>
                             {{-- <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi"
                                 rows="6" placeholder="Isikan detail acara">{{ old('deskripsi') }}</textarea> --}}
-                            <input id="deskripsi" type="hidden" name="deskripsi">
-                            <trix-editor class="@error('deskripsi') is-invalid @enderror"
-                                input="deskripsi">{!! old('deskripsi') !!}</trix-editor>
+                            <input id="deskripsi" type="hidden" name="deskripsi" value="{!! old('deskripsi') !!}">
+                            <trix-editor class="@error('deskripsi') is-invalid @enderror" input="deskripsi"></trix-editor>
                             @error('deskripsi')
                                 <div class="invalid-feedback">
                                     {{ $message }}

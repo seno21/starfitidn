@@ -47,7 +47,7 @@
                             </div>
                             <div class="card-footer m-0 bg-white">
                                 <small class="text-muted">
-                                    <a href="{{ route('show.event', $event->id) }}"
+                                    <a href="{{ route('show.event', $event->slug) }}"
                                         class="btn btn-info btn-block fw-bold border-2 w-100 text-light"><i
                                             class='bx bxs-info-circle'></i> Detail Event</a>
                                     {{-- <a href="" class="btn btn-primary btn-block fw-bold border-2 w-100 mt-2"><i

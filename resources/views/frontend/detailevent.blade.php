@@ -301,15 +301,16 @@
                                 <h3 class="fs-5 fw-bold">BAGIKAN EVENT</h3>
                                 <hr class="border border-1 border-secondary">
                                 <div class="social-links m-2">
-                                    <a href="#" class="btn btn-md btn-outline-primary m-2" target="_blank"><i
+                                    <a href="https://www.facebook.com/share_channel/?link={{ url()->current() }}"
+                                        class="btn btn-md btn-outline-primary m-2" target="_blank"><i
                                             class="bx bxl-facebook "></i></a>
                                     <a href="#" class="btn btn-md btn-outline-primary m-2" target="_blank"><i
                                             class="bx bxl-instagram "></i></a>
                                     <a href="#" class="btn btn-md btn-outline-primary m-2" target="_blank"><i
                                             class="bx bxl-whatsapp "></i></a>
-                                    <a href="#" class="btn btn-md btn-outline-primary m-2" target="_blank"><i
+                                    <a href="https://t.me/share/url?url={{ url()->current() }}"
+                                        class="btn btn-md btn-outline-primary m-2" target="_blank"><i
                                             class="bx bxl-telegram "></i></a>
-
                                 </div>
                             </div>
                         </div>

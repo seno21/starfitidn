@@ -54,7 +54,7 @@ class EventController extends Controller
         // dd($request->file('poster')->getClientOriginalName());
 
         $request->validate([
-            'acara' => 'required|max:255',
+            'acara' => 'required|max:255|unique:events,nama_event',
             'waktu' => 'required',
             'lokasi' => 'required|max:255',
             'telepon' => 'required|numeric|digits_between:11,13',
@@ -62,6 +62,12 @@ class EventController extends Controller
             'penyelenggara' => 'required',
             'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024'
         ]);
+
+        // $slug = Str::slug($request->acara, '-');
+
+        // $chek = Events::where('slug', $slug)->count();
+        // if ($chek > 0) {
+        // }
 
         $event = new Events();
 
@@ -98,7 +104,8 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        $event = Events::find($id);
+        // dd($event);
 
         $request->validate([
             'acara' => 'required|max:255',
@@ -109,10 +116,6 @@ class EventController extends Controller
             'penyelenggara' => 'required',
             // 'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024'
         ]);
-
-
-        $event = Events::find($id);
-        // dd($event);
 
         $event->nama_event = $request->acara;
         $event->waktu_pelaksanaan = $request->waktu;

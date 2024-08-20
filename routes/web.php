@@ -4,6 +4,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\TransaksiTiketController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,11 @@ Route::middleware('auth')->prefix('event')->name('event.')->group(function () {
     Route::post('tiketDel/{id}', [EventController::class, 'removeTiket'])->name('eom.removeTiket');
     Route::put('updateTiket/{id}', [EventController::class, 'updateTiket'])->name('eom.updateTiket');
     Route::post('del/{id}', [EventController::class, 'remove'])->name('eom.remove');
+});
+
+
+Route::middleware('auth')->prefix('gallery')->name('gallery.')->group(function () {
+    Route::resource('img', GalleryController::class);
 });
 
 
