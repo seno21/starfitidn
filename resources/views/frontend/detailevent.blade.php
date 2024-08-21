@@ -11,8 +11,7 @@
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Konfirmasi Pembelian
                             </h1>
-                            <button type="button" class="btn-close close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -20,6 +19,7 @@
                                     @csrf
                                     <input type="hidden" name="_method" value="POST">
                                     <input type="hidden" name="id_event" value="{{ $event->id }}">
+                                    <input type="hidden" name="slug" value="{{ $event->slug }}">
                                     <input type="hidden" name="id_user" value="{{ $detailUsers->id_user ?? '' }}">
                                     <input type="hidden" name="id_tiket" id="tiket_id">
                                     <input type="hidden" name="harga" id="harga">
@@ -53,8 +53,7 @@
                                                             <div class="form-check">
                                                                 <label class="form-check-label">
                                                                     <input type="radio" class="form-check-input"
-                                                                        name="jenis_kelamin" id="L"
-                                                                        value="laki-laki"
+                                                                        name="jenis_kelamin" id="L" value="laki-laki"
                                                                         {{ $detailUsers->jenis_kelamin == 'laki-laki' ? 'checked' : '' }}>
                                                                     Laki-laki
                                                                 </label>
@@ -64,8 +63,7 @@
                                                             <div class="form-check">
                                                                 <label class="form-check-label">
                                                                     <input type="radio" class="form-check-input"
-                                                                        name="jenis_kelamin" id="NL"
-                                                                        value="perempuan"
+                                                                        name="jenis_kelamin" id="NL" value="perempuan"
                                                                         {{ $detailUsers->jenis_kelamin == 'perempuan' ? 'checked' : '' }}>
                                                                     Perempuan
                                                                 </label>
@@ -183,8 +181,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger close" data-bs-dismiss="modal"
                                             id="btn-batal">Batal</button>
-                                        <button type="submit" class="btn btn-primary"
-                                            id="btn-submit">Konfirmasi</button>
+                                        <button type="submit" class="btn btn-primary" id="btn-submit">Konfirmasi</button>
                                     </div>
                                 </form>
                             </div>
@@ -235,8 +232,12 @@
                                                     {{ 25 }} Terjual</div>
                                             </div>
                                             @guest
+                                                {{-- <a class="btn btn-block btn-outline-primary mt-2 w-100"
+                                                    href="{{ route('login') }}"><i class='bx bxs-user'></i>Login Untuk Beli
+                                                    Tiket</a> --}}
                                                 <a class="btn btn-block btn-outline-primary mt-2 w-100"
-                                                    href="{{ route('login') }}">Login untuk Beli Tiket</a>
+                                                    onclick="swal('Oopss !!','Silakan Login Terlebih Dahulu Untuk Membeli Tiket', 'info')">Beli
+                                                    Tiket</a>
                                             @endguest
                                             @auth
                                                 @if (!isset($transaksi))
@@ -279,15 +280,11 @@
                         class="border-2 rounded mt-4 shadow border p-4 px-4 card m-3">
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <h3 class="fs-5 fw-bold">YUK JOIN EVENT</h3>
-                                <hr class="border border-1 border-secondary">
-                                @auth
-                                    <a href="" class="btn btn-outline-primary mt-2"><i
-                                            class='bx bxs-mouse'></i>Mendaftar Event
-                                    </a>
-                                @endauth
                                 @guest
-                                    <a href="{{ route('login') }}" class="btn btn-outline-primary d-block mt-2">Login untuk
+                                    <h3 class="fs-5 fw-bold">YUK JOIN EVENT</h3>
+                                    <hr class="border border-1 border-secondary">
+                                    <a href="{{ route('login') }}" class="btn btn-outline-primary  mt-2"><i
+                                            class='bx bxs-user'></i>Login untuk
                                         daftar
                                     </a>
                                 @endguest
@@ -298,8 +295,9 @@
                                 <h3 class="fs-5 fw-bold">HUBUNGI KAMI</h3>
                                 <hr class="border border-1 border-secondary">
                                 <div class="mt-3">
-                                    <a href="" class="btn btn-outline-primary text-center mt-2"><i
-                                            class='bx bxs-user'></i>Contact
+                                    <a href="https://api.whatsapp.com/send?phone={{ $event->kontak }}&text=Hi%2C%20saya%20mendapat%20whatsapp%20mu%20dari%20personal%20web%20mu.%0ASaya%20ingin%20menawarimu%20pekerjaan"
+                                        class="btn btn-outline-primary text-center mt-2" target="_blank"><i
+                                            class='bx bxs-phone'></i>Contact
                                         Person
                                     </a>
                                 </div>

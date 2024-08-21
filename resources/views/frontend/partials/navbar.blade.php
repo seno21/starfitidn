@@ -26,15 +26,15 @@
                 @csrf
 
                 <button type="submit" class="btn btn-sm btn-primary text-light m-1"><i
-                    class='bx bxs-dashboard'></i>Admin
+                        class='bx bxs-dashboard'></i>Admin
                     Panel</button>
-                </form>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+            </form>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
 
-                    <button type="submit" class="btn btn-sm btn-danger text-light"><i
-                            class="bx bx-exit pl-1 mr-2"></i>Logout</button>
-                </form>
+                <button type="submit" class="btn btn-sm btn-danger text-light"><i
+                        class="bx bx-exit pl-1 mr-2"></i>Logout</button>
+            </form>
         </div>
     @elseif (Auth::check() == true)
         <div class="header-social-links d-flex align-items-center m-2">
@@ -47,7 +47,8 @@
         </div>
     @else
         <div class="header-social-links d-flex align-items-center">
-            <a href="{{ route('login') }}" class="btn btn-primary btn-lg text-sm text-light p-3">Login</a>
+            <a href="{{ route('login') }}" class="btn btn-primary btn-lg text-sm text-light p-3"><i
+                    class='bx bxs-user'></i>Login</a>
         </div>
     @endif
 

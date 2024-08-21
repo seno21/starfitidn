@@ -27,11 +27,12 @@ class LandingController extends Controller
         return view('frontend.event', $data);
     }
 
-    public function showEvent($id)
+    public function showEvent($slug)
     {
         $events = new Events();
-        $events = $events->where('slug', $id)->first();
+        $events = $events->where('slug', $slug)->first();
         $userLogin = Auth::user();
+        // dd($events);
 
         $detailUser = array();
 
@@ -49,9 +50,9 @@ class LandingController extends Controller
         if ($today->greaterThanOrEqualTo($eventDate)) {
             $tickets = array();
         } else {
-            $tickets = Tikets::where('id_event', $id)->where('active', 1)->orderBy('tgl_mulai')->get();
+            $tickets = Tikets::where('id_event', $events->id)->where('active', 1)->orderBy('tgl_mulai')->get();
         }
-        $transaksis = DB::table('transaksi')->where('active', 1)->where('id_event', $id)->first();
+        $transaksis = DB::table('transaksi')->where('active', 1)->where('id_event', $events->id)->first();
 
         $data = [
             'event' => $events,

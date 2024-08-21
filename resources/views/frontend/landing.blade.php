@@ -199,7 +199,7 @@
                 <div class="row">
                     @foreach ($gallerys as $gallery)
                         <div class="col-md-3">
-                            <div class="p-2 border border-2 rounded shadow">
+                            <div class="p-2 border border-2 rounded shadow mt-3">
                                 <figure>
                                     <a href="{{ asset('storage/' . $gallery->nama_foto) }}"
                                         data-gallery="portfolioGallery" class="portfolio-lightbox">
@@ -210,6 +210,11 @@
                         </div>
                     @endforeach
 
+                </div>
+
+                <div class="mt-5 text-center">
+                    <a href="{{ route('gallery') }}" type="button" class="btn btn-outline-primary btn-fw btn-lg">Cari
+                        Momen Terbaikmu</a>
                 </div>
 
             </div>

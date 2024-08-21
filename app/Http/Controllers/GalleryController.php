@@ -20,7 +20,7 @@ class GalleryController extends Controller
     {
 
         $request->validate([
-            'galeri' => 'required|mimes:jpeg,jpg,png|image|max:1024'
+            'galeri.*' => 'mimes:jpeg,jpg,png|image'
         ]);
         $images = $request->file('galeri');
 
@@ -36,6 +36,6 @@ class GalleryController extends Controller
         }
 
 
-        return redirect()->with('success', 'Upload foto berhasil');
+        return redirect()->back()->with('success', 'Upload foto berhasil');
     }
 }

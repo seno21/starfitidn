@@ -101,7 +101,7 @@ class TransaksiTiketController extends Controller
             // Commit transaksi
             DB::commit();
 
-            return redirect(route('show.event', $request->id_event));
+            return redirect(route('show.event', $request->slug));
         } catch (\Throwable $th) {
             DB::rollBack(); // Rollback jika terjadi error
             return redirect()->back()->withErrors(['error' => $th->getMessage()]);
@@ -153,7 +153,7 @@ class TransaksiTiketController extends Controller
             $result = $apiInstance->createInvoice($create_invoice_request);
 
             // Redirect the user to the payment URL
-            dd($result);
+            // dd($result);
             return redirect($result['invoice_url']);
         } catch (XenditSdkException $e) {
             // Handle any SDK exceptions
