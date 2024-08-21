@@ -63,12 +63,6 @@ class EventController extends Controller
             'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024'
         ]);
 
-        // $slug = Str::slug($request->acara, '-');
-
-        // $chek = Events::where('slug', $slug)->count();
-        // if ($chek > 0) {
-        // }
-
         $event = new Events();
 
 
@@ -114,7 +108,7 @@ class EventController extends Controller
             'telepon' => 'required|numeric|digits_between:11,13',
             'deskripsi' => 'required|max:1000',
             'penyelenggara' => 'required',
-            // 'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024'
+            'poster' => 'mimes:jpeg,jpg,png|image|max:1024'
         ]);
 
         $event->nama_event = $request->acara;

@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gallerys', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->string('nama_foto');
+            $table->boolean('active');
             $table->timestamps();
         });
     }

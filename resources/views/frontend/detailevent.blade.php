@@ -252,7 +252,7 @@
                                                     </div>
                                                 @endif
                                                 @if (isset($transaksi) && $transaksi->id_tiket == $tiket->id)
-                                                    <a href="{{route('checkout')}}">
+                                                    <a href="{{ route('checkout') }}">
                                                         <button type="button"
                                                             class="btn btn-block w-100 mt-3 btn-outline-primary"
                                                             data-id="{{ $tiket->id }}"

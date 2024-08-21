@@ -48,12 +48,12 @@ h6 {
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-  }
+}
 
-  ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     border-radius: 20px;
     background: #888;
-  }
+}
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -422,6 +422,12 @@ h6 {
         font-size: 14px;
         margin: 0 0 10px 0;
     }
+}
+
+.gallery-img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
 }
 
 .portfolio .portfolio-item {
@@ -981,7 +987,7 @@ section {
 }
 
 .portfolio .portfolio-item {
-    position: relative;
+    /* position: relative; */
     height: 360px;
     overflow: hidden;
 }

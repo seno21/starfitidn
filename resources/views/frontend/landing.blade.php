@@ -123,7 +123,7 @@
                 </div>
                 <div class="row">
                     @foreach ($events as $event)
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-3 mt-3">
                             <div class="card shadow-sm m-1 border-0 mt-3 d-flex flex-column h-100">
                                 <div class="position-relative p-3">
                                     <a href="{{ asset('storage/' . $event->poster) }}" data-gallery="portfolioGallery"
@@ -165,7 +165,7 @@
                                 <div class="card-footer m-0 bg-white">
                                     <small class="text-muted">
                                         <small class="text-muted">
-                                            <a href="{{ route('show.event', $event->id) }}"
+                                            <a href="{{ route('show.event', $event->slug) }}"
                                                 class="btn btn-info btn-block fw-bold border-2 w-100 text-light"><i
                                                     class='bx bxs-info-circle'></i> Detail Event
                                             </a>
@@ -188,60 +188,33 @@
             </div>
         </section>
 
-        <!-- Galery Section -->
-        <section class="portfolio" id="gallery">
-
+        <!-- ======= Portfolio Section ======= -->
+        <section id="gallery" class="portfolio">
             <div class="container">
 
                 <div class="section-title">
-                    <h2>GALLERY</h2>
+                    <h2>GALLERY KAMI</h2>
                 </div>
 
-                <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-                    <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-                        <div class="col-lg-4 col-md-6 portfolio-item wow fadeInUp">
-                            <img src="images/poster/fun-run.jpeg" class="img-fluid" alt="">
-                            <div class="portfolio-info">
-                                <h4>App 1</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="images/poster/fun-run.jpeg" title="App 1" data-gallery="portfolio-gallery-app"
-                                    class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
+                <div class="row">
+                    @foreach ($gallerys as $gallery)
+                        <div class="col-md-3">
+                            <div class="p-2 border border-2 rounded shadow">
+                                <figure>
+                                    <a href="{{ asset('storage/' . $gallery->nama_foto) }}"
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox">
+                                        <img src="{{ asset('storage/' . $gallery->nama_foto) }}"
+                                            class="gallery-img rounded p-2 img-fluid" alt="Gallery Kami"></a>
+                                </figure>
                             </div>
-                        </div><!-- End Portfolio Item -->
+                        </div>
+                    @endforeach
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="images/poster/run-party.jpeg" class="img-fluid" alt="">
-                            <div class="portfolio-info">
-                                <h4>app 1</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="images/poster/run-party.jpeg" title="app 1"
-                                    data-gallery="portfolio-gallery-app" class="link-preview portfolio-lightbox"><i
-                                        class="bx bx-show"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="images/poster/skrun.jpeg" class="img-fluid" alt="">
-                            <div class="portfolio-info">
-                                <h4>app 1</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="images/poster/skrun.jpeg" title="app 1" data-gallery="portfolio-gallery-app"
-                                    class="link-preview portfolio-lightbox"><i class="bx bx-show"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-                    </div><!-- End Portfolio Container -->
-
-                </div>
-
-                <div class="mt-3 text-center">
-                    <a href="{{ route('gallery') }}" type="button" class="btn btn-outline-primary btn-fw btn-lg">Cari
-                        Momen Terbaikmu</a>
                 </div>
 
             </div>
+        </section><!-- End Portfolio Section -->
 
-        </section>
 
         <!-- ======= Testimonials Section ======= -->
         <section id="testimonials" class="testimonials section-bg">

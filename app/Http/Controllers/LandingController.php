@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Events;
+use App\Models\Gallerys;
 use App\Models\Tikets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class LandingController extends Controller
         $data = [
             'events' => $events->allEvent(),
             'auth' => $auth,
+
         ];
 
 
@@ -67,10 +69,14 @@ class LandingController extends Controller
     {
         $events = new Events();
         $auth = new Auth();
+        $gallerys = new Gallerys();
+
+        // dd($gallerys->all());
 
         $data = [
             'events' => $events->showEventLanding(),
             'auth' => $auth,
+            'gallerys' => $gallerys->allGallery(),
         ];
 
 
