@@ -3,7 +3,7 @@
     <!-- ======= Event Section ======= -->
     <section id="event" class="min-vh-100 section-bg">
         {{-- @if (count($detailUsers) > 0) --}}
-        @if (isset($detailUsers))
+        @auth
             <div class="modal fade" id="modalTiket" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog modal-lg">
@@ -192,7 +192,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+        @endauth
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-4 order-1 order-md-0 mt-2 mt-md-0 text-center">
