@@ -1,4 +1,5 @@
 <x-guest-layout>
+
     <head>
         <title>Login</title>
     </head>
@@ -27,11 +28,15 @@
                                 </div>
                                 <div class="mt-3">
                                     <button type="submit"
-                                        class="btn btn-block btn-primary btn-md font-weight-medium auth-form-btn">LOG IN</button>
+                                        class="btn btn-block btn-primary btn-md font-weight-bold auth-form-btn">LOG
+                                        IN</button>
                                 </div>
-                                <div class="text-center mt-4 font-weight-light">
-                                    Belum Punya akun? <a href="{{ route('register') }}"
-                                        class="text-primary">Registrasi</a>
+                                <div class="text-center mt-3 font-weight-light">
+                                    Belum Punya akun?
+                                </div>
+                                <div class="mt-3">
+                                    <a href="{{ route('register') }}"
+                                        class="btn btn-block btn-info btn-md font-weight-bold auth-form-btn">REGISTRASI</a>
                                 </div>
                             </form>
                         </div>

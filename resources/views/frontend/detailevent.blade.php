@@ -71,14 +71,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="form-group my-3">
-                                                <label for="tiket">Jenis Kelamin</label>
-                                                <div class="input-group">
-                                                    <input type="text"
-                                                        class="form-control @error('jk') is-invalid @enderror"
-                                                        name="jk" id="jk" value="{{ old('jk'), $detailUsers->jenis_kelamin ?? '' }}">
-                                                </div>
-                                            </div> --}}
+
                                                 <div class="form-group my-3">
                                                     <label for="tiket">Tempat Lahir</label>
                                                     <div class="input-group">
@@ -168,6 +161,33 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p class="fs-5 fw-bold mt-3">Syarat & Ketentuan</p>
+                                                <ul>
+                                                    <li class="list-group-item">1. Lorem ipsum, dolor sit amet consectetur
+                                                        adipisicing elit.</li>
+                                                    <li class="list-group-item">2. Lorem ipsum dolor sit amet consectetur
+                                                        adipisicing elit. Cum, temporibus.</li>
+                                                    <li class="list-group-item">3. Lorem, ipsum dolor sit amet consectetur
+                                                        adipisicing elit. Beatae, aliquid?</li>
+                                                    <li class="list-group-item">4. Lorem, ipsum dolor sit amet consectetur
+                                                        adipisicing elit. Hic, sed?</li>
+                                                    <li class="list-group-item">5. Lorem ipsum dolor sit amet consectetur
+                                                        adipisicing elit. Commodi, iusto.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-checkmy-3 form-check-flat form-check-primary">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input">
+                                                        Remember me
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-6 p-4">
                                         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -231,15 +251,8 @@
                                                     aria-valuemax="{{ $tiket->quota }}">
                                                     {{ 25 }} Terjual</div>
                                             </div>
-                                            @guest
-                                                {{-- <a class="btn btn-block btn-outline-primary mt-2 w-100"
-                                                    href="{{ route('login') }}"><i class='bx bxs-user'></i>Login Untuk Beli
-                                                    Tiket</a> --}}
-                                                <a class="btn btn-block btn-outline-primary mt-2 w-100"
-                                                    onclick="swal('Oopss !!','Silakan Login Terlebih Dahulu Untuk Membeli Tiket', 'info')">Beli
-                                                    Tiket</a>
-                                            @endguest
-                                            @auth
+
+                                            @if (Auth::check() === true && Auth::user()->role === 'user')
                                                 @if (!isset($transaksi))
                                                     <div class="mt-2">
                                                         <button type="button"
@@ -267,7 +280,7 @@
                                                         Batalkan Pesanan
                                                     </button>
                                                 @endif
-                                            @endauth
+                                            @endif
                                         @else
                                             <p class="text-danger">Penjualan sudah ditutup</p>
                                         @endif
@@ -283,9 +296,8 @@
                                 @guest
                                     <h3 class="fs-5 fw-bold">YUK JOIN EVENT</h3>
                                     <hr class="border border-1 border-secondary">
-                                    <a href="{{ route('login') }}" class="btn btn-outline-primary  mt-2"><i
-                                            class='bx bxs-user'></i>Login untuk
-                                        daftar
+                                    <a href="{{ route('login') }}" class="btn btn-outline-primary mt-1 mb-2"><i
+                                            class='bx bxs-user'></i>Login Untuk Daftar
                                     </a>
                                 @endguest
                             </div>
@@ -296,7 +308,7 @@
                                 <hr class="border border-1 border-secondary">
                                 <div class="mt-3">
                                     <a href="https://api.whatsapp.com/send?phone={{ $event->kontak }}&text=Hi%2C%20saya%20mendapat%20whatsapp%20mu%20dari%20personal%20web%20mu.%0ASaya%20ingin%20menawarimu%20pekerjaan"
-                                        class="btn btn-outline-primary text-center mt-2" target="_blank"><i
+                                        class="btn btn-outline-primary text-center mt-1 mb-2" target="_blank"><i
                                             class='bx bxs-phone'></i>Contact
                                         Person
                                     </a>

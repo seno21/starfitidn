@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\TransaksiTiketController;
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
 // FRONTEND - Route untuk Landing (Tanpa Login)
@@ -25,7 +26,7 @@ Route::get('/gallery', function () {
 
 // BACKEND - Route untuk Admin (Perlu Login)
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(IsAdmin::class)->group(function () {
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');
@@ -37,14 +38,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/checkout', [TransaksiTiketController::class, 'checkout'])->name('checkout');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(IsAdmin::class)->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // Route untuke Event Organizer Management
-Route::middleware('auth')->prefix('event')->name('event.')->group(function () {
+Route::middleware(IsAdmin::class)->prefix('event')->name('event.')->group(function () {
     Route::resource('eom', EventController::class);
     Route::post('tiket', [EventController::class, 'insertTiket'])->name('eom.insertTiket');
     Route::post('tiketDel/{id}', [EventController::class, 'removeTiket'])->name('eom.removeTiket');
@@ -52,8 +53,8 @@ Route::middleware('auth')->prefix('event')->name('event.')->group(function () {
     Route::post('del/{id}', [EventController::class, 'remove'])->name('eom.remove');
 });
 
-
-Route::middleware('auth')->prefix('gallery')->name('gallery.')->group(function () {
+// Ini contoh jika middleware nya dalam bentuk array
+Route::middleware([IsAdmin::class])->prefix('gallery')->name('gallery.')->group(function () {
     Route::resource('img', GalleryController::class);
 });
 
