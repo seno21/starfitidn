@@ -182,8 +182,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-checkmy-3 form-check-flat form-check-primary">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input">
-                                                        Remember me
+                                                        <input type="checkbox" class="form-check-input" id="ceklisSetuju">
+                                                        Saya Setuju
                                                     </label>
                                                 </div>
                                             </div>
@@ -201,7 +201,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger close" data-bs-dismiss="modal"
                                             id="btn-batal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" id="btn-submit">Konfirmasi</button>
+                                        <button type="submit" class="btn btn-primary disabled"
+                                            id="btn-submit">Konfirmasi</button>
                                     </div>
                                 </form>
                             </div>
@@ -245,15 +246,15 @@
                                             @endif
                                         </div>
                                         @if ($tiket->tgl_selesai && strtotime($tiket->tgl_selesai) > time())
-                                            <div class="progress progress-md">
-                                                <div class="progress-bar bg-info" style="width: {{ 25 }}%"
-                                                    role="progressbar" aria-valuenow="25" aria-valuemin="0"
-                                                    aria-valuemax="{{ $tiket->quota }}">
-                                                    {{ 25 }} Terjual</div>
-                                            </div>
-
                                             @if (Auth::check() === true && Auth::user()->role === 'user')
                                                 @if (!isset($transaksi))
+                                                    <div class="progress progress-md">
+                                                        <div class="progress-bar bg-info"
+                                                            style="width: {{ 25 }}%" role="progressbar"
+                                                            aria-valuenow="25" aria-valuemin="0"
+                                                            aria-valuemax="{{ $tiket->quota }}">
+                                                            {{ 25 }} Terjual</div>
+                                                    </div>
                                                     <div class="mt-2">
                                                         <button type="button"
                                                             class="btn btn-block w-100 btn-outline-primary edit-tiket"
@@ -266,19 +267,24 @@
                                                     </div>
                                                 @endif
                                                 @if (isset($transaksi) && $transaksi->id_tiket == $tiket->id)
-                                                    <a href="{{ route('checkout') }}">
+                                                    {{-- <a href="{{ route('checkout') }}"> --}}
+                                                    @if ($transaksi->status_pembayaran == 'PAID')
+                                                        <p class="text-success mt-3">Tiket Terbeli</p>
+                                                    @endif
+                                                    @if ($transaksi->status_pembayaran != 'PAID')
                                                         <button type="button"
-                                                            class="btn btn-block w-100 mt-3 btn-outline-primary"
-                                                            data-id="{{ $tiket->id }}"
+                                                            class="btn btn-block w-100 mt-3 btn-outline-primary checkout-btn"
+                                                            data-transaksi_id="{{ $transaksi->id }}"
                                                             data-nama_promo="{{ $tiket->nama_promo }}"
                                                             data-harga="{{ $tiket->harga }}">
                                                             Proses Bayar
                                                         </button>
-                                                    </a>
-                                                    <button class="btn btn-outline-danger change-role-btn mt-2 w-100"
-                                                        data-id="{{ $tiket->id }}">
-                                                        Batalkan Pesanan
-                                                    </button>
+                                                        {{-- </a> --}}
+                                                        <button class="btn btn-outline-danger change-role-btn mt-2 w-100"
+                                                            data-id="{{ $tiket->id }}">
+                                                            Batalkan Pesanan
+                                                        </button>
+                                                    @endif
                                                 @endif
                                             @endif
                                         @else
@@ -407,14 +413,16 @@
 
             btnBeliTiket.forEach(btnBeli => {
                 btnBeli.addEventListener('click', () => {
+                    const ceklisSetuju = document.querySelector('#ceklisSetuju')
+                    const btnSubmit = document.querySelector('#btn-submit')
+                    ceklisSetuju.addEventListener('change', () => {
+                        if (ceklisSetuju.checked) {
+                            btnSubmit.classList.remove('disabled');
+                        } else {
+                            btnSubmit.classList.add('disabled');
+                        }
+                    });
                     modalBeliTiket.show()
-
-                    // const btnClose = document.querySelectorAll(".close")
-                    // btnClose.forEach(close => {
-                    //     close.addEventListener('click', () => {
-                    //         modalBeliTiket.hide()
-                    //     })
-                    // })
                     document.querySelector('#tiket_id').value = btnBeli.dataset.id
                     document.querySelector('#qty').value = 1
                     document.querySelector('#harga').value = btnBeli.dataset.harga
@@ -437,6 +445,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Get all buttons with the class 'change-role-btn'
             const changeRoleButtons = document.querySelectorAll('.change-role-btn');
+            const checkoutBtn = document.querySelectorAll('.checkout-btn');
             let selectedTiketID = null;
 
             changeRoleButtons.forEach(button => {
@@ -506,6 +515,98 @@
                                     })
                                     console.error('Error:', error);
                                 });
+                        }
+                    });
+                });
+            });
+            checkoutBtn.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Get user ID and role from the data attributes
+                    selectedTransaksiID = button.getAttribute('data-transaksi_id');
+                    // Show SweetAlert2 confirmation dialog
+                    swal({
+                        title: 'Proses Pembayaran',
+                        text: `Anda ingin melanjutkan pembayaran?`,
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3f51b5',
+                        cancelButtonColor: '#ff4081',
+                        confirmButtonText: 'Great ',
+                        buttons: {
+                            cancel: {
+                                text: "Cancel",
+                                value: null,
+                                visible: true,
+                                className: "btn btn-danger",
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "OK",
+                                value: true,
+                                visible: true,
+                                className: "btn btn-primary",
+                                closeModal: true
+                            }
+                        }
+                    }).then((result) => {
+                        if (result) {
+                            // Create a form element
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = `{{ route('checkout') }}`;
+
+                            // Add the CSRF token input
+                            const csrfInput = document.createElement('input');
+                            csrfInput.type = 'hidden';
+                            csrfInput.name = '_token';
+                            csrfInput.value = '{{ csrf_token() }}';
+                            form.appendChild(csrfInput);
+
+                            // Add the transaction ID input
+                            const idInput = document.createElement('input');
+                            idInput.type = 'hidden';
+                            idInput.name = 'id';
+                            idInput.value = selectedTransaksiID;
+                            form.appendChild(idInput);
+
+                            // Append the form to the body and submit it
+                            document.body.appendChild(form);
+                            form.submit();
+                            // Perform the AJAX request to change the role using Fetch API
+                            // fetch("{{ route('checkout') }}", {
+                            //         method: 'POST',
+                            //         headers: {
+                            //             'Content-Type': 'application/x-www-form-urlencoded',
+                            //             'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            //         },
+                            //         body: new URLSearchParams({
+                            //             id: selectedTransaksiID,
+                            //         })
+                            //     })
+                            //     .then(response => response.json())
+                            //     .then(data => {
+                            //         if (data.success) {
+                            //             location.reload()
+                            //             // Show success alert
+                            //             showSwal('success-message')
+                            //         } else {
+                            //             throw new Error('Something went wrong');
+                            //         }
+                            //     })
+                            //     .catch(error => {
+                            //         swal({
+                            //             title: 'Ada Kesalahan',
+                            //             text: 'Terdapat error silakan periksa',
+                            //             icon: 'error',
+                            //             button: {
+                            //                 text: "ok",
+                            //                 value: true,
+                            //                 visible: true,
+                            //                 className: "btn btn-primary"
+                            //             }
+                            //         })
+                            //         console.error('Error:', error);
+                            //     });
                         }
                     });
                 });

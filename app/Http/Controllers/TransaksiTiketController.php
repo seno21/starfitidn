@@ -129,8 +129,15 @@ class TransaksiTiketController extends Controller
         ]);
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
+
+        $dataTransaksi = DB::table('transaksi as tr')
+            ->join('users as us', 'tr.id_user', 'us.id')
+            ->join('detail_users as du', 'tr.id_user', 'du.id_user')
+            ->join('tikets as ti', 'tr.id_tiket', 'ti.id')
+            ->join('events as ev', 'tr.id_event', 'ev.id')
+            ->where('tr.id', $request->id)->first();
         // Initialize Xendit with the API key
         Configuration::setXenditKey(env('XENDIT_SECRET_KEY'));
 
@@ -139,13 +146,32 @@ class TransaksiTiketController extends Controller
 
         // Prepare the invoice creation request
         $create_invoice_request = new CreateInvoiceRequest([
-            'external_id' => 'invoice-' . uniqid(),
-            'description' => 'Sistem kalau udah dipakai itu harus dibayar, jangan bilangnya ga dipake tapi hari H full akses',
-            'amount' => 25000000,
+            'external_id' => $dataTransaksi->no_transaksi,
+            'description' => 'Pembayaran untuk Event '.$dataTransaksi->nama_event.' dengan tiket '.$dataTransaksi->nama_promo.' dengan harga Rp. '.$dataTransaksi->final_payment,
+            'amount' => $dataTransaksi->final_payment,
             'invoice_duration' => 172800, // Invoice is valid for 48 hours
             'currency' => 'IDR',
             'reminder_time' => 1,
-            'success_redirect_url' => route('home') // Reminder will be sent after 1 hour
+            'customer' => [
+                'given_names' => $dataTransaksi->nama_lengkap,
+                'email' => $dataTransaksi->email,
+                'mobile_number' => $dataTransaksi->no_telp,
+                'addresses' => [
+                    [
+                        'city' => $dataTransaksi->domisili,
+                        'country' => 'INDONESIA',
+                    ],
+                ],
+            ],
+            'items' => [
+                [
+                    'name' => $dataTransaksi->nama_promo,
+                    'quantity' => 1,
+                    'price' => $dataTransaksi->final_payment,
+                    'category' => $dataTransaksi->nama_event,
+                ],
+            ],
+            'success_redirect_url' => route('show.event', $dataTransaksi->slug) // Reminder will be sent after 1 hour
         ]);
 
         try {
@@ -154,15 +180,15 @@ class TransaksiTiketController extends Controller
 
             // Redirect the user to the payment URL
             // dd($result);
+            DB::table('transaksi')
+                ->where('id', $request->id)
+                ->update(['status_pembayaran' => 'PAID']);
+
             return redirect($result['invoice_url']);
         } catch (XenditSdkException $e) {
             // Handle any SDK exceptions
             echo 'SDK Exception when creating invoice: ', $e->getMessage(), PHP_EOL;
             echo 'Full Error: ', json_encode($e->getFullError()), PHP_EOL;
-        } catch (\App\Http\Controllers\ApiException $e) {
-            // Handle API exceptions
-            echo 'API Exception when creating invoice: ', $e->getMessage(), PHP_EOL;
-            echo 'Full Error: ', json_encode($e->getResponseObject()), PHP_EOL;
         }
     }
 
