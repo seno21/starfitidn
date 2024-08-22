@@ -16,7 +16,16 @@ class Gallerys extends Model
         return DB::table('gallerys')
             ->where('active', 1)
             ->limit(8)
-            ->orderBy('created_at', 'desc')
+            // ->orderBy('created_at', 'desc')
+            ->inRandomOrder()
+            ->get();
+    }
+
+    public function allGalleryPage()
+    {
+        return DB::table('gallerys')
+            ->where('active', 1)
+            ->inRandomOrder()
             ->get();
     }
 }

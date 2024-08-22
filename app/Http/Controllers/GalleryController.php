@@ -20,7 +20,8 @@ class GalleryController extends Controller
     {
 
         $request->validate([
-            'galeri.*' => 'mimes:jpeg,jpg,png|image'
+            'galeri' => 'required',
+            'galeri.*' => 'mimes:jpeg,jpg,png,mp4,mov,avi|image|max:102400'
         ]);
         $images = $request->file('galeri');
 

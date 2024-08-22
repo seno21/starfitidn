@@ -50,7 +50,6 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-
         // dd($request->file('poster')->getClientOriginalName());
 
         $request->validate([
@@ -78,8 +77,6 @@ class EventController extends Controller
         $event->deskripsi = $request->deskripsi;
         $event->active = 1;
         $event->save();
-
-        // toast('Event Berhasil Dibuat', 'success');
 
         return redirect()->route('event.eom.index')->with('success', 'Event berhasil dibuat');
     }
@@ -130,9 +127,6 @@ class EventController extends Controller
         $event->deskripsi = $request->deskripsi;
         $event->active = 1;
         $event->save();
-
-        // toast('Event Berhasil Diperbarui', 'success');
-
 
         return redirect()->route('event.eom.index')->with('success', 'Event Berhasil Diperbarui');
     }
@@ -261,10 +255,6 @@ class EventController extends Controller
         $tikets->active = 1;
         $tikets->save();
 
-        // dd($request, $tikets);
-
-
-        // toast('Tiket Berhasil Dibuat', 'success');
         return redirect()->back()->with('success', 'Tiket Berhasil Dibuat');
     }
 }

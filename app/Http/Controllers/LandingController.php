@@ -12,6 +12,21 @@ use Illuminate\Support\Facades\DB;
 class LandingController extends Controller
 {
     // Method Event Landing - FrontEnd
+    public function allGallery()
+    {
+        $gallerys = new Gallerys();
+
+        $data = [
+            'gallerys' => $gallerys->allGalleryPage(),
+        ];
+
+
+        return view('frontend.gallery', $data);
+    }
+
+
+
+
     public function allEvent()
     {
         $events = new Events();

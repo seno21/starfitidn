@@ -173,14 +173,43 @@
         function viewImage() {
             const gambar = document.querySelector('#poster');
             const imgPreview = document.querySelector('#posterView');
-
             const oFReader = new FileReader();
+
             // Jika gambar ada
             oFReader.readAsDataURL(gambar.files[0]);
 
             oFReader.onload = function(oFREvent) {
                 imgPreview.src = oFREvent.target.result;
             }
+        }
+
+        // Load multiple image previews
+        function viewImages() {
+            const $gambar = $('#galeri'); // Input element with multiple images
+            const $imgPreviewContainer = $('#galeriViewContainer'); // Container for image previews
+
+            $imgPreviewContainer.empty(); // Clear previous previews
+
+            const files = $gambar[0].files;
+
+            $.each(files, function(index, file) {
+                const oFReader = new FileReader();
+
+                oFReader.readAsDataURL(file);
+
+                oFReader.onload = function(oFREvent) {
+                    const $imgElement = $('<img>'); // Create a new img element using jQuery
+                    $imgElement.attr('src', oFREvent.target.result);
+                    $imgElement.css({
+                        'max-width': '250px',
+                        'max-height': '250px',
+                        'margin': '5px',
+                        'border-radius': '5px',
+                        'shadow': '2px 3px 15px;'
+                    });
+                    $imgPreviewContainer.append($imgElement);
+                }
+            });
         }
     </script>
 </body>

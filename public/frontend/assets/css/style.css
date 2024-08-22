@@ -424,6 +424,16 @@ h6 {
     }
 }
 
+#portfolioGallery {
+    box-shadow: 5px 5px 15px #cacaca;
+}
+
+#portfolioGallery:hover {
+    box-shadow: 5px 5px 15px #1697ec;
+    width: 300px;
+    transition: box-shadow 0.3s ease, width 0.5s ease;
+}
+
 .gallery-img {
     height: 200px;
     object-fit: cover;

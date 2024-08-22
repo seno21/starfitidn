@@ -200,7 +200,7 @@
                     @foreach ($gallerys as $gallery)
                         <div class="col-md-3">
                             <div class="p-2 border border-2 rounded shadow mt-3">
-                                <figure>
+                                <figure id="portfolioGallery">
                                     <a href="{{ asset('storage/' . $gallery->nama_foto) }}"
                                         data-gallery="portfolioGallery" class="portfolio-lightbox">
                                         <img src="{{ asset('storage/' . $gallery->nama_foto) }}"
@@ -218,7 +218,7 @@
                 </div>
 
             </div>
-        </section><!-- End Portfolio Section -->
+        </section>
 
 
         <!-- ======= Testimonials Section ======= -->

@@ -13,15 +13,9 @@ use Illuminate\Support\Facades\Route;
 // FRONTEND - Route untuk Landing (Tanpa Login)
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
-
 Route::get('/event', [LandingController::class, 'allEvent'])->name('event');
 Route::get('/event/detail/{id}', [LandingController::class, 'showEvent'])->name('show.event');
-
-
-
-Route::get('/gallery', function () {
-    return view('frontend.gallery');
-})->name('gallery');
+Route::get('/gallery', [LandingController::class, 'allGallery'])->name('gallery');
 
 
 // BACKEND - Route untuk Admin (Perlu Login)
