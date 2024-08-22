@@ -8,6 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\TransaksiTiketController;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsUser;
 use Illuminate\Support\Facades\Route;
 
 // FRONTEND - Route untuk Landing (Tanpa Login)
@@ -27,9 +28,12 @@ Route::middleware(IsAdmin::class)->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/list-akun', [UserController::class, 'index'])->name('list-akun');
     Route::post('/ganti-role', [UserController::class, 'update'])->name('ganti-role');
+});
+
+Route::middleware(IsUser::class)->group(function(){
     Route::post('/transaksi', [TransaksiTiketController::class, 'store'])->name('transaksi');
     Route::post('/cancel-pesanan', [TransaksiTiketController::class, 'cancel'])->name('cancel-pesanan');
-    Route::get('/checkout', [TransaksiTiketController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout', [TransaksiTiketController::class, 'checkout'])->name('checkout');
 });
 
 Route::middleware(IsAdmin::class)->group(function () {
