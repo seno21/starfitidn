@@ -30,7 +30,7 @@ Route::middleware(IsAdmin::class)->group(function () {
     Route::post('/ganti-role', [UserController::class, 'update'])->name('ganti-role');
 });
 
-Route::middleware(IsUser::class)->group(function(){
+Route::middleware(IsUser::class)->group(function () {
     Route::post('/transaksi', [TransaksiTiketController::class, 'store'])->name('transaksi');
     Route::post('/cancel-pesanan', [TransaksiTiketController::class, 'cancel'])->name('cancel-pesanan');
     Route::post('/checkout', [TransaksiTiketController::class, 'checkout'])->name('checkout');

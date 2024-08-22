@@ -226,24 +226,32 @@
                             </div>
                         </div>
                     @else
-                        <div style="min-height: 100px; max-height: 80vh; overflow-y: auto; overflow-x: hidden"
-                            class="px-4 pt-2">
+                        <div class="px-4 pt-2"
+                            style="min-height: 100px; max-height: 80vh; overflow-y: auto; overflow-x: hidden">
                             @foreach ($tikets as $tiket)
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
                                             <h4 class="card-title text-uppercase">{{ $tiket->nama_promo }}</h4>
-                                            <div id="countdown-{{ $tiket->id }}" class="text-danger fw-bold"></div>
+                                            <div id="countdown-{{ $tiket->id }}" class="text-danger fw-bold">
+                                            </div>
                                             @if ($tiket->tgl_selesai)
                                             @endif
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <p class="text-muted">Rp. {{ number_format($tiket->harga, 0, ',', '.') }}</p>
+                                            <p class="text-muted">Rp. {{ number_format($tiket->harga, 0, ',', '.') }}
+                                            </p>
                                             @if ($tiket->quota)
                                                 <p class="text-muted">Kuota: {{ $tiket->quota ?? '-' }}</p>
                                             @else
                                                 <p class="text-muted">Terjual: 90</p>
                                             @endif
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span></span>
+                                            <p class="p-2 badge bg-warning text-light text-lowercase">
+                                                {{ $tiket->kategori }}
+                                            </p>
                                         </div>
                                         @if ($tiket->tgl_selesai && strtotime($tiket->tgl_selesai) > time())
                                             @if (Auth::check() === true && Auth::user()->role === 'user')
