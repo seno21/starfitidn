@@ -65,9 +65,15 @@ class LandingController extends Controller
         if ($today->greaterThanOrEqualTo($eventDate)) {
             $tickets = array();
         } else {
-            $tickets = Tikets::where('id_event', $events->id)->where('active', 1)->orderBy('tgl_mulai')->get();
+            $tickets = Tikets::where('id_event', $events->id)
+                        ->where('active', 1)
+                        ->orderBy('tgl_mulai')->get();
         }
-        $transaksis = DB::table('transaksi')->where('active', 1)->where('id_event', $events->id)->first();
+        $transaksis = DB::table('transaksi')
+                        ->where('active', 1)
+                        ->where('id_user', $userLogin->id)
+                        ->where('id_event', $events->id)
+                        ->first();
 
         $data = [
             'event' => $events,
