@@ -7,9 +7,6 @@
                     <div class="col-md-12">
                         <h2 class="font-bold">DETAIL EVENT</h2>
                         <hr class="border border-primary border-5">
-                        <a href="{{ route('event.eom.index') }}" class="btn btn-danger">Kembali ke
-                            List
-                            Event</a>
                     </div>
                 </div>
                 <div class="row">
@@ -18,45 +15,72 @@
                             class="img-fluid rounded-4 w-100 card-img-top shadow-lg border-0 p-2 mb-3 "
                             style="object-fit: cover; height: 500px;">
                     </div>
-                    <div class="col-md-8 p-5">
-                        <h1>{{ $event->nama_event }}</h1>
-                        <div class="row mt-3">
-                            <div class="col-md-2">
-                                <p class="fw-bold fs-4">
-                                    WAKTU
-                                </p>
+                    <div class="col-md-8 p-2 pr-4">
+                        <div class="card p-5 shadow">
+                            <h1 class="text-uppercase">{{ $event->nama_event }}</h1>
+                            <hr class="border border-primary">
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <p class="fw-bold fs-4">
+                                        WAKTU
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="fs-4">
+                                        @php
+                                            $date = strtotime($event->waktu_pelaksanaan);
+                                            echo date('d/m/Y h:i', $date);
+                                        @endphp
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p class="fs-4">
-                                    {{ $event->waktu_pelaksanaan }}
-                                </p>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <p class="fw-bold fs-4">
+                                        LOKASI
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="fs-4">
+                                        {{ $event->lokasi }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-2">
-                                <p class="fw-bold fs-4">
-                                    LOKASI
-                                </p>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <p class="fw-bold fs-4">
+                                        PENYELENGGARA
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="fs-4">
+                                        {{ $event->penyelenggara }}
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p class="fs-4">
-                                    {{ $event->lokasi }}
-                                </p>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <p class="fw-bold fs-4">
+                                        KONTAK
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="fs-4">
+                                        {{ $event->kontak }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="mt-3">
-                                <p class="fw-bold fs-4">
-                                    Tentang Event.
-                                </p>
-                                <div class="fs-4 mt-3">
-                                    {!! $event->deskripsi !!}
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <p class="fs-4">
+                                        <span
+                                            class="bagde badge-sm rounded-5 text-light p-1 px-3 {{ $event->status == 'ongoing' ? 'bg-success' : ($event->status == 'upcoming' ? 'bg-warning' : 'bg-danger') }}">{{ $event->status }}</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="card mt-3">
@@ -86,6 +110,16 @@
                             </button>
                         @endif
 
+                        <button type="button" class="btn btn-danger mb-2" id="tutup-tiket">
+                            Tutup
+                        </button>
+                        <script>
+                            $(document).ready(function() {
+                                $('#tutup-tiket').click(function() {
+                                    location.assign('{{ route('event.eom.index') }}')
+                                })
+                            })
+                        </script>
 
                         <!-- Modal -->
                         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -118,7 +152,8 @@
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class="form-control @error('kategori') is-invalid @enderror"
-                                                            name="kategori" id="kategori" value="{{ old('kategori') }}">
+                                                            name="kategori" id="kategori"
+                                                            value="{{ old('kategori') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -190,23 +225,24 @@
                                 });
                             </script>
                         @endif
-
-                        <table id="tikets-table" class="table table-responsive-md">
-                            <thead>
-                                <tr>
-                                    <th>Nama Promo tiket</th>
-                                    <th>Kategori Tiket</th>
-                                    <th>Periode Mulai</th>
-                                    <th>Periode Selesai</th>
-                                    <th>Quota Peserta</th>
-                                    <th>Harga Tiket</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- Otomatis di isi oleh yajra datatable --}}
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="tikets-table" class="table table-responsive-md">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Promo tiket</th>
+                                        <th>Kategori Tiket</th>
+                                        <th>Periode Mulai</th>
+                                        <th>Periode Selesai</th>
+                                        <th>Quota Peserta</th>
+                                        <th>Harga Tiket</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- Otomatis di isi oleh yajra datatable --}}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -284,37 +320,38 @@
             $("#tikets-table").DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 ajax: "{{ route('event.eom.show', $id_event) }}",
                 columns: [{
                         data: "nama_promo",
-                        name: "nama_promo",
+                        name: "Nama Promo tiket",
                     },
                     {
                         data: "kategori",
-                        name: "kategori",
+                        name: "Kategori Tiket",
                     },
                     {
                         data: "tgl_mulai",
-                        name: "tgl_mulai",
+                        name: "Periode Mulai",
                     },
                     {
                         data: "tgl_selesai",
-                        name: "tgl_selesai",
+                        name: "Periode Selesai",
                     },
                     {
                         data: "quota",
-                        name: "quota",
+                        name: "Quota Peserta",
                     },
                     {
                         data: "harga",
-                        name: "harga",
+                        name: "Harga Tiket",
                         render: function(data, type, row) {
                             return formatRupiah(data.toString(), 'Rp. ');
                         }
                     },
                     {
                         data: "action",
-                        name: "action",
+                        name: "Action",
                         orderable: false,
                         searchable: false,
                     },

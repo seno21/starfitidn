@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
 
-    <!-- include simplemde css/js -->
+    <!-- include trix editor css/js -->
     <link href="{{ asset('vendors/trix-main/trix.css') }}" rel="stylesheet">
     <script src="{{ asset('vendors/trix-main/trix.js') }}"></script>
     <script>
@@ -163,11 +163,6 @@
                     }
                 });
         })
-
-        // Simplemde
-        var simplemde = new SimpleMDE({
-            element: $("#deskripsi")[0]
-        });
 
         // load image preview
         function viewImage() {

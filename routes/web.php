@@ -45,6 +45,7 @@ Route::middleware(IsAdmin::class)->group(function () {
 // Route untuke Event Organizer Management
 Route::middleware(IsAdmin::class)->prefix('event')->name('event.')->group(function () {
     Route::resource('eom', EventController::class);
+    Route::get('eom/peserta/{id}', [EventController::class, 'peserta'])->name('eom.peserta');
     Route::post('tiket', [EventController::class, 'insertTiket'])->name('eom.insertTiket');
     Route::post('tiketDel/{id}', [EventController::class, 'removeTiket'])->name('eom.removeTiket');
     Route::put('updateTiket/{id}', [EventController::class, 'updateTiket'])->name('eom.updateTiket');

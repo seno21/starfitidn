@@ -133,7 +133,7 @@
                                             style="object-fit: cover; height: 200px;">
                                     </a>
                                     <label
-                                        class="badge position-absolute rounded top-0 end-0 m-2 fs-6 text-uppercase {{ $event->status == 'ongoing' ? 'bg-primary' : ($event->status == 'upcoming' ? 'bg-warning' : 'bg-danger') }}">
+                                        class="badge position-absolute rounded top-0 end-0 m-2 fs-6 text-uppercase {{ $event->status == 'ongoing' ? 'bg-success' : ($event->status == 'upcoming' ? 'bg-warning' : 'bg-danger') }}">
                                         {{ $event->status }}
                                     </label>
                                     <label

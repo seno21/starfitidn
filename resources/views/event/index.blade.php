@@ -14,19 +14,20 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <table id="event-table" class="table table-responsive-md">
-                            <thead>
-                                <tr>
-                                    <th>Nama Event</th>
-                                    <th>Waktu Pelaksanaan</th>
-                                    <th>Penyelengara</th>
-                                    <th>Kategori</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- @foreach ($events as $event)
+                        <div class="table-responsive">
+                            <table id="event-table" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Event</th>
+                                        <th>Waktu Pelaksanaan</th>
+                                        <th>Penyelengara</th>
+                                        <th>Kategori</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- @foreach ($events as $event)
                                     <tr>
                                         <td>{{ $event->nama_event }}</td>
                                         <td>{{ $event->waktu_pelaksanaan }}</td>
@@ -44,9 +45,9 @@
                                         </td>
                                     </tr>
                                 @endforeach --}}
-                            </tbody>
-                        </table>
-
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

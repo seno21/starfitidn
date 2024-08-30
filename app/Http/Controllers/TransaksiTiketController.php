@@ -52,7 +52,7 @@ class TransaksiTiketController extends Controller
                         'id_user' => $request->id_user,
                         'no_telp' => $request->no_telp,
                         'nama_lengkap' => $request->nama_lengkap,
-                        'nik' => $request->nik,
+                        // 'nik' => $request->nik,
                         'kontak_darurat' => $request->kontak_darurat,
                         'domisili' => $request->domisili,
                         'usia' => $usia,
@@ -147,7 +147,7 @@ class TransaksiTiketController extends Controller
         // Prepare the invoice creation request
         $create_invoice_request = new CreateInvoiceRequest([
             'external_id' => $dataTransaksi->no_transaksi,
-            'description' => 'Pembayaran untuk Event '.$dataTransaksi->nama_event.' dengan tiket '.$dataTransaksi->nama_promo.' dengan harga Rp. '.$dataTransaksi->final_payment,
+            'description' => 'Pembayaran untuk Event ' . $dataTransaksi->nama_event . ' dengan tiket ' . $dataTransaksi->nama_promo . ' dengan harga Rp. ' . $dataTransaksi->final_payment,
             'amount' => $dataTransaksi->final_payment,
             'invoice_duration' => 172800, // Invoice is valid for 48 hours
             'currency' => 'IDR',

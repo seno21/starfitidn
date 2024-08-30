@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Events;
 use App\Models\Tikets;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -26,11 +27,12 @@ class EventController extends Controller
             return DataTables::of($events)
                 ->addIndexColumn()
                 ->addColumn('action', function ($event) {
-                    return '<a href="' . route('event.eom.show', $event->id) . '" class="btn btn-sm btn-primary"><i class="mdi mdi-ticket"></i></a>
-                        <a href="' . route('event.eom.edit', $event->id) . '" class="btn btn-sm btn-success"><i class="mdi mdi-pencil-box-outline"></i></a>
+                    return '<a href="' . route('event.eom.peserta', $event->id) . '" class="btn btn-sm btn-info" title="Peserta terdaftar"><i class="mdi mdi-account-multiple"></i></a>
+                     <a href="' . route('event.eom.show', $event->id) . '" class="btn btn-sm btn-primary" title="Tambahkan tiket untuk event ini"><i class="mdi mdi-ticket"></i></a>
+                        <a href="' . route('event.eom.edit', $event->id) . '" class="btn btn-sm btn-success" title="Edit event ini"><i class="mdi mdi-pencil-box-outline"></i></a>
                         <form method="POST" action="' . route('event.eom.remove', $event->id) . '" style="display:inline;">
                             ' . csrf_field() . '
-                            <button type="submit" class="btn btn-sm btn-danger" id="btnDel"><i class="mdi mdi-delete"></i></button>
+                            <button type="submit" class="btn btn-sm btn-danger" id="btnDel" title="Hapus event ini"><i class="mdi mdi-delete"></i></button>
                         </form>';
                 })->make(true);
         }
@@ -59,7 +61,8 @@ class EventController extends Controller
             'telepon' => 'required|numeric|digits_between:11,13',
             'deskripsi' => 'required|max:1000',
             'penyelenggara' => 'required',
-            'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024'
+            'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024',
+            'sk' => 'required'
         ]);
 
         $event = new Events();
@@ -76,6 +79,7 @@ class EventController extends Controller
         $event->status = $request->status;
         $event->deskripsi = $request->deskripsi;
         $event->active = 1;
+        $event->sk = $request->sk;
         $event->save();
 
         return redirect()->route('event.eom.index')->with('success', 'Event berhasil dibuat');
@@ -212,6 +216,7 @@ class EventController extends Controller
         $request->validate([
             'tiket' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
+            'quota' => 'required|numeric',
             'tgl_mulai' => 'required|date',
             'tgl_selesai' => 'required|date',
             'harga' => 'required|numeric',
@@ -256,5 +261,25 @@ class EventController extends Controller
         $tikets->save();
 
         return redirect()->back()->with('success', 'Tiket Berhasil Dibuat');
+    }
+
+    public function peserta(Request $request, $id_event)
+    {
+        $data = [
+            'title' => 'Peserta Terdaftar Event',
+            'id_event' => $id_event
+        ];
+
+        $transaksi = new Transaksi();
+        $transaksi = $transaksi->allPeserta($id_event);
+
+        if ($request->ajax()) {
+            return DataTables::of($transaksi)
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+
+        return view('event.peserta', $data);
     }
 }

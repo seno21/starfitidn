@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('kategori');
             $table->string('status');
             $table->boolean('active');
+            $table->string('sk');
             $table->timestamps();
         });
     }

@@ -37,7 +37,7 @@
                                                             value="{{ $detailUsers->nama_lengkap ?? old('nama_lengkap') }}">
                                                     </div>
                                                 </div>
-                                                <div class="form-group my-3">
+                                                {{-- <div class="form-group my-3">
                                                     <label for="tiket">NIK</label>
                                                     <div class="input-group">
                                                         <input type="text"
@@ -45,7 +45,7 @@
                                                             name="nik" id="nik"
                                                             value="{{ $detailUsers->nik ?? old('nik') }}">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-group my-3">
                                                     <label class="col-sm-3 col-form-label">Kategori</label>
                                                     <div class="d-flex">
@@ -164,17 +164,14 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <p class="fs-5 fw-bold mt-3">Syarat & Ketentuan</p>
+                                                @php
+                                                    $terms = $event->sk;
+                                                    $explode = explode("\n", $terms);
+                                                @endphp
                                                 <ul>
-                                                    <li class="list-group-item">1. Lorem ipsum, dolor sit amet consectetur
-                                                        adipisicing elit.</li>
-                                                    <li class="list-group-item">2. Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing elit. Cum, temporibus.</li>
-                                                    <li class="list-group-item">3. Lorem, ipsum dolor sit amet consectetur
-                                                        adipisicing elit. Beatae, aliquid?</li>
-                                                    <li class="list-group-item">4. Lorem, ipsum dolor sit amet consectetur
-                                                        adipisicing elit. Hic, sed?</li>
-                                                    <li class="list-group-item">5. Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing elit. Commodi, iusto.</li>
+                                                    @foreach ($explode as $sk)
+                                                        <li>{{ $sk }}</li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -277,7 +274,8 @@
                                                 @if (isset($transaksi) && $transaksi->id_tiket == $tiket->id)
                                                     {{-- <a href="{{ route('checkout') }}"> --}}
                                                     @if ($transaksi->status_pembayaran == 'PAID')
-                                                        <p class="text-success mt-3">Tiket Terbeli</p>
+                                                        <p class="text-light mt-3 d-block badge p-3 rounded bg-success">
+                                                            TIKET TERBELI</p>
                                                     @endif
                                                     @if ($transaksi->status_pembayaran != 'PAID')
                                                         <button type="button"

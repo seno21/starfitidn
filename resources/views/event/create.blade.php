@@ -114,11 +114,19 @@
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi Acara</label>
-                            {{-- <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi"
-                                rows="6" placeholder="Isikan detail acara">{{ old('deskripsi') }}</textarea> --}}
                             <input id="deskripsi" type="hidden" name="deskripsi" value="{!! old('deskripsi') !!}">
-                            <trix-editor class="@error('deskripsi') is-invalid @enderror" input="deskripsi"></trix-editor>
+                            <trix-editor placeholder="Isikan deskripsi acara" input="deskripsi"></trix-editor>
                             @error('deskripsi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="sk">Syarat dan Ketentuan Acara</label>
+                            <textarea class="form-control @error('sk') is-invalid @enderror" name="sk" id="sk" rows="6"
+                                placeholder="Isikan syarat dan ketentuan acara">{{ old('sk') }}</textarea>
+                            @error('sk')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

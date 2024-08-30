@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('id_user');
             $table->string('no_telp');
             $table->string('nama_lengkap');
-            $table->string('nik');
+            // $table->string('nik');
             $table->string('kontak_darurat');
             $table->string('domisili');
             $table->string('usia');

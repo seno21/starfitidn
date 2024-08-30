@@ -117,6 +117,16 @@
                                 </div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="sk">Syarat dan Ketentuan Acara</label>
+                            <textarea class="form-control @error('sk') is-invalid @enderror" name="sk" id="sk" rows="6"
+                                placeholder="Isikan syarat dan ketentuan acara">{{ $event->sk }}</textarea>
+                            @error('sk')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="row">
