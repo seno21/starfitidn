@@ -45,10 +45,14 @@ class TransaksiTiketController extends Controller
             $usia = $currentYear - $yearOfBirth;
 
             // Upsert untuk detail_users
+            $existingUser = DB::table('detail_users')->where('id_user', $request->id_user)->first();
+
+            $id = $existingUser ? $existingUser->id : Str::uuid()->toString();
+
             DB::table('detail_users')->upsert(
                 [
                     [
-                        'id' => Str::uuid()->toString(),
+                        'id' => $id,  // Use existing ID or generate new one
                         'id_user' => $request->id_user,
                         'no_telp' => $request->no_telp,
                         'nama_lengkap' => $request->nama_lengkap,
@@ -58,12 +62,14 @@ class TransaksiTiketController extends Controller
                         'usia' => $usia,
                         'ukuran_jersey' => $request->ukuran_jersey,
                         'jenis_kelamin' => $request->jenis_kelamin,
-                        'tgl_lahir' => $request->tgl_lahir, // Fixed: gunakan $request->tgl_lahir
+                        'tgl_lahir' => $request->tgl_lahir,
                         'tempat_lahir' => $request->tempat_lahir
                     ],
                 ],
-                ['id_user']
+                ['id_user'], // Unique constraint for upsert
+                ['no_telp', 'nama_lengkap', 'kontak_darurat', 'domisili', 'usia', 'ukuran_jersey', 'jenis_kelamin', 'tgl_lahir', 'tempat_lahir'] // Columns to update if matching
             );
+
 
             // Hitung fee komisi
             $fee_commision = 0;
