@@ -75,7 +75,7 @@
                                                     <div class="form-group">
                                                         <label for="keterangan">Keterangan Penarikan Dana</label>
                                                         <textarea class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" id="keterangan"
-                                                            rows="6" placeholder="Isikan syarat dan ketentuan acara">{{ old('keterangan') }}</textarea>
+                                                            rows="6" placeholder="Isikan keterangan penarikan dana">{{ old('keterangan') }}</textarea>
                                                         @error('keterangan')
                                                             <div class="invalid-feedback">
                                                                 {{ $message }}
