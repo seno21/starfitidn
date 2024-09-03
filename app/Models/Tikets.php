@@ -17,8 +17,9 @@ class Tikets extends Model
 
         // dd($id_event);
         return DB::table('tikets')
-            ->where('active', 1)
-            ->where('id_event', $id_event)
+            ->join('kategoris', 'kategoris.id', 'tikets.kategori')
+            ->where('tikets.active', 1)
+            ->where('tikets.id_event', $id_event)
             ->get();
     }
 }

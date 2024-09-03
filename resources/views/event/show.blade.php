@@ -149,12 +149,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="kategori">Kategori</label>
-                                                    <div class="input-group">
-                                                        <input type="text"
-                                                            class="form-control @error('kategori') is-invalid @enderror"
-                                                            name="kategori" id="kategori"
-                                                            value="{{ old('kategori') }}">
-                                                    </div>
+                                                    <select class="form-control" id="kategori" name="kategori">
+                                                        @foreach ($kategoris as $kategori)
+                                                            <option class="text-truncate" value="{{$kategori->id}}">{{"$kategori->nama_kategori (Gender : $kategori->gender) ($kategori->min_usia - $kategori->max_usia Tahun)"}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="quota">Quota Peserta</label>
@@ -327,8 +326,11 @@
                         name: "Nama Promo tiket",
                     },
                     {
-                        data: "kategori",
+                        data: "nama_kategori",
                         name: "Kategori Tiket",
+                        render: function(data, type, row){
+                            return `${row.nama_kategori} (Gender: ${row.gender}) (${row.min_usia}-${row.max_usia} Tahun)`
+                        }
                     },
                     {
                         data: "tgl_mulai",

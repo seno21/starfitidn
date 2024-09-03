@@ -179,6 +179,9 @@ class EventController extends Controller
         $tikets = new Tikets();
         $tikets = $tikets->showTikets($id);
 
+        $kategoris = new Kategori();
+        $kategoris = $kategoris->showKategori($id);
+
         $event = Events::find($id);
         $today = \Carbon\Carbon::now();
         $eventDate = \Carbon\Carbon::parse($event->waktu_pelaksanaan);
@@ -187,6 +190,7 @@ class EventController extends Controller
             'title' => 'Tiket Event',
             'id_event' => $id,
             'event' => $event,
+            'kategoris' => $kategoris,
         ];
 
         if ($request->ajax()) {
