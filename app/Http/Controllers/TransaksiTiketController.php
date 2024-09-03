@@ -155,7 +155,7 @@ class TransaksiTiketController extends Controller
             'external_id' => $dataTransaksi->no_transaksi,
             'description' => 'Pembayaran untuk Event ' . $dataTransaksi->nama_event . ' dengan tiket ' . $dataTransaksi->nama_promo . ' dengan harga Rp. ' . $dataTransaksi->final_payment,
             'amount' => $dataTransaksi->final_payment,
-            'invoice_duration' => 172800, // Invoice is valid for 48 hours
+            'invoice_duration' => 1800, // Invoice is valid for 48 hours
             'currency' => 'IDR',
             'reminder_time' => 1,
             'customer' => [
@@ -186,9 +186,9 @@ class TransaksiTiketController extends Controller
 
             // Redirect the user to the payment URL
             // dd($result);
-            DB::table('transaksi')
-                ->where('id', $request->id)
-                ->update(['status_pembayaran' => 'PAID']);
+            // DB::table('transaksi')
+            //     ->where('id', $request->id)
+            //     ->update(['status_pembayaran' => 'PAID']);
 
             return redirect($result['invoice_url']);
         } catch (XenditSdkException $e) {

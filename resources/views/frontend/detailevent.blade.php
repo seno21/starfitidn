@@ -246,8 +246,8 @@
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <span></span>
-                                            <p class="p-2 badge bg-warning text-light text-lowercase">
-                                                {{ $tiket->kategori }}
+                                            <p class="p-2 badge bg-warning text-light text-lowercase text-truncate text-uppercase">
+                                                {{ $tiket->nama_kategori }} - Gender({{ $tiket->gender }})
                                             </p>
                                         </div>
                                         @if ($tiket->tgl_selesai && strtotime($tiket->tgl_selesai) > time())
