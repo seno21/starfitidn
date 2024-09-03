@@ -8,6 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\TransaksiTiketController;
+use App\Http\Controllers\WithdrawController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use App\Models\Profits;
@@ -56,6 +57,11 @@ Route::middleware(IsAdmin::class)->prefix('event')->name('event.')->group(functi
 
 Route::middleware(IsAdmin::class)->prefix('profit')->name('profit.')->group(function () {
     Route::get('profit/', [ProfitController::class, 'index'])->name('index');
+});
+
+
+Route::middleware(IsAdmin::class)->prefix('withdraw')->name('withdraw.')->group(function () {
+    Route::get('withdraw/', [WithdrawController::class, 'index'])->name('index');
 });
 
 // Ini contoh jika middleware nya dalam bentuk array
