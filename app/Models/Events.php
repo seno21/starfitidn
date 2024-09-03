@@ -15,7 +15,7 @@ class Events extends Model
     public function allEvent()
     {
         return DB::table('events')
-            ->orderBy('waktu_pelaksanaan', 'desc')
+            ->orderBy('waktu_pelaksanaan')
             ->where('events.active', 1)
             ->get();
     }
@@ -31,7 +31,7 @@ class Events extends Model
     {
         return DB::table('events')
             ->limit(4)
-            ->orderBy('waktu_pelaksanaan', 'desc')
+            ->orderBy('waktu_pelaksanaan')
             ->get();
     }
 }

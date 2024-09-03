@@ -32,6 +32,12 @@
                 <span class="menu-title">Gallery</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('profit.index') }}" aria-expanded="false" aria-controls="form-elements">
+                <i class="icon-paper menu-icon"></i>
+                <span class="menu-title">Sharing Profit</span>
+            </a>
+        </li>
         {{--
     <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">

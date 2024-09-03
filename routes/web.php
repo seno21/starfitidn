@@ -6,9 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\TransaksiTiketController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
+use App\Models\Profits;
 use Illuminate\Support\Facades\Route;
 
 // FRONTEND - Route untuk Landing (Tanpa Login)
@@ -50,6 +52,10 @@ Route::middleware(IsAdmin::class)->prefix('event')->name('event.')->group(functi
     Route::post('tiketDel/{id}', [EventController::class, 'removeTiket'])->name('eom.removeTiket');
     Route::put('updateTiket/{id}', [EventController::class, 'updateTiket'])->name('eom.updateTiket');
     Route::post('del/{id}', [EventController::class, 'remove'])->name('eom.remove');
+});
+
+Route::middleware(IsAdmin::class)->prefix('profit')->name('profit.')->group(function () {
+    Route::get('profit/', [ProfitController::class, 'index'])->name('index');
 });
 
 // Ini contoh jika middleware nya dalam bentuk array

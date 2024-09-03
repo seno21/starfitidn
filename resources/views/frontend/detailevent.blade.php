@@ -251,7 +251,10 @@
                                             </p>
                                         </div>
                                         @if ($tiket->tgl_selesai && strtotime($tiket->tgl_selesai) > time())
-                                            @if (Auth::check() === true && Auth::user()->role === 'user')
+                                            @if (Auth::check() === true &&
+                                                    Auth::user()->role === 'user' &&
+                                                    date('Y-m-d') >= $tiket->tgl_mulai &&
+                                                    date('Y-m-d') <= $tiket->tgl_selesai)
                                                 @if (!isset($transaksi))
                                                     <div class="progress progress-md">
                                                         <div class="progress-bar bg-info"
