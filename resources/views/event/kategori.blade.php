@@ -79,6 +79,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="nama_kategori">No Start BIB</label>
+                                                    <div class="input-group">
+                                                        <input type="text"
+                                                            class="form-control @error('start_bib') is-invalid @enderror"
+                                                            name="start_bib" id="start_bib"
+                                                            value="{{ old('start_bib') }}">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -99,6 +108,7 @@
                                         <th>Gender</th>
                                         <th>Minimal Usia</th>
                                         <th>Maksimal Usia</th>
+                                        <th>Nomor Mulai BIB</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -140,12 +150,14 @@
                 var gender = $(this).data('gender');
                 var min_usia = $(this).data('min_usia');
                 var max_usia = $(this).data('max_usia');
+                var start_bib = $(this).data('start_bib');
 
                 // Isi form modal dengan data yang diambil
                 $('#nama_kategori').val(nama_kategori);
                 $('#gender').val(gender);
                 $('#min_usia').val(min_usia);
                 $('#max_usia').val(max_usia);
+                $('#start_bib').val(start_bib);
                 $('#kategori_id').val(id); // Set hidden ID for updating
 
                 // Ubah form action agar mengarah ke rute update dengan ID tiket
@@ -186,6 +198,10 @@
                     {
                         data: "max_usia",
                         name: "Usia Maksimal",
+                    },
+                    {
+                        data: "start_bib",
+                        name: "No Mulai BIB",
                     },
                     {
                         data: "action",

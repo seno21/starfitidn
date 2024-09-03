@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('gender');
             $table->integer('min_usia');
             $table->integer('max_usia');
+            $table->integer('start_bib');
             $table->integer('active');
             $table->timestamps();
         });

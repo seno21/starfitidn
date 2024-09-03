@@ -271,6 +271,7 @@ class EventController extends Controller
         $kategori->gender = $request->gender;
         $kategori->min_usia = $request->min_usia;
         $kategori->max_usia = $request->max_usia;
+        $kategori->start_bib = $request->start_bib;
         $kategori->save();
 
         // Redirect kembali ke halaman event dengan pesan sukses
@@ -321,6 +322,7 @@ class EventController extends Controller
         $kategori->gender = $request->gender;
         $kategori->min_usia = $request->min_usia;
         $kategori->max_usia = $request->max_usia;
+        $kategori->start_bib = $request->start_bib;
         $kategori->active = 1;
         $kategori->save();
 
@@ -368,6 +370,7 @@ class EventController extends Controller
                         data-nama_kategori="' . $kategori->nama_kategori . '"
                         data-min_usia="' . $kategori->min_usia . '"
                         data-max_usia="' . $kategori->max_usia . '"
+                        data-start_bib="' . $kategori->start_bib . '"
                         data-gender="' . $kategori->gender . '">
                         <i class="mdi mdi-pencil-box-outline"></i>
                     </button>
