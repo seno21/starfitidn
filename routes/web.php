@@ -49,9 +49,15 @@ Route::middleware(IsAdmin::class)->group(function () {
 Route::middleware(IsAdmin::class)->prefix('event')->name('event.')->group(function () {
     Route::resource('eom', EventController::class);
     Route::get('eom/peserta/{id}', [EventController::class, 'peserta'])->name('eom.peserta');
+    Route::get('eom/kategori/{id}', [EventController::class, 'kategori'])->name('eom.kategori');
+
     Route::post('tiket', [EventController::class, 'insertTiket'])->name('eom.insertTiket');
     Route::post('tiketDel/{id}', [EventController::class, 'removeTiket'])->name('eom.removeTiket');
     Route::put('updateTiket/{id}', [EventController::class, 'updateTiket'])->name('eom.updateTiket');
+
+    Route::post('kategori', [EventController::class, 'insertKategori'])->name('eom.insertKategori');
+    Route::post('kategoriDel/{id}', [EventController::class, 'removeKategori'])->name('eom.removeKategori');
+    Route::put('updateKategori/{id}', [EventController::class, 'updateKategori'])->name('eom.updateKategori');
     Route::post('del/{id}', [EventController::class, 'remove'])->name('eom.remove');
 });
 

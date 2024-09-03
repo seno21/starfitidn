@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Events;
+use App\Models\Kategori;
 use App\Models\Tikets;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class EventController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($event) {
                     return '<a href="' . route('event.eom.peserta', $event->id) . '" class="btn btn-sm btn-info" title="Peserta terdaftar"><i class="mdi mdi-account-multiple"></i></a>
+                     <a href="' . route('event.eom.kategori', $event->id) . '" class="btn btn-sm btn-warning" title="Tambahkan kategori tiket untuk event ini"><i class="mdi mdi-cogs"></i></a>
                      <a href="' . route('event.eom.show', $event->id) . '" class="btn btn-sm btn-primary" title="Tambahkan tiket untuk event ini"><i class="mdi mdi-ticket"></i></a>
                         <a href="' . route('event.eom.edit', $event->id) . '" class="btn btn-sm btn-success" title="Edit event ini"><i class="mdi mdi-pencil-box-outline"></i></a>
                         <form method="POST" action="' . route('event.eom.remove', $event->id) . '" style="display:inline;">
@@ -160,6 +162,18 @@ class EventController extends Controller
         return redirect()->route('event.eom.show', $event->id_event);
     }
 
+    public function removeKategori(Request $request, $id)
+    {
+        // Set active to 0
+        $event = Kategori::find($id);
+
+        $event->active = 0;
+        $event->save();
+
+
+        return redirect()->route('event.eom.kategori', $event->id_event);
+    }
+
     public function show(Request $request, $id)
     {
         $tikets = new Tikets();
@@ -235,6 +249,29 @@ class EventController extends Controller
         // Redirect kembali ke halaman event dengan pesan sukses
         return redirect()->route('event.eom.show', $tiket->id_event)->with('success', 'Tiket berhasil diperbarui');
     }
+    public function updateKategori(Request $request, $id)
+    {
+        $kategori = Kategori::find($id);
+
+        // Validasi data
+        $request->validate([
+            'nama_kategori' => 'required|string|max:255',
+            'gender' => 'required|string|max:255',
+            'min_usia' => 'required|numeric',
+            'max_usia' => 'required|numeric',
+        ]);
+
+        // Update data tiket
+        $kategori->id_event = $request->id_event;
+        $kategori->nama_kategori = $request->nama_kategori;
+        $kategori->gender = $request->gender;
+        $kategori->min_usia = $request->min_usia;
+        $kategori->max_usia = $request->max_usia;
+        $kategori->save();
+
+        // Redirect kembali ke halaman event dengan pesan sukses
+        return redirect()->route('event.eom.kategori', $kategori->id_event)->with('success', 'Kategori berhasil diperbarui');
+    }
 
 
     public function insertTiket(Request $request)
@@ -263,6 +300,29 @@ class EventController extends Controller
         return redirect()->back()->with('success', 'Tiket Berhasil Dibuat');
     }
 
+    public function insertKategori(Request $request)
+    {
+        $request->validate([
+            'nama_kategori' => 'required|max:255',
+            'gender' => 'required',
+            'min_usia' => 'required|numeric',
+            'max_usia' => 'required|numeric',
+        ]);
+
+
+        $kategori = new Kategori();
+
+        $kategori->id_event = $request->id_event;
+        $kategori->nama_kategori = $request->nama_kategori;
+        $kategori->gender = $request->gender;
+        $kategori->min_usia = $request->min_usia;
+        $kategori->max_usia = $request->max_usia;
+        $kategori->active = 1;
+        $kategori->save();
+
+        return redirect()->back()->with('success', 'Kategori Berhasil Dibuat');
+    }
+
     public function peserta(Request $request, $id_event)
     {
         $data = [
@@ -281,5 +341,41 @@ class EventController extends Controller
 
 
         return view('event.peserta', $data);
+    }
+
+    public function kategori(Request $request, $id_event)
+    {
+        $data = [
+            'title' => 'Kategori Event',
+            'id_event' => $id_event
+        ];
+
+        $kategoris = new Kategori();
+        $kategoris = $kategoris->showKategori($id_event);
+
+        if ($request->ajax()) {
+            return DataTables::of($kategoris)
+            ->addColumn('action', function ($kategori){
+                    return '
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-success edit-kategori"
+                        data-id="' . $kategori->id . '"
+                        data-nama_kategori="' . $kategori->nama_kategori . '"
+                        data-min_usia="' . $kategori->min_usia . '"
+                        data-max_usia="' . $kategori->max_usia . '"
+                        data-gender="' . $kategori->gender . '">
+                        <i class="mdi mdi-pencil-box-outline"></i>
+                    </button>
+                    <form method="POST" action="' . route('event.eom.removeKategori', $kategori->id) . '" style="display:inline;">
+                        ' . csrf_field() . '
+                        <button type="submit" class="btn btn-sm btn-danger" id="btnDel"><i class="mdi mdi-delete"></i></button>
+                    </form>';
+            })
+                ->make(true);
+        }
+
+
+        return view('event.kategori', $data);
     }
 }
