@@ -66,16 +66,16 @@ class LandingController extends Controller
             $tickets = array();
         } else {
             $tickets = DB::table('tikets')->where('tikets.id_event', $events->id)
-                        ->leftJoin('kategoris', 'kategoris.id', 'tikets.kategori')
-                        ->select('kategoris.*','tikets.*')
-                        ->where('tikets.active', 1)
-                        ->orderBy('tgl_mulai')->get();
+                ->leftJoin('kategoris', 'kategoris.id', 'tikets.kategori')
+                ->select('kategoris.*', 'tikets.*')
+                ->where('tikets.active', 1)
+                ->orderBy('tgl_mulai')->get();
         }
         $transaksis = DB::table('transaksi')
-                        ->where('active', 1)
-                        ->where('id_user', $userLogin->id)
-                        ->where('id_event', $events->id)
-                        ->first();
+            ->where('active', 1)
+            // ->where('id_user', $userLogin->id)
+            ->where('id_event', $events->id)
+            ->first();
 
         $data = [
             'event' => $events,

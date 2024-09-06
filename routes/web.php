@@ -12,6 +12,7 @@ use App\Http\Controllers\WithdrawController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use App\Models\Profits;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 // FRONTEND - Route untuk Landing (Tanpa Login)
@@ -75,7 +76,9 @@ Route::middleware([IsAdmin::class])->prefix('gallery')->name('gallery.')->group(
     Route::resource('img', GalleryController::class);
 });
 
-
+Route::get('/symlink', function () {
+    Artisan::call('storage:link');
+});
 
 
 
