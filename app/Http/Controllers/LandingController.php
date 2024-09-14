@@ -65,11 +65,24 @@ class LandingController extends Controller
         if ($today->greaterThanOrEqualTo($eventDate)) {
             $tickets = array();
         } else {
-            $tickets = DB::table('tikets')->where('tikets.id_event', $events->id)
-                ->leftJoin('kategoris', 'kategoris.id', 'tikets.kategori')
-                ->select('kategoris.*', 'tikets.*')
+            $tickets = DB::table('tikets')
+                ->leftJoin('kategoris', 'kategoris.id', '=', 'tikets.kategori')
+                ->leftJoin(
+                    DB::raw('(SELECT id_tiket, COUNT(id) as total_tiket_terbeli
+                         FROM transaksi
+                         WHERE status_pembayaran = "PAID"
+                         GROUP BY id_tiket) as tr'),
+                    'tikets.id',
+                    '=',
+                    'tr.id_tiket'
+                )
+                ->select('kategoris.*', 'tikets.*', DB::raw('IFNULL(tr.total_tiket_terbeli, 0) as total_tiket_terbeli'))
+                ->where('tikets.id_event', $events->id)
                 ->where('tikets.active', 1)
-                ->orderBy('tgl_mulai')->get();
+                ->orderBy('tgl_mulai')
+                ->get();
+            // Gunakan first() karena ini menghasilkan satu nilai
+
         }
         $transaksis = DB::table('transaksi')
             ->where('active', 1)

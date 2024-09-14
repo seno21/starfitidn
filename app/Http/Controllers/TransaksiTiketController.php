@@ -135,6 +135,48 @@ class TransaksiTiketController extends Controller
         ]);
     }
 
+    public function paidInvoice(Request $request)
+    {
+        $transaksi = DB::table('transaksi')->where('no_transaksi', $request->external_id)->first();
+
+        if ($transaksi) {
+            // Mendapatkan nilai maksimal dari 'no_bib' di event dan tiket yang sama
+            $nobib = DB::table('transaksi')
+                ->where('id_event', $transaksi->id_event)
+                ->where('id_tiket', $transaksi->id_tiket)
+                ->max('no_bib'); // Menggunakan max() dengan benar
+
+            // Jika ada nilai 'no_bib', tambahkan 1
+            if ($nobib) {
+                $nobib = $nobib + 1;
+            } else {
+                // Jika 'no_bib' tidak ditemukan, dapatkan nilai 'start_bib' dari 'tikets' dan 'kategoris'
+                $startBibData = DB::table('tikets as tik')
+                    ->join('kategoris as kat', 'kat.id', '=', 'tik.kategori')
+                    ->select('kat.start_bib')
+                    ->where('tik.id', $transaksi->id_tiket) // Sesuaikan dengan 'id_tiket'
+                    ->first();
+
+                if ($startBibData) {
+                    $nobib = $startBibData->start_bib;
+                } else {
+                    return response()->json(['error' => 'No start_bib found'], 404); // Penanganan jika start_bib tidak ditemukan
+                }
+            }
+
+            // Update transaksi dengan status baru dan no_bib
+            DB::table('transaksi')->where('no_transaksi', $request->external_id)
+                ->update([
+                    'status_pembayaran' => $request->status,
+                    'no_bib' => $nobib,
+                ]);
+
+            return response()->json(['message' => 'Transaction Success'], 200);
+        } else {
+            return response()->json(['error' => 'Transaction not found'], 404);
+        }
+    }
+
     public function checkout(Request $request)
     {
 
@@ -186,9 +228,9 @@ class TransaksiTiketController extends Controller
 
             // Redirect the user to the payment URL
             // dd($result);
-            // DB::table('transaksi')
-            //     ->where('id', $request->id)
-            //     ->update(['status_pembayaran' => 'PAID']);
+            DB::table('transaksi')
+                ->where('id', $request->id)
+                ->update(['payment_url' => $result['invoice_url']]);
 
             return redirect($result['invoice_url']);
         } catch (XenditSdkException $e) {

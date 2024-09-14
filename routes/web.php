@@ -12,6 +12,7 @@ use App\Http\Controllers\WithdrawController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use App\Models\Profits;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,7 @@ Route::middleware(IsUser::class)->group(function () {
     Route::post('/cancel-pesanan', [TransaksiTiketController::class, 'cancel'])->name('cancel-pesanan');
     Route::post('/checkout', [TransaksiTiketController::class, 'checkout'])->name('checkout');
 });
+Route::post('/paidInvoice', [TransaksiTiketController::class, 'paidInvoice'])->name('paidInvoice')->withoutMiddleware(VerifyCsrfToken::class);
 
 Route::middleware(IsAdmin::class)->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

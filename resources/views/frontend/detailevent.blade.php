@@ -239,9 +239,9 @@
                                             <p class="text-muted">Rp. {{ number_format($tiket->harga, 0, ',', '.') }}
                                             </p>
                                             @if ($tiket->quota)
-                                                <p class="text-muted">Kuota: {{ $tiket->quota ?? '-' }}</p>
+                                                <p class="text-muted">Sisa Kuota: {{ $tiket->quota - $tiket->total_tiket_terbeli ?? '-' }}</p>
                                             @else
-                                                <p class="text-muted">Terjual: 90</p>
+                                                <p class="text-muted">Terjual: {{$tiket->total_tiket_terbeli ?? 0}}</p>
                                             @endif
                                         </div>
                                         <div class="d-flex justify-content-between">
@@ -258,10 +258,10 @@
                                                 @if (!isset($transaksi))
                                                     <div class="progress progress-md">
                                                         <div class="progress-bar bg-info"
-                                                            style="width: {{ 25 }}%" role="progressbar"
+                                                            style="width: {{ $tiket->total_tiket_terbeli ?? 0 }}%" role="progressbar"
                                                             aria-valuenow="25" aria-valuemin="0"
                                                             aria-valuemax="{{ $tiket->quota }}">
-                                                            {{ 25 }} Terjual</div>
+                                                            {{ $tiket->total_tiket_terbeli ?? 0 }} Terjual</div>
                                                     </div>
                                                     <div class="mt-2">
                                                         <button type="button"
@@ -285,6 +285,7 @@
                                                             class="btn btn-block w-100 mt-3 btn-outline-primary checkout-btn"
                                                             data-transaksi_id="{{ $transaksi->id }}"
                                                             data-nama_promo="{{ $tiket->nama_promo }}"
+                                                            data-link="{{$transaksi->payment_url}}"
                                                             data-harga="{{ $tiket->harga }}">
                                                             Proses Bayar
                                                         </button>
@@ -350,9 +351,6 @@
                         </div>
                     </div>
                 </div>
-                @if ($errors->any())
-                    {{ dd($errors) }}
-                @endif
                 <div class="col-md-8 order-0" style="padding-left: 25px;">
                     <div class="card p-4 shadow">
                         <div class="top-section"
@@ -560,62 +558,32 @@
                     }).then((result) => {
                         if (result) {
                             // Create a form element
-                            const form = document.createElement('form');
-                            form.method = 'POST';
-                            form.action = `{{ route('checkout') }}`;
+                            const url_payment = button.getAttribute('data-link')
+                            if(url_payment){
+                                window.open(url_payment);
+                            }else{
+                                const form = document.createElement('form');
+                                form.method = 'POST';
+                                form.action = `{{ route('checkout') }}`;
 
-                            // Add the CSRF token input
-                            const csrfInput = document.createElement('input');
-                            csrfInput.type = 'hidden';
-                            csrfInput.name = '_token';
-                            csrfInput.value = '{{ csrf_token() }}';
-                            form.appendChild(csrfInput);
+                                // Add the CSRF token input
+                                const csrfInput = document.createElement('input');
+                                csrfInput.type = 'hidden';
+                                csrfInput.name = '_token';
+                                csrfInput.value = '{{ csrf_token() }}';
+                                form.appendChild(csrfInput);
 
-                            // Add the transaction ID input
-                            const idInput = document.createElement('input');
-                            idInput.type = 'hidden';
-                            idInput.name = 'id';
-                            idInput.value = selectedTransaksiID;
-                            form.appendChild(idInput);
+                                // Add the transaction ID input
+                                const idInput = document.createElement('input');
+                                idInput.type = 'hidden';
+                                idInput.name = 'id';
+                                idInput.value = selectedTransaksiID;
+                                form.appendChild(idInput);
 
-                            // Append the form to the body and submit it
-                            document.body.appendChild(form);
-                            form.submit();
-                            // Perform the AJAX request to change the role using Fetch API
-                            // fetch("{{ route('checkout') }}", {
-                            //         method: 'POST',
-                            //         headers: {
-                            //             'Content-Type': 'application/x-www-form-urlencoded',
-                            //             'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            //         },
-                            //         body: new URLSearchParams({
-                            //             id: selectedTransaksiID,
-                            //         })
-                            //     })
-                            //     .then(response => response.json())
-                            //     .then(data => {
-                            //         if (data.success) {
-                            //             location.reload()
-                            //             // Show success alert
-                            //             showSwal('success-message')
-                            //         } else {
-                            //             throw new Error('Something went wrong');
-                            //         }
-                            //     })
-                            //     .catch(error => {
-                            //         swal({
-                            //             title: 'Ada Kesalahan',
-                            //             text: 'Terdapat error silakan periksa',
-                            //             icon: 'error',
-                            //             button: {
-                            //                 text: "ok",
-                            //                 value: true,
-                            //                 visible: true,
-                            //                 className: "btn btn-primary"
-                            //             }
-                            //         })
-                            //         console.error('Error:', error);
-                            //     });
+                                // Append the form to the body and submit it
+                                document.body.appendChild(form);
+                                form.submit();
+                            }
                         }
                     });
                 });
