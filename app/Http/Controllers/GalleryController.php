@@ -27,7 +27,7 @@ class GalleryController extends Controller
 
 
         foreach ($images as $image) {
-            $gambar = $image->store('gallery-img'); //pindah gambar dati temp ke public storage
+            $gambar = $image->store('public/gallery-img'); //pindah gambar dati temp ke public storage
             $gallerys = new Gallerys();
 
             $path[] = $gambar;

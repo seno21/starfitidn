@@ -75,7 +75,7 @@ class EventController extends Controller
         $event->waktu_pelaksanaan = $request->waktu;
         $event->lokasi  = $request->lokasi;
         $event->kontak = $request->telepon;
-        $event->poster = $request->file('poster')->store('poster-img');
+        $event->poster = $request->file('poster')->store('public/poster-img');
         $event->penyelenggara = $request->penyelenggara;
         $event->kategori = $request->kategori;
         $event->status = $request->status;
@@ -361,7 +361,7 @@ class EventController extends Controller
 
         if ($request->ajax()) {
             return DataTables::of($kategoris)
-            ->addColumn('action', function ($kategori){
+                ->addColumn('action', function ($kategori) {
                     return '
                     <button
                         type="button"
@@ -378,7 +378,7 @@ class EventController extends Controller
                         ' . csrf_field() . '
                         <button type="submit" class="btn btn-sm btn-danger" id="btnDel"><i class="mdi mdi-delete"></i></button>
                     </form>';
-            })
+                })
                 ->make(true);
         }
 

@@ -73,9 +73,12 @@ class LandingController extends Controller
         }
         $transaksis = DB::table('transaksi')
             ->where('active', 1)
-            // ->where('id_user', $userLogin->id)
-            ->where('id_event', $events->id)
-            ->first();
+            ->where('id_event', $events->id);
+        if (isset($userLogin->id)) {
+            $transaksis = $transaksis->where('id_user', $userLogin->id);
+        }
+        $transaksis = $transaksis->first();
+
 
         $data = [
             'event' => $events,

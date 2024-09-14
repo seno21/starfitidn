@@ -14,6 +14,7 @@
                             <figure id="portfolioGallery">
                                 <a href="{{ asset('storage/' . $gallery->nama_foto) }}" data-gallery="portfolioGallery"
                                     class="portfolio-lightbox">
+                                    {{ dd($gallery->nama_foto) }}
                                     <img src="{{ asset('storage/' . $gallery->nama_foto) }}"
                                         class="gallery-img rounded p-2 img-fluid" alt="Gallery Kami"></a>
                             </figure>
