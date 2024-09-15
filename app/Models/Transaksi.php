@@ -40,4 +40,23 @@ class Transaksi extends Model
 
         return $query;
     }
+
+    public function pesertaToday()
+    {
+        $query = DB::table('transaksi')
+            ->where('status_pembayaran', 'PAID')
+            ->where('created_at', now())
+            ->count();
+
+        return $query;
+    }
+
+    public function totalPendaftar()
+    {
+        $query = DB::table('transaksi')
+            ->where('status_pembayaran', 'PAID')
+            ->count();
+
+        return $query;
+    }
 }

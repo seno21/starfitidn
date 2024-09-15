@@ -11,22 +11,6 @@
                             <span class="text-primary">3 pesan notifikasi!</span>
                         </h6>
                     </div>
-                    <div class="col-12 col-xl-4">
-                        <div class="justify-content-end d-flex">
-                            <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button"
-                                    id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                                    <a class="dropdown-item" href="#">January - March</a>
-                                    <a class="dropdown-item" href="#">March - June</a>
-                                    <a class="dropdown-item" href="#">June - August</a>
-                                    <a class="dropdown-item" href="#">August - November</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -51,8 +35,7 @@
                         <div class="card card-tale">
                             <div class="card-body">
                                 <p class="mb-4">Peserta Daftar Hari Ini</p>
-                                <p class="fs-30 mb-2">231</p>
-                                <p>10.00% (30 days)</p>
+                                <p class="fs-30 mb-2">{{ $transaksi->pesertaToday() }} Peserta</p>
                             </div>
                         </div>
                     </div>
@@ -60,8 +43,8 @@
                         <div class="card card-dark-blue">
                             <div class="card-body">
                                 <p class="mb-4">Total Pendaftar</p>
-                                <p class="fs-30 mb-2">310987</p>
-                                <p>22.00% (30 days)</p>
+                                <p class="fs-30 mb-2">{{ $transaksi->totalPendaftar() }} Terdaftar</p>
+                                <p>Pada Semua Event</p>
                             </div>
                         </div>
                     </div>
@@ -70,9 +53,8 @@
                     <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                         <div class="card card-light-blue">
                             <div class="card-body">
-                                <p class="mb-4">Total Partner</p>
-                                <p class="fs-30 mb-2">97</p>
-                                <p>2.00% (30 days)</p>
+                                <p class="mb-4">Total Event</p>
+                                <p class="fs-30 mb-2">{{ $event }} Event</p>
                             </div>
                         </div>
                     </div>
@@ -80,15 +62,15 @@
                         <div class="card card-light-danger">
                             <div class="card-body">
                                 <p class="mb-4">Total User</p>
-                                <p class="fs-30 mb-2">5902</p>
-                                <p>0.22% (30 days)</p>
+                                <p class="fs-30 mb-2">{{ DB::table('users')->count() }} User</p>
+                                <p>Terdaftar Pada Web <a href="http://starfitidn.com">starfitidn.com</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -133,7 +115,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <!-- content-wrapper ends -->
 

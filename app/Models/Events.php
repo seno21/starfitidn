@@ -34,4 +34,10 @@ class Events extends Model
             ->orderBy('waktu_pelaksanaan')
             ->get();
     }
+
+    public function totalEvent()
+    {
+        return DB::table('events')
+            ->count();
+    }
 }
