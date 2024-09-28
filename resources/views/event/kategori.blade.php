@@ -29,7 +29,8 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form id="kategoriForm" method="POST" action="{{ route('event.eom.insertKategori') }}">
+                                    <form id="kategoriForm" method="POST" enctype="multipart/form-data"
+                                        action="{{ route('event.eom.insertKategori') }}">
                                         @csrf
                                         <input type="hidden" name="_method" value="POST">
                                         <input type="hidden" name="id_event" value="{{ $id_event }}">
@@ -84,8 +85,27 @@
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class="form-control @error('start_bib') is-invalid @enderror"
-                                                            name="start_bib" id="start_bib"
-                                                            value="{{ old('start_bib') }}">
+                                                            name="start_bib" id="start_bib" value="{{ old('start_bib') }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Design BIB</label>
+                                                    <input type="file" name="img_bib" class="file-upload-default"
+                                                        id="img_bib" onchange="viewImage()">
+                                                    <div class="input-group col-xs-12">
+                                                        <input type="text"
+                                                            class="form-control @error('img_bib') is-invalid @enderror file-upload-info"
+                                                            disabled placeholder="Upload Image">
+                                                        <span class="input-group-append">
+                                                            <button class="file-upload-browse btn btn-primary"
+                                                                type="button">Upload</button>
+                                                        </span>
+                                                        @error('img_bib')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>

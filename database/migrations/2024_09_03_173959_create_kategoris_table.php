@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('min_usia');
             $table->integer('max_usia');
             $table->integer('start_bib');
+            $table->string('img_bib');
             $table->integer('active');
             $table->timestamps();
         });

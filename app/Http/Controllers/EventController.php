@@ -263,7 +263,13 @@ class EventController extends Controller
             'gender' => 'required|string|max:255',
             'min_usia' => 'required|numeric',
             'max_usia' => 'required|numeric',
+            'img_bib' => 'required|mimes:jpeg,jpg,png|image|max:1024',
         ]);
+
+        if ($request->file('img_bib') != null) {
+            Storage::delete($kategori->img_bib);
+            $kategori->img_bib = $request->file('img_bib')->store('bib-img');
+        }
 
         // Update data tiket
         $kategori->id_event = $request->id_event;
@@ -312,8 +318,8 @@ class EventController extends Controller
             'gender' => 'required',
             'min_usia' => 'required|numeric',
             'max_usia' => 'required|numeric',
+            'img_bib' => 'required|mimes:jpeg,jpg,png|image|max:1024',
         ]);
-
 
         $kategori = new Kategori();
 
@@ -323,6 +329,7 @@ class EventController extends Controller
         $kategori->min_usia = $request->min_usia;
         $kategori->max_usia = $request->max_usia;
         $kategori->start_bib = $request->start_bib;
+        $kategori->img_bib = $request->file('img_bib')->store('public/bib-img');
         $kategori->active = 1;
         $kategori->save();
 
