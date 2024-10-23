@@ -34,17 +34,11 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('profit.index') }}" aria-expanded="false" aria-controls="form-elements">
-                <i class="mdi mdi-chart-bar menu-icon"></i>
-                <span class="menu-title">Sharing Profit</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('withdraw.index') }}" aria-expanded="false"
-                aria-controls="form-elements">
                 <i class="mdi mdi-cash-multiple menu-icon"></i>
-                <span class="menu-title">Withdraw</span>
+                <span class="menu-title">Profit</span>
             </a>
         </li>
+
         {{--
     <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">

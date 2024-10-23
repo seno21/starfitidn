@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallerys;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class GalleryController extends Controller
 {
@@ -38,5 +39,14 @@ class GalleryController extends Controller
 
 
         return redirect()->back()->with('success', 'Upload foto berhasil');
+    }
+
+    public function downloadImg(File $img)
+    {
+        $filePath = storage_path('public/gallery-img/' . $img);
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        }
     }
 }

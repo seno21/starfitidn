@@ -69,13 +69,10 @@ Route::middleware(IsAdmin::class)->prefix('profit')->name('profit.')->group(func
 });
 
 
-Route::middleware(IsAdmin::class)->prefix('withdraw')->name('withdraw.')->group(function () {
-    Route::get('withdraw/', [WithdrawController::class, 'index'])->name('index');
-});
-
 // Ini contoh jika middleware nya dalam bentuk array
 Route::middleware([IsAdmin::class])->prefix('gallery')->name('gallery.')->group(function () {
     Route::resource('img', GalleryController::class);
+    Route::get('download/{id}', [GalleryController::class, 'downloadImg'])->name('img.download');
 });
 
 Route::get('/symlink', function () {
