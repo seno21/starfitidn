@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Xendit\Configuration;
 use Xendit\Invoice\CreateInvoiceRequest;
 use Xendit\Invoice\Invoice;
@@ -137,43 +138,49 @@ class TransaksiTiketController extends Controller
 
     public function paidInvoice(Request $request)
     {
-        $transaksi = DB::table('transaksi')->where('no_transaksi', $request->external_id)->first();
+        Log::info('Paid Invoice Request: ' . json_encode($request->all()));
+        try {
+            $transaksi = DB::table('transaksi')->where('no_transaksi', $request->external_id)->first();
 
-        if ($transaksi) {
-            // Mendapatkan nilai maksimal dari 'no_bib' di event dan tiket yang sama
-            $nobib = DB::table('transaksi')
-                ->where('id_event', $transaksi->id_event)
-                ->where('id_tiket', $transaksi->id_tiket)
-                ->max('no_bib'); // Menggunakan max() dengan benar
+            if ($transaksi) {
+                // Mendapatkan nilai maksimal dari 'no_bib' di event dan tiket yang sama
+                $nobib = DB::table('transaksi')
+                    ->where('id_event', $transaksi->id_event)
+                    ->where('id_tiket', $transaksi->id_tiket)
+                    ->max('no_bib'); // Menggunakan max() dengan benar
 
-            // Jika ada nilai 'no_bib', tambahkan 1
-            if ($nobib) {
-                $nobib = $nobib + 1;
-            } else {
-                // Jika 'no_bib' tidak ditemukan, dapatkan nilai 'start_bib' dari 'tikets' dan 'kategoris'
-                $startBibData = DB::table('tikets as tik')
-                    ->join('kategoris as kat', 'kat.id', '=', 'tik.kategori')
-                    ->select('kat.start_bib')
-                    ->where('tik.id', $transaksi->id_tiket) // Sesuaikan dengan 'id_tiket'
-                    ->first();
-
-                if ($startBibData) {
-                    $nobib = $startBibData->start_bib;
+                // Jika ada nilai 'no_bib', tambahkan 1
+                if ($nobib) {
+                    $nobib = $nobib + 1;
                 } else {
-                    return response()->json(['error' => 'No start_bib found'], 404); // Penanganan jika start_bib tidak ditemukan
+                    // Jika 'no_bib' tidak ditemukan, dapatkan nilai 'start_bib' dari 'tikets' dan 'kategoris'
+                    $startBibData = DB::table('tikets as tik')
+                        ->join('kategoris as kat', 'kat.id', '=', 'tik.kategori')
+                        ->select('kat.start_bib')
+                        ->where('tik.id', $transaksi->id_tiket) // Sesuaikan dengan 'id_tiket'
+                        ->first();
+
+                    if ($startBibData) {
+                        $nobib = $startBibData->start_bib;
+                    } else {
+                        return response()->json(['error' => 'No start_bib found'], 404); // Penanganan jika start_bib tidak ditemukan
+                    }
                 }
+
+                // Update transaksi dengan status baru dan no_bib
+                DB::table('transaksi')->where('no_transaksi', $request->external_id)
+                    ->update([
+                        'status_pembayaran' => $request->status,
+                        'no_bib' => $nobib,
+                    ]);
+
+                return response()->json(['message' => 'Transaction Success'], 200);
+            } else {
+                return response()->json(['error' => 'KEH MENE'], 404);
             }
-
-            // Update transaksi dengan status baru dan no_bib
-            DB::table('transaksi')->where('no_transaksi', $request->external_id)
-                ->update([
-                    'status_pembayaran' => $request->status,
-                    'no_bib' => $nobib,
-                ]);
-
-            return response()->json(['message' => 'Transaction Success'], 200);
-        } else {
-            return response()->json(['error' => 'Transaction not found'], 404);
+        } catch (\Throwable $th) {
+            Log::error('Error processing paid invoice: ' . $th->getMessage());
+            return response()->json(['error' => 'An error occurred while processing the invoice'], 500);
         }
     }
 
