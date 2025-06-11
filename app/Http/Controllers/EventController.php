@@ -317,7 +317,7 @@ class EventController extends Controller
             'nama_kategori' => 'required|max:255',
             'gender' => 'required',
             'min_usia' => 'required|numeric',
-            'max_usia' => 'required|numeric',
+            'max_usia' => 'required|numeric|gte:min_usia',
             'img_bib' => 'required|mimes:jpeg,jpg,png|image|max:1024',
         ]);
 

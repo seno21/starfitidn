@@ -47,7 +47,7 @@
                                                     </div>
                                                 </div> --}}
                                                 <div class="form-group my-3">
-                                                    <label class="col-sm-3 col-form-label">Kategori</label>
+                                                    <label class="py-2">Jenis Kelamin</label>
                                                     <div class="d-flex">
                                                         <div class="col-sm-4">
                                                             <div class="form-check">
@@ -239,14 +239,16 @@
                                             <p class="text-muted">Rp. {{ number_format($tiket->harga, 0, ',', '.') }}
                                             </p>
                                             @if ($tiket->quota)
-                                                <p class="text-muted">Sisa Kuota: {{ $tiket->quota - $tiket->total_tiket_terbeli ?? '-' }}</p>
+                                                <p class="text-muted">Sisa Kuota:
+                                                    {{ $tiket->quota - $tiket->total_tiket_terbeli ?? '-' }}</p>
                                             @else
-                                                <p class="text-muted">Terjual: {{$tiket->total_tiket_terbeli ?? 0}}</p>
+                                                <p class="text-muted">Terjual: {{ $tiket->total_tiket_terbeli ?? 0 }}</p>
                                             @endif
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <span></span>
-                                            <p class="p-2 badge bg-warning text-light text-lowercase text-truncate text-uppercase">
+                                            <p
+                                                class="p-2 badge bg-warning text-light text-lowercase text-truncate text-uppercase">
                                                 {{ $tiket->nama_kategori }} - Gender({{ $tiket->gender }})
                                             </p>
                                         </div>
@@ -258,8 +260,8 @@
                                                 @if (!isset($transaksi))
                                                     <div class="progress progress-md">
                                                         <div class="progress-bar bg-info"
-                                                            style="width: {{ $tiket->total_tiket_terbeli ?? 0 }}%" role="progressbar"
-                                                            aria-valuenow="25" aria-valuemin="0"
+                                                            style="width: {{ $tiket->total_tiket_terbeli ?? 0 }}%"
+                                                            role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                             aria-valuemax="{{ $tiket->quota }}">
                                                             {{ $tiket->total_tiket_terbeli ?? 0 }} Terjual</div>
                                                     </div>
@@ -285,7 +287,7 @@
                                                             class="btn btn-block w-100 mt-3 btn-outline-primary checkout-btn"
                                                             data-transaksi_id="{{ $transaksi->id }}"
                                                             data-nama_promo="{{ $tiket->nama_promo }}"
-                                                            data-link="{{$transaksi->payment_url}}"
+                                                            data-link="{{ $transaksi->payment_url }}"
                                                             data-harga="{{ $tiket->harga }}">
                                                             Proses Bayar
                                                         </button>
@@ -559,9 +561,9 @@
                         if (result) {
                             // Create a form element
                             const url_payment = button.getAttribute('data-link')
-                            if(url_payment){
+                            if (url_payment) {
                                 window.open(url_payment);
-                            }else{
+                            } else {
                                 const form = document.createElement('form');
                                 form.method = 'POST';
                                 form.action = `{{ route('checkout') }}`;

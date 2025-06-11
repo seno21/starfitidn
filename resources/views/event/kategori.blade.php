@@ -48,10 +48,16 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="gender">Gender</label>
-                                                    <select class="form-control" id="gender" name="gender">
-                                                        <option value="semua">Semua Gender</option>
-                                                        <option value="laki-laki">Laki-laki</option>
-                                                        <option value="perempuan">Perempuan</option>
+                                                    <select name="gender" id="gender" class="form-control">
+                                                        <option value="semua"
+                                                            {{ old('gender') == 'semua' ? 'selected' : '' }}>Semua Gender
+                                                        </option>
+                                                        <option value="laki-laki"
+                                                            {{ old('gender') == 'laki-laki' ? 'selected' : '' }}>Laki-laki
+                                                        </option>
+                                                        <option value="perempuan"
+                                                            {{ old('gender') == 'perempuan' ? 'selected' : '' }}>Perempuan
+                                                        </option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -236,3 +242,11 @@
         });
     </script>
 @endsection()
+@if ($errors->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+            myModal.show();
+        });
+    </script>
+@endif
