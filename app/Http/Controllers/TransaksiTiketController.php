@@ -234,20 +234,6 @@ class TransaksiTiketController extends Controller
         // Create an instance of the InvoiceApi class
         $apiInstance = new InvoiceApi();
 
-        $addreses = [
-            'city' => $dataTransaksi->domisili,
-            'country' => 'INDONESIA',
-        ];
-
-        $items = [
-            [
-                'name' => $dataTransaksi->nama_promo,
-                'quantity' => 1,
-                'price' => $dataTransaksi->final_payment,
-                'category' => $dataTransaksi->nama_event,
-            ],
-        ];
-
         // Prepare the invoice creation request
         $create_invoice_request = new CreateInvoiceRequest([
             'external_id' => $dataTransaksi->no_transaksi,
@@ -260,9 +246,21 @@ class TransaksiTiketController extends Controller
                 'given_names' => $dataTransaksi->nama_lengkap,
                 'email' => $dataTransaksi->email,
                 'mobile_number' => $dataTransaksi->no_telp,
-                'addresses' => $addreses,
+                'addresses' => [
+                    [
+                        'city' => $dataTransaksi->domisili,
+                        'country' => 'INDONESIA',
+                    ],
+                ],
             ],
-            'items' => $items,
+            'items' => [
+                [
+                    'name' => $dataTransaksi->nama_promo,
+                    'quantity' => 1,
+                    'price' => $dataTransaksi->final_payment,
+                    'category' => $dataTransaksi->nama_event,
+                ],
+            ],
             'success_redirect_url' => route('show.event', $dataTransaksi->slug) // Reminder will be sent after 1 hour
         ]);
 
