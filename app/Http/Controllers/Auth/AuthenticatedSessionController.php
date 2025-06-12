@@ -7,7 +7,9 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
+use App\Mail\LoginSuccessMail;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -30,6 +32,8 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        // Mail::to(auth()->user()->email)->send(new LoginSuccessMail(auth()->user()));
 
         return redirect()->intended(route('home', absolute: false));
     }

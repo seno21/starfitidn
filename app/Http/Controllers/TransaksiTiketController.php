@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaidStatusMail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Xendit\Configuration;
 use Xendit\Invoice\CreateInvoiceRequest;
 use Xendit\Invoice\Invoice;
@@ -140,7 +142,12 @@ class TransaksiTiketController extends Controller
     {
         Log::info('Paid Invoice Request: ' . json_encode($request->all()));
         try {
-            $transaksi = DB::table('transaksi')->where('no_transaksi', $request->external_id)->first();
+            $transaksi = DB::table('transaksi')
+            ->join('tikets as tik', 'tik.id', '=', 'transaksi.id_tiket')
+            ->join('events as ev', 'ev.id', '=', 'transaksi.id_event')
+            ->join('users as us', 'us.id', '=', 'transaksi.id_user')
+            ->select('transaksi.*', 'tik.nama_promo', 'ev.slug', 'us.name', 'us.email')
+            ->where('no_transaksi', $request->external_id)->first();
 
             if ($transaksi) {
                 // Mendapatkan nilai maksimal dari 'no_bib' di event dan tiket yang sama
@@ -174,12 +181,40 @@ class TransaksiTiketController extends Controller
                         'no_bib' => $nobib,
                     ]);
 
+                $data = [
+                    'status' => $request->status,
+                    'amount' => $request->paid_amount,
+                    'user' => $transaksi->name,
+                    'payment_date' => $request->paid_at,
+                    'payment_method' => $request->payment_method,
+                    'transaction' => $request->external_id,
+                    'description' => $request->description,
+                    'payment_channel' => $request->payment_channel,
+                    'no_bib' => $nobib,
+                    'slug' => $transaksi->slug,
+                ];
+
+                Log::info('Paid Invoice Data: ' .json_encode($data));
+
+                // Kirim email konfirmasi pembayaran
+                Mail::to($transaksi->email)->send(new PaidStatusMail($data));
+
                 return response()->json(['message' => 'Transaction Success'], 200);
             } else {
-                return response()->json(['error' => 'KEH MENE'], 404);
+                // Mail::to("wawan19@upi.edu")->send(new PaidStatusMail([
+                //     'status' => $request->status,
+                //     'amount' => $request->paid_amount,
+                //     'user' => $request->user_id,
+                //     'payment_date' => $request->paid_at,
+                //     'payment_method' => $request->payment_method,
+                //     'transaction' => $request->external_id,
+                //     'description' => $request->description,
+                //     'payment_channel' => $request->payment_channel,
+                // ]));
+                return response()->json(['error' => 'Transaksi tidak ditemukan'], 404);
             }
         } catch (\Throwable $th) {
-            Log::error('Error processing paid invoice: ' . $th->getMessage());
+            Log::error('Error processing paid invoice: ' . $th->getMessage(). 'at '. $th->getLine());
             return response()->json(['error' => 'An error occurred while processing the invoice'], 500);
         }
     }
