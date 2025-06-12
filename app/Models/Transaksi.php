@@ -59,4 +59,18 @@ class Transaksi extends Model
 
         return $query;
     }
+
+    public function transaksiDetail($id_transaksi)
+    {
+        $query = DB::table('transaksi')
+            ->join('events', 'events.id', 'transaksi.id_event')
+            ->join('users', 'users.id', 'transaksi.id_user')
+            ->join('tikets', 'tikets.id', 'transaksi.id_tiket')
+            ->join('kategoris', 'kategoris.id', 'tikets.kategori')
+            ->select('users.name', 'transaksi.no_bib', 'kategoris.img_bib')
+            ->where('transaksi.id', $id_transaksi)
+            ->first();
+
+        return $query;
+    }
 }

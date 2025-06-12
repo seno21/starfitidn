@@ -281,6 +281,20 @@
                                                     @if ($transaksi->status_pembayaran == 'PAID')
                                                         <p class="text-light mt-3 d-block badge p-3 rounded bg-success">
                                                             TIKET TERBELI</p>
+                                                        <div class="">
+                                                            <h3>NO BIB</h3>
+                                                            <h1 class="display-4 font-weight-bold">
+                                                                {{ $transaksi->no_bib }}</h1>
+                                                            <div class=" mt-3">
+                                                                <a type="button" target="_blank"
+                                                                    href="{{ route('cetakBib', $transaksi->id) }}"
+                                                                    class="btn btn-outline-primary checkout-btn w-100">
+                                                                    Download
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        {{-- $transaksi->no_bib --}}
                                                     @endif
                                                     @if ($transaksi->status_pembayaran != 'PAID')
                                                         <button type="button"

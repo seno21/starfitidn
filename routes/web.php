@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CetakController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -74,7 +75,10 @@ Route::middleware(IsUser::class)->group(function () {
     Route::post('/transaksi', [TransaksiTiketController::class, 'store'])->name('transaksi');
     Route::post('/cancel-pesanan', [TransaksiTiketController::class, 'cancel'])->name('cancel-pesanan');
     Route::post('/checkout', [TransaksiTiketController::class, 'checkout'])->name('checkout');
+    Route::get('/cetak/{id}', [CetakController::class, 'cetakBib'])->name('cetakBib');
 });
+
+
 
 /*
 ---------------------------------------------------------------------------
