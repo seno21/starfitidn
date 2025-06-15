@@ -2,6 +2,7 @@
 
     <head>
         <title>Registrasi</title>
+        <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
     </head>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -35,23 +36,37 @@
                                 </div>
 
                                 <!-- Password -->
-                                <div class="mt-4">
+                                <div class="mt-4 position-relative">
                                     <x-input-label for="password" :value="__('Password')" />
 
-                                    <x-text-input id="password" class="block mt-1 w-full form-control" type="password"
-                                        name="password" required autocomplete="new-password" />
+                                    <div style="position: relative;">
+                                        <x-text-input id="password" class="block mt-1 w-full form-control pr-10"
+                                            type="password" name="password" required autocomplete="new-password" />
+
+                                        {{-- Ikon Mata --}}
+                                        <span onclick="togglePassword()"
+                                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                            <i class="mdi mdi-eye" id="eyeIcon"></i>
+                                        </span>
+                                    </div>
 
                                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                 </div>
 
+
                                 <!-- Confirm Password -->
-                                <div class="mt-4">
+                                <div class="mt-4 position-relative">
                                     <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                                    <x-text-input id="password_confirmation" class="block mt-1 w-full form-control"
-                                        type="password" name="password_confirmation" required
-                                        autocomplete="new-password" />
-
+                                    <div style="position: relative;">
+                                        <x-text-input id="password_confirmation" class="block mt-1 w-full form-control"
+                                            type="password" name="password_confirmation" required
+                                            autocomplete="new-password" />
+                                        {{-- Ikon Mata --}}
+                                        <span onclick="togglePassword()"
+                                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                            <i class="mdi mdi-eye" id="eyeIcon"></i>
+                                        </span>
+                                    </div>
                                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                 </div>
 
@@ -75,4 +90,24 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+    <script>
+        function togglePassword() {
+            const input = document.getElementById("password");
+            const inputDua = document.getElementById("password_confirmation");
+            const eyeIcon = document.getElementById("eyeIcon");
+
+            if (input.type === "password" || inputDua.type === "password") {
+                input.type = "text";
+                inputDua.type = "text";
+                eyeIcon.classList.remove("mdi-eye");
+                eyeIcon.classList.add("mdi-eye-off");
+            } else {
+                input.type = "password";
+                inputDua.type = "password"
+                eyeIcon.classList.remove("mdi-eye-off");
+                eyeIcon.classList.add("mdi-eye");
+            }
+        }
+    </script>
+
 </x-guest-layout>

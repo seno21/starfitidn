@@ -79,7 +79,7 @@ class LandingController extends Controller
                 ->select('kategoris.*', 'tikets.*', DB::raw('IFNULL(tr.total_tiket_terbeli, 0) as total_tiket_terbeli'))
                 ->where('tikets.id_event', $events->id)
                 ->where('tikets.active', 1)
-                ->orderBy('tgl_mulai')
+                ->orderBy('created_at', 'desc')
                 ->get();
             // Gunakan first() karena ini menghasilkan satu nilai
 

@@ -2,6 +2,7 @@
 
     <head>
         <title>Login</title>
+        <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
     </head>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -21,11 +22,24 @@
                                         placeholder="Username" name="email">
                                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                 </div>
-                                <div class="form-group mt-3">
+                                {{-- <div class="form-group mt-3">
                                     <input type="password" class="form-control form-control-lg"
                                         id="exampleInputPassword1" placeholder="Password" name="password">
                                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                </div> --}}
+                                <div class="form-group mt-3 position-relative">
+                                    <input type="password" class="form-control form-control-lg"
+                                        id="exampleInputPassword1" placeholder="Password" name="password">
+
+                                    {{-- Icon Mata --}}
+                                    <span class="position-absolute" onclick="togglePasswordVisibility()"
+                                        style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;">
+                                        <i class="mdi mdi-eye" id="toggleEyeIcon"></i>
+                                    </span>
+
+                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                 </div>
+
                                 <div class="mt-3">
                                     <button type="submit"
                                         class="btn btn-block btn-primary btn-md font-weight-bold auth-form-btn">LOG
@@ -47,4 +61,24 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.togglePasswordVisibility = function() {
+                const passwordInput = document.getElementById("exampleInputPassword1");
+                const eyeIcon = document.getElementById("toggleEyeIcon");
+
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    eyeIcon.classList.remove("mdi-eye");
+                    eyeIcon.classList.add("mdi-eye-off");
+                } else {
+                    passwordInput.type = "password";
+                    eyeIcon.classList.remove("mdi-eye-off");
+                    eyeIcon.classList.add("mdi-eye");
+                }
+            }
+        });
+    </script>
+
 </x-guest-layout>

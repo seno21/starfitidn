@@ -238,18 +238,20 @@
                                         <div class="d-flex justify-content-between">
                                             <p class="text-muted">Rp. {{ number_format($tiket->harga, 0, ',', '.') }}
                                             </p>
-                                            @if ($tiket->quota)
+                                            {{-- Sisa Kuota --}}
+                                            {{-- @if ($tiket->quota)
                                                 <p class="text-muted">Sisa Kuota:
                                                     {{ $tiket->quota - $tiket->total_tiket_terbeli ?? '-' }}</p>
                                             @else
                                                 <p class="text-muted">Terjual: {{ $tiket->total_tiket_terbeli ?? 0 }}</p>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <span></span>
                                             <p
-                                                class="p-2 badge bg-warning text-light text-lowercase text-truncate text-uppercase">
-                                                {{ $tiket->nama_kategori }} - Gender({{ $tiket->gender }})
+                                                class="p-2 badge bg-warning text-dark text-lowercase text-truncate text-uppercase">
+                                                {{ $tiket->nama_kategori }} -
+                                                Gender({{ $tiket->gender === 'semua' ? 'Pria/Wanita' : $tiket->gender }})
                                             </p>
                                         </div>
                                         @if ($tiket->tgl_selesai && strtotime($tiket->tgl_selesai) > time())
@@ -281,17 +283,29 @@
                                                     @if ($transaksi->status_pembayaran == 'PAID')
                                                         <p class="text-light mt-3 d-block badge p-3 rounded bg-success">
                                                             TIKET TERBELI</p>
-                                                        <div class="">
-                                                            <h3>NO BIB</h3>
+                                                        <div
+                                                            style="padding: 15px; background-color: #d4edda; color: #155724; ">
+
+                                                            <strong class="fs-4 fw-bold">Pembayaran Berhasil!</strong>
+                                                            <p>
+                                                                Silakan periksa email
+                                                                Anda untuk melihat bukti pembayaran.
+                                                                Jika tidak menerima email, hubungi admin untuk
+                                                                konfirmasi
+                                                                lebih lanjut.
+                                                            </p>
+
+                                                            {{-- Ganti jangan BIB --}}
+                                                            {{-- <h3>NO BIB</h3>
                                                             <h1 class="display-4 font-weight-bold">
                                                                 {{ $transaksi->no_bib }}</h1>
                                                             <div class=" mt-3">
                                                                 <a type="button" target="_blank"
                                                                     href="{{ route('cetakBib', $transaksi->id) }}"
-                                                                    class="btn btn-outline-primary checkout-btn w-100">
+                                                                    class="btn btn-outline-primary w-100">
                                                                     Download
                                                                 </a>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
 
                                                         {{-- $transaksi->no_bib --}}

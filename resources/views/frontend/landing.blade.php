@@ -70,8 +70,8 @@
         <!-- ======= Counts Section ======= -->
         <section id="counts" class="counts">
             <div class="container">
-
-                <div class="row">
+                {{-- Section bagian peserta yag pernah daftar dll --}}
+                {{-- <div class="row">
 
                     <div class="col-lg-3 col-6">
                         <div class="count-box">
@@ -109,7 +109,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> --}}
 
             </div>
         </section>
@@ -201,8 +201,8 @@
                         <div class="col-md-3">
                             <div class="p-2 border border-2 rounded shadow mt-3">
                                 <figure id="portfolioGallery">
-                                    <a href="{{ asset('storage/' . $gallery->nama_foto) }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox">
+                                    <a href="{{ asset('storage/' . $gallery->nama_foto) }}" data-gallery="portfolioGallery"
+                                        class="portfolio-lightbox">
                                         <img src="{{ asset('storage/' . $gallery->nama_foto) }}"
                                             class="gallery-img rounded p-2 img-fluid" alt="Gallery Kami"></a>
                                 </figure>
@@ -304,7 +304,7 @@
         </section><!-- End Testimonials Section -->
 
         <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact section-bg">
+        {{-- <section id="contact" class="contact section-bg">
             <div class="container">
 
                 <div class="section-title">
@@ -344,7 +344,8 @@
 
 
             </div>
-        </section><!-- End Contact Section -->
+        </section> --}}
+        <!-- End Contact Section -->
 
     </main><!-- End #main -->
 @endsection()
