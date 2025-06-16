@@ -260,13 +260,13 @@
                                                     date('Y-m-d') >= $tiket->tgl_mulai &&
                                                     date('Y-m-d') <= $tiket->tgl_selesai)
                                                 @if (!isset($transaksi))
-                                                    <div class="progress progress-md">
+                                                    {{-- <div class="progress progress-md">
                                                         <div class="progress-bar bg-info"
                                                             style="width: {{ $tiket->total_tiket_terbeli ?? 0 }}%"
                                                             role="progressbar" aria-valuenow="25" aria-valuemin="0"
                                                             aria-valuemax="{{ $tiket->quota }}">
                                                             {{ $tiket->total_tiket_terbeli ?? 0 }} Terjual</div>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="mt-2">
                                                         <button type="button"
                                                             class="btn btn-block w-100 btn-outline-primary edit-tiket"

@@ -227,6 +227,7 @@ class TransaksiTiketController extends Controller
             ->join('detail_users as du', 'tr.id_user', 'du.id_user')
             ->join('tikets as ti', 'tr.id_tiket', 'ti.id')
             ->join('events as ev', 'tr.id_event', 'ev.id')
+            ->join('kategoris as ka', 'ti.kategori', 'ka.id')
             ->where('tr.id', $request->id)->first();
         // Initialize Xendit with the API key
         Configuration::setXenditKey(env('XENDIT_SECRET_KEY'));
@@ -237,9 +238,9 @@ class TransaksiTiketController extends Controller
         // Prepare the invoice creation request
         $create_invoice_request = new CreateInvoiceRequest([
             'external_id' => $dataTransaksi->no_transaksi,
-            'description' => 'Pembayaran untuk Event ' . $dataTransaksi->nama_event . ' dengan tiket ' . $dataTransaksi->nama_promo . ' dengan harga Rp. ' . $dataTransaksi->final_payment,
+            'description' => 'Pembayaran untuk Event ' . $dataTransaksi->nama_event . ' dengan tiket ' . $dataTransaksi->nama_promo . ' kategori '.$dataTransaksi->nama_kategori.' dengan harga Rp. ' . $dataTransaksi->final_payment,
             'amount' => $dataTransaksi->final_payment,
-            'invoice_duration' => 1800, // Invoice is valid for 48 hours
+            'invoice_duration' => 7200, // Invoice is valid for 48 hours
             'currency' => 'IDR',
             'reminder_time' => 1,
             'customer' => [

@@ -31,7 +31,7 @@ class Events extends Model
     {
         return DB::table('events')
             ->limit(4)
-            ->orderBy('waktu_pelaksanaan')
+            ->orderBy('created_at', 'desc')
             ->where('events.active', 1)
             ->get();
     }
