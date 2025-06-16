@@ -22,6 +22,8 @@
                                         <th>Ukuran Jersey</th>
                                         <th data-priority="2">No. Telepon</th>
                                         <th>Kontak Darurat</th>
+                                        <th>Kategori Tiket</th>
+                                        <th>No. BIB</th>
                                         <th>Email</th>
                                         {{-- <th>Action</th> --}}
                                     </tr>
@@ -75,6 +77,14 @@
                     {
                         data: "kontak_darurat",
                         name: "Kontak Darurat",
+                    },
+                    {
+                        data: "nama_kategori",
+                        name: "Kategori Tiket",
+                    },
+                    {
+                        data: "no_bib",
+                        name: "No BIB",
                     },
                     {
                         data: "email",

@@ -29,10 +29,15 @@ class Transaksi extends Model
                 'detail_users.ukuran_jersey',
                 'detail_users.domisili',
                 'detail_users.kontak_darurat',
-                'detail_users.tempat_lahir'
+                'detail_users.tempat_lahir',
+                'transaksi.no_bib',
+                'tikets.nama_promo',
+                'kategoris.nama_kategori',
             )
             ->join('users', 'users.id', 'transaksi.id_user')
             ->join('detail_users', 'detail_users.id_user', 'transaksi.id_user')
+            ->join('tikets', 'tikets.id', 'transaksi.id_tiket')
+            ->join('kategoris', 'kategoris.id', 'tikets.kategori')
             ->where('transaksi.status_pembayaran', 'PAID')
             ->where('transaksi.active', 1)
             ->where('transaksi.id_event', $id_event)
