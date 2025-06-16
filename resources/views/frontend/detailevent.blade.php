@@ -283,7 +283,14 @@
                                                     @if ($transaksi->status_pembayaran == 'PAID')
                                                         <p class="text-light mt-3 d-block badge p-3 rounded bg-success">
                                                             TIKET TERBELI</p>
-                                                        <div
+                                                            <div class="notif-pulse">
+                                                                <strong class="fs-4 fw-bold">Pembayaran Berhasil!</strong>
+                                                                <p>
+                                                                    Silakan periksa email Anda untuk melihat bukti pembayaran.
+                                                                    Jika tidak menerima email, hubungi admin untuk konfirmasi lebih lanjut.
+                                                                </p>
+                                                            </div>
+                                                        {{-- <div
                                                             style="padding: 15px; background-color: #d4edda; color: #155724; ">
 
                                                             <strong class="fs-4 fw-bold">Pembayaran Berhasil!</strong>
@@ -295,8 +302,8 @@
                                                                 lebih lanjut.
                                                             </p>
 
-                                                            {{-- Ganti jangan BIB --}}
-                                                            {{-- <h3>NO BIB</h3>
+                                                            Ganti jangan BIB
+                                                            <h3>NO BIB</h3>
                                                             <h1 class="display-4 font-weight-bold">
                                                                 {{ $transaksi->no_bib }}</h1>
                                                             <div class=" mt-3">
@@ -305,8 +312,8 @@
                                                                     class="btn btn-outline-primary w-100">
                                                                     Download
                                                                 </a>
-                                                            </div> --}}
-                                                        </div>
+                                                            </div>
+                                                        </div> --}}
 
                                                         {{-- $transaksi->no_bib --}}
                                                     @endif
@@ -735,6 +742,33 @@
             border-left: 1px solid rgba(0, 0, 0, 0.126);
             border-right: 1px solid rgba(0, 0, 0, 0.126);
         }
+
+        .notif-pulse {
+        padding: 15px;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 5px;
+        animation: pulseEffect 2s infinite;
+        max-width: 600px;
+        margin: 20px auto;
+        box-shadow: 0 0 0 rgba(72, 180, 97, 0.4);
+    }
+
+    @keyframes pulseEffect {
+        0% {
+            scale: 1;
+            box-shadow: 0 0 0 0 rgba(72, 180, 97, 0.7);
+        }
+        70% {
+            scale: 1.05;
+            box-shadow: 0 0 0 10px rgba(72, 180, 97, 0);
+        }
+        100% {
+            scale: 1;
+            box-shadow: 0 0 0 0 rgba(72, 180, 97, 0);
+        }
+    }
     </style>
 
 @endsection()
