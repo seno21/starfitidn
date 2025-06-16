@@ -352,13 +352,19 @@
                             <div class="col-md-12 text-center">
                                 <h3 class="fs-5 fw-bold">HUBUNGI KAMI</h3>
                                 <hr class="border border-1 border-secondary">
-                                <div class="mt-3">
-                                    <a href="https://api.whatsapp.com/send?phone={{ $event->kontak }}&text=Hi%2C%20saya%20mendapat%20whatsapp%20mu%20dari%20personal%20web%20mu.%0ASaya%20ingin%20menawarimu%20pekerjaan"
+                                @php
+                                    $terms = $event->kontak;
+                                    $explode = explode("\n", $terms);
+                                @endphp
+                                @foreach ($explode as $index => $kontak)
+                                <div class="mt-1">
+                                    <a href="https://api.whatsapp.com/send?phone={{ $kontak }}&text=Hi%2C%20saya%20mendapat%20whatsapp%20mu%20dari%20personal%20web%20mu.%0ASaya%20ingin%20menawarimu%20pekerjaan"
                                         class="btn btn-outline-primary text-center mt-1 mb-2" target="_blank"><i
                                             class='bx bxs-phone'></i>Contact
-                                        Person
+                                        Person {{$index+1}}
                                     </a>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="row mt-3">

@@ -108,7 +108,7 @@ class EventController extends Controller
             'acara' => 'required|max:255',
             'waktu' => 'required',
             'lokasi' => 'required|max:255',
-            'telepon' => 'required|numeric|digits_between:11,13',
+            // 'telepon' => 'required|numeric|digits_between:11,13',
             'deskripsi' => 'required|max:1000',
             'penyelenggara' => 'required',
             'poster' => 'mimes:jpeg,jpg,png|image|max:1024'
