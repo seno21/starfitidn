@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\PaidStatusMail;
+use App\Models\Transaksi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -105,7 +106,7 @@ class TransaksiTiketController extends Controller
             ];
 
             // Simpan data transaksi
-            DB::table('transaksi')->insert($data);
+            Transaksi::create($data);
 
             // Commit transaksi
             DB::commit();
