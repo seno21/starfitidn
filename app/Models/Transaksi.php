@@ -12,6 +12,17 @@ class Transaksi extends Model
 {
     use HasFactory;
 
+    protected $table = 'transaksi';
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    protected $fillable = [
+        'id', 'id_event', 'id_tiket', 'id_user', 'qty',
+        'final_payment', 'fee_commision', 'payment_fee', 'clean_fee', 'mode',
+        'no_bib', 'no_rfid', 'no_transaksi', 'active', 'status_pembayaran',
+    ];
+
     public function allPeserta($id_event)
     {
         $query = DB::table('transaksi')
