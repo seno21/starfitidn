@@ -55,13 +55,14 @@
                             mengurus semua detail agar setiap peserta dan penonton menikmati momen luar biasa. Bergabunglah
                             dengan kami dan rasakan semangat olahraga yang sejati!
                         </p>
-                        <div>
+                        {{-- Tombol Join Partner --}}
+                        {{-- <div>
                             <p class="mt-5">
                                 <a href="#about" class="btn btn-outline-primary text-uppercase scrollto">Join Partner</a>
-                            </p>
-                        </div>
+                            </p> --}}
                     </div>
                 </div>
+            </div>
 
             </div>
         </section><!-- End About Section -->

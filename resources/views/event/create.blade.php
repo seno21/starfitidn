@@ -71,6 +71,16 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label for="start_rfid">Start RFID</label>
+                            <input type="text" class="form-control @error('start_rfid') is-invalid @enderror"
+                                id="start_rfid" placeholder="1000" name="start_rfid" value="{{ old('start_rfid') }}">
+                            @error('start_rfid')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="penyelenggara">Penyelengara Acara</label>
                             <input type="text" class="form-control @error('penyelenggara') is-invalid @enderror"
                                 id="penyelenggara" placeholder="Starfit Indonesia" name="penyelenggara"

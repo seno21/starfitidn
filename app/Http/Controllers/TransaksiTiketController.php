@@ -144,13 +144,13 @@ class TransaksiTiketController extends Controller
         Log::info('Paid Invoice Request: ' . json_encode($request->all()));
         try {
             $transaksi = DB::table('transaksi')
-            ->join('tikets as tik', 'tik.id', '=', 'transaksi.id_tiket')
-            ->join('events as ev', 'ev.id', '=', 'transaksi.id_event')
-            ->join('users as us', 'us.id', '=', 'transaksi.id_user')
-            ->select('transaksi.*', 'tik.nama_promo', 'ev.slug', 'us.name', 'us.email')
-            ->where('no_transaksi', $request->external_id)->first();
+                ->join('tikets as tik', 'tik.id', '=', 'transaksi.id_tiket')
+                ->join('events as ev', 'ev.id', '=', 'transaksi.id_event')
+                ->join('users as us', 'us.id', '=', 'transaksi.id_user')
+                ->select('transaksi.*', 'tik.nama_promo', 'ev.slug', 'us.name', 'us.email')
+                ->where('no_transaksi', $request->external_id)->first();
 
-            if ($transaksi) {
+            if ($transaksi && $request->status != 'PAID') {
                 // Mendapatkan nilai maksimal dari 'no_bib' di event dan tiket yang sama
                 $nobib = DB::table('transaksi')
                     ->where('id_event', $transaksi->id_event)
@@ -195,7 +195,7 @@ class TransaksiTiketController extends Controller
                     'slug' => $transaksi->slug,
                 ];
 
-                Log::info('Paid Invoice Data: ' .json_encode($data));
+                Log::info('Paid Invoice Data: ' . json_encode($data));
 
                 // Kirim email konfirmasi pembayaran
                 Mail::to($transaksi->email)->send(new PaidStatusMail($data));
@@ -215,7 +215,7 @@ class TransaksiTiketController extends Controller
                 return response()->json(['error' => 'Transaksi tidak ditemukan'], 404);
             }
         } catch (\Throwable $th) {
-            Log::error('Error processing paid invoice: ' . $th->getMessage(). 'at '. $th->getLine());
+            Log::error('Error processing paid invoice: ' . $th->getMessage() . 'at ' . $th->getLine());
             return response()->json(['error' => 'An error occurred while processing the invoice'], 500);
         }
     }
@@ -239,7 +239,7 @@ class TransaksiTiketController extends Controller
         // Prepare the invoice creation request
         $create_invoice_request = new CreateInvoiceRequest([
             'external_id' => $dataTransaksi->no_transaksi,
-            'description' => 'Pembayaran untuk Event ' . $dataTransaksi->nama_event . ' dengan tiket ' . $dataTransaksi->nama_promo . ' kategori '.$dataTransaksi->nama_kategori.' dengan harga Rp. ' . $dataTransaksi->final_payment,
+            'description' => 'Pembayaran untuk Event ' . $dataTransaksi->nama_event . ' dengan tiket ' . $dataTransaksi->nama_promo . ' kategori ' . $dataTransaksi->nama_kategori . ' dengan harga Rp. ' . $dataTransaksi->final_payment,
             'amount' => $dataTransaksi->final_payment,
             'invoice_duration' => 7200, // Invoice is valid for 48 hours
             'currency' => 'IDR',

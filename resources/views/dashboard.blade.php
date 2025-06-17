@@ -5,67 +5,64 @@
             <div class="col-md-12 grid-margin">
                 <div class="row">
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                        <h3 class="font-weight-bold">Selamat Datang, {{ Auth::user()->name }}</h3>
-                        {{-- <h3 class="font-weight-bold">Welcome Aamir</h3> --}}
-                        <h6 class="font-weight-normal mb-0">Sistem berjalan baik, kamu memiliki
-                            <span class="text-primary">3 pesan notifikasi!</span>
-                        </h6>
+                        <h3 class="font-weight-bold">Selamat Datang, <u> {{ Auth::user()->name }}</u></h3>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card tale-bg">
-                    <div class="card-people mt-auto">
-                        <img src="images/dashboard/people.svg" alt="people">
-                        <div class="weather-info">
-                            <div class="d-flex">
-                                <div class="ml-2">
-                                    <a class="btn btn-primary" href="{{ route('home') }}">Back to Website</a>
-                                </div>
-                            </div>
+            <div class="col-md-6">
+                <form method="GET" action="{{ route('dashboard') }}">
+                    <div class="form-group">
+                        <label for="event">Pilih Event</label>
+                        <div class="d-flex align-items-center">
+                            <select class="form-control mr-2" id="event" name="event">
+                                @foreach ($allEvents as $allEvent)
+                                    <option class="text-truncate" value="{{ $allEvent->id }}"
+                                        {{ request('event') == $allEvent->id ? 'selected' : '' }}>
+                                        {{ $allEvent->nama_event }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <button class="btn btn-primary ml-2" type="submit">Filter</button>
                         </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-4 stretch-card transparent">
+                <div class="card card-tale">
+                    <div class="card-body">
+                        <p class="mb-4 fs-5 fw-bold">Hari Ini</p>
+                        <p class="fs-30 mb-2">{{ $pesertaHariIni }} Peserta</p>
+                        <p class="fs-5 fw-bolder">Terdaftar Pada Event</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 grid-margin transparent">
-                <div class="row">
-                    <div class="col-md-6 mb-4 stretch-card transparent">
-                        <div class="card card-tale">
-                            <div class="card-body">
-                                <p class="mb-4">Peserta Daftar Hari Ini</p>
-                                <p class="fs-30 mb-2">{{ $transaksi->pesertaToday() }} Peserta</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4 stretch-card transparent">
-                        <div class="card card-dark-blue">
-                            <div class="card-body">
-                                <p class="mb-4">Total Pendaftar</p>
-                                <p class="fs-30 mb-2">{{ $transaksi->totalPendaftar() }} Terdaftar</p>
-                                <p>Pada Semua Event</p>
-                            </div>
-                        </div>
+            <div class="col-md-3 mb-4 stretch-card transparent">
+                <div class="card card-dark-blue">
+                    <div class="card-body">
+                        <p class="mb-4 fs-5 fw-bold">Total Pendaftar</p>
+                        <p class="fs-30 mb-2">{{ $totalPendaftar }} Peserta</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                        <div class="card card-light-blue">
-                            <div class="card-body">
-                                <p class="mb-4">Total Event</p>
-                                <p class="fs-30 mb-2">{{ $event }} Event</p>
-                            </div>
-                        </div>
+            </div>
+            <div class="col-md-3 mb-4 stretch-card transparent">
+                <div class="card text-light bg-danger">
+                    <div class="card-body">
+                        <p class="mb-4 fs-5 fw-bold">Total Event</p>
+                        <p class="fs-30 mb-2">{{ $event }} Event</p>
                     </div>
-                    <div class="col-md-6 stretch-card transparent">
-                        <div class="card card-light-danger">
-                            <div class="card-body">
-                                <p class="mb-4">Total User</p>
-                                <p class="fs-30 mb-2">{{ DB::table('users')->count() }} User</p>
-                                <p>Terdaftar Pada Web <a href="http://starfitidn.com">starfitidn.com</a></p>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 stretch-card transparent">
+                <div class="card text-light bg-success">
+                    <div class="card-body">
+                        <p class="mb-4 fs-5 fw-bold">Total User</p>
+                        <p class="fs-30 mb-2">{{ DB::table('users')->count() }} User</p>
+                        <p>Terdaftar Pada Web <a href="http://starfitidn.com">starfitidn.com</a></p>
                     </div>
                 </div>
             </div>

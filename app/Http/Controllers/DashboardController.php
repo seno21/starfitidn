@@ -9,17 +9,19 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $event = new Events();
         $transaksi = new Transaksi();
         // $user = new User();
-
+        $eventId = $request->input('event');
 
         $data = [
             'title' => 'Welcome to Admin Dashboard',
-            'event' => $event->totalEvent(),
-            'transaksi' => $transaksi,
+            'event' => $event->totalEvent($eventId),
+            'allEvents' => $event->all(),
+            'pesertaHariIni' => $transaksi->pesertaToday($eventId),
+            'totalPendaftar' => $transaksi->totalPendaftar($eventId)
             // 'user' => $user->totalUser()
         ];
 

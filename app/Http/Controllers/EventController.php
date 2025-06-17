@@ -64,7 +64,8 @@ class EventController extends Controller
             'deskripsi' => 'required|max:1000',
             'penyelenggara' => 'required',
             'poster' => 'required|mimes:jpeg,jpg,png|image|max:1024',
-            'sk' => 'required'
+            'sk' => 'required',
+            'start_rfid' => 'required|numeric',
         ]);
 
         $event = new Events();
@@ -82,6 +83,7 @@ class EventController extends Controller
         $event->deskripsi = $request->deskripsi;
         $event->active = 1;
         $event->sk = $request->sk;
+        $event->start_rfid = $request->start_rfid;
         $event->save();
 
         return redirect()->route('event.eom.index')->with('success', 'Event berhasil dibuat');
@@ -111,7 +113,8 @@ class EventController extends Controller
             // 'telepon' => 'required|numeric|digits_between:11,13',
             'deskripsi' => 'required|max:1000',
             'penyelenggara' => 'required',
-            'poster' => 'mimes:jpeg,jpg,png|image|max:1024'
+            'poster' => 'mimes:jpeg,jpg,png|image|max:1024',
+            'start_rfid' => 'required|numeric'
         ]);
 
         $event->nama_event = $request->acara;
@@ -131,6 +134,7 @@ class EventController extends Controller
         $event->kategori = $request->kategori;
         $event->status = $request->status;
         $event->deskripsi = $request->deskripsi;
+        $event->start_rfid = $request->start_rfid;
         $event->active = 1;
         $event->save();
 

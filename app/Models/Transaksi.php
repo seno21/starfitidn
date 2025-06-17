@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use function Laravel\Prompts\select;
@@ -18,9 +19,21 @@ class Transaksi extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'id', 'id_event', 'id_tiket', 'id_user', 'qty',
-        'final_payment', 'fee_commision', 'payment_fee', 'clean_fee', 'mode',
-        'no_bib', 'no_rfid', 'no_transaksi', 'active', 'status_pembayaran',
+        'id',
+        'id_event',
+        'id_tiket',
+        'id_user',
+        'qty',
+        'final_payment',
+        'fee_commision',
+        'payment_fee',
+        'clean_fee',
+        'mode',
+        'no_bib',
+        'no_rfid',
+        'no_transaksi',
+        'active',
+        'status_pembayaran',
     ];
 
     public function allPeserta($id_event)
@@ -57,20 +70,24 @@ class Transaksi extends Model
         return $query;
     }
 
-    public function pesertaToday()
+    public function pesertaToday($eventId = null)
     {
         $query = DB::table('transaksi')
+            ->join('events', 'events.id', 'transaksi.id_event')
             ->where('status_pembayaran', 'PAID')
-            ->where('created_at', now())
+            ->whereDate('transaksi.created_at', now())
+            ->when($eventId, fn($query) => $query->where('id_event', $eventId))
             ->count();
 
         return $query;
     }
 
-    public function totalPendaftar()
+    public function totalPendaftar($eventId = null)
     {
         $query = DB::table('transaksi')
+            ->join('events', 'events.id', 'transaksi.id_event')
             ->where('status_pembayaran', 'PAID')
+            ->when($eventId, fn($query) => $query->where('id_event', $eventId))
             ->count();
 
         return $query;
