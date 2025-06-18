@@ -150,7 +150,7 @@ class TransaksiTiketController extends Controller
                 ->select('transaksi.*', 'tik.nama_promo', 'ev.slug', 'us.name', 'us.email')
                 ->where('no_transaksi', $request->external_id)->first();
 
-            if ($transaksi && $request->status != 'PAID') {
+            if ($transaksi && $request->status == 'PAID') {
                 // Mendapatkan nilai maksimal dari 'no_bib' di event dan tiket yang sama
                 $nobib = DB::table('transaksi')
                     ->where('id_event', $transaksi->id_event)
