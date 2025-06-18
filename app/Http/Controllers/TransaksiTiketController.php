@@ -187,8 +187,8 @@ class TransaksiTiketController extends Controller
                             ->where('id', $transaksi->id_event) // Sesuaikan dengan 'id_tiket'
                             ->first();
 
-                        if ($startBibData) {
-                            $norfid = $startBibData->start_rfid;
+                        if ($startRFIDData) {
+                            $norfid = $startRFIDData->start_rfid;
                         } else {
                             return response()->json(['error' => 'No start_rfid found'], 404); // Penanganan jika start_bib tidak ditemukan
                         }
