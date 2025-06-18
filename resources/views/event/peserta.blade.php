@@ -24,6 +24,7 @@
                                         <th>Kontak Darurat</th>
                                         <th>Kategori Tiket</th>
                                         <th>No. BIB</th>
+                                        <th>No. RFID</th>
                                         <th>Email</th>
                                         {{-- <th>Action</th> --}}
                                     </tr>
@@ -85,6 +86,10 @@
                     {
                         data: "no_bib",
                         name: "No BIB",
+                    },
+                    {
+                        data: "no_rfid",
+                        name: "No RFID",
                     },
                     {
                         data: "email",

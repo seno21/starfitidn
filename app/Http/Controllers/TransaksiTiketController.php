@@ -175,11 +175,31 @@ class TransaksiTiketController extends Controller
                     }
                 }
 
+                $norfid = DB::table('transaksi')
+                    ->where('id_event', $transaksi->id_event)
+                    ->max('no_rfid');
+
+                    if ($norfid) {
+                        $norfid = $norfid + 1;
+                    } else {
+                        // Jika 'no_bib' tidak ditemukan, dapatkan nilai 'start_bib' dari 'tikets' dan 'kategoris'
+                        $startRFIDData = DB::table('events')
+                            ->where('id', $transaksi->id_event) // Sesuaikan dengan 'id_tiket'
+                            ->first();
+
+                        if ($startBibData) {
+                            $norfid = $startBibData->start_rfid;
+                        } else {
+                            return response()->json(['error' => 'No start_rfid found'], 404); // Penanganan jika start_bib tidak ditemukan
+                        }
+                    }
+
                 // Update transaksi dengan status baru dan no_bib
                 DB::table('transaksi')->where('no_transaksi', $request->external_id)
                     ->update([
                         'status_pembayaran' => $request->status,
                         'no_bib' => $nobib,
+                        'no_rfid' => $norfid,
                     ]);
 
                 $data = [

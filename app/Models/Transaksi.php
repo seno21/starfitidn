@@ -55,6 +55,7 @@ class Transaksi extends Model
                 'detail_users.kontak_darurat',
                 'detail_users.tempat_lahir',
                 'transaksi.no_bib',
+                'transaksi.no_rfid',
                 'tikets.nama_promo',
                 'kategoris.nama_kategori',
             )
