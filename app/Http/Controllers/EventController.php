@@ -135,6 +135,7 @@ class EventController extends Controller
         $event->status = $request->status;
         $event->deskripsi = $request->deskripsi;
         $event->start_rfid = $request->start_rfid;
+        $event->sk = $request->sk;
         $event->active = 1;
         $event->save();
 

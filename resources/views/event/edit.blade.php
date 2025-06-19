@@ -41,9 +41,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="cp">No. Telepon / WhatsApp</label>
-                            <textarea class="form-control @error('telepon') is-invalid @enderror" name="telepon" id="cp" rows="6"
-                                placeholder="Isikan syarat dan ketentuan acara">{{ $event->kontak }}</textarea>
+                            <label for="cp">Contact Person</label>
+                            <textarea class="form-control @error('telepon') is-invalid @enderror" name="telepon" id="cp" rows="6">{{ $event->kontak }}</textarea>
                             @error('telepon')
                                 <div class="invalid-feedback">
                                     {{ $message }}

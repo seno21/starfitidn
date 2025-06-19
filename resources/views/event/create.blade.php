@@ -40,9 +40,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="cp">No. Telepon / WhatsApp</label>
-                            <input type="text" class="form-control @error('telepon') is-invalid @enderror" id="cp"
-                                placeholder="08123456789" name="telepon" value="{{ old('telepon') }}">
+                            <label for="cp">Contact Person</label>
+                            <textarea class="form-control @error('telepon') is-invalid @enderror" name="telepon" id="cp" rows="6"
+                                placeholder="6281987654321">{{ old('telepon') }}</textarea>
                             @error('telepon')
                                 <div class="invalid-feedback">
                                     {{ $message }}

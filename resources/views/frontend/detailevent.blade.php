@@ -283,13 +283,14 @@
                                                     @if ($transaksi->status_pembayaran == 'PAID')
                                                         <p class="text-light mt-3 d-block badge p-3 rounded bg-success">
                                                             TIKET TERBELI</p>
-                                                            <div class="notif-pulse">
-                                                                <strong class="fs-4 fw-bold">Pembayaran Berhasil!</strong>
-                                                                <p>
-                                                                    Silakan periksa email Anda untuk melihat bukti pembayaran.
-                                                                    Jika tidak menerima email, hubungi admin untuk konfirmasi lebih lanjut.
-                                                                </p>
-                                                            </div>
+                                                        <div class="notif-pulse">
+                                                            <strong class="fs-4 fw-bold">Pembayaran Berhasil!</strong>
+                                                            <p>
+                                                                Silakan periksa email Anda untuk melihat bukti pembayaran.
+                                                                Jika tidak menerima email, hubungi admin untuk konfirmasi
+                                                                lebih lanjut.
+                                                            </p>
+                                                        </div>
                                                         {{-- <div
                                                             style="padding: 15px; background-color: #d4edda; color: #155724; ">
 
@@ -361,16 +362,22 @@
                                 <hr class="border border-1 border-secondary">
                                 @php
                                     $terms = $event->kontak;
-                                    $explode = explode("\n", $terms);
+                                    $explode = preg_split('/\r\n|\r|\n/', $terms);
                                 @endphp
                                 @foreach ($explode as $index => $kontak)
-                                <div class="mt-1">
-                                    <a href="https://api.whatsapp.com/send?phone={{ $kontak }}&text=Hi%2C%20saya%20mendapat%20whatsapp%20mu%20dari%20personal%20web%20mu.%0ASaya%20ingin%20menawarimu%20pekerjaan"
-                                        class="btn btn-outline-primary text-center mt-1 mb-2" target="_blank"><i
-                                            class='bx bxs-phone'></i>Contact
-                                        Person {{$index+1}}
-                                    </a>
-                                </div>
+                                    @php
+                                        $kontak = ltrim(trim((string) $kontak));
+                                        if (str_starts_with($kontak, '0')) {
+                                            $kontak = '62' . substr($kontak, 1);
+                                        }
+                                    @endphp
+                                    <div class="mt-1">
+                                        <a href="https://api.whatsapp.com/send?phone={{ urlencode($kontak) }}&text=Hi%2C%20Saya%20ingin%20bertanya%20tentang%20event%20ini"
+                                            class="btn btn-outline-primary text-center mt-1 mb-2" target="_blank"><i
+                                                class='bx bxs-phone'></i>Contact
+                                            Person {{ $index + 1 }}
+                                        </a>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
@@ -744,31 +751,33 @@
         }
 
         .notif-pulse {
-        padding: 15px;
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-        border-radius: 5px;
-        animation: pulseEffect 2s infinite;
-        max-width: 600px;
-        margin: 20px auto;
-        box-shadow: 0 0 0 rgba(72, 180, 97, 0.4);
-    }
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            animation: pulseEffect 2s infinite;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 0 0 rgba(72, 180, 97, 0.4);
+        }
 
-    @keyframes pulseEffect {
-        0% {
-            scale: 1;
-            box-shadow: 0 0 0 0 rgba(72, 180, 97, 0.7);
+        @keyframes pulseEffect {
+            0% {
+                scale: 1;
+                box-shadow: 0 0 0 0 rgba(72, 180, 97, 0.7);
+            }
+
+            70% {
+                scale: 1.05;
+                box-shadow: 0 0 0 10px rgba(72, 180, 97, 0);
+            }
+
+            100% {
+                scale: 1;
+                box-shadow: 0 0 0 0 rgba(72, 180, 97, 0);
+            }
         }
-        70% {
-            scale: 1.05;
-            box-shadow: 0 0 0 10px rgba(72, 180, 97, 0);
-        }
-        100% {
-            scale: 1;
-            box-shadow: 0 0 0 0 rgba(72, 180, 97, 0);
-        }
-    }
     </style>
 
 @endsection()
