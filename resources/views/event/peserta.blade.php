@@ -43,11 +43,22 @@
 
     <script>
         $(document).ready(function() {
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
             $("#transaksi-table").DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ route('event.eom.peserta', $id_event) }}",
+                ajax: {
+                    url: "{{ route('event.eom.peserta', $id_event) }}",
+                    data: function(d) {
+                        // Ambil nilai today dari URL dan konversi ke boolean
+                        const today = getQueryParam('today');
+                        d.today = today === 'true';
+                    }
+                },
                 columns: [{
                         data: "nama_lengkap",
                         name: "Nama Peserta",

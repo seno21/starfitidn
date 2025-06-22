@@ -71,6 +71,42 @@ class Transaksi extends Model
         return $query;
     }
 
+    public function allPesertaToday($id_event)
+    {
+        $query = DB::table('transaksi')
+            ->select(
+                'transaksi.id_user',
+                'transaksi.id_tiket',
+                'transaksi.id_event',
+                'transaksi.status_pembayaran',
+                'users.name',
+                'users.email',
+                'detail_users.no_telp',
+                'detail_users.nama_lengkap',
+                'detail_users.tgl_lahir',
+                'detail_users.jenis_kelamin',
+                'detail_users.ukuran_jersey',
+                'detail_users.domisili',
+                'detail_users.kontak_darurat',
+                'detail_users.tempat_lahir',
+                'transaksi.no_bib',
+                'transaksi.no_rfid',
+                'tikets.nama_promo',
+                'kategoris.nama_kategori',
+            )
+            ->join('users', 'users.id', 'transaksi.id_user')
+            ->join('detail_users', 'detail_users.id_user', 'transaksi.id_user')
+            ->join('tikets', 'tikets.id', 'transaksi.id_tiket')
+            ->join('kategoris', 'kategoris.id', 'tikets.kategori')
+            ->where('transaksi.status_pembayaran', 'PAID')
+            ->where('transaksi.active', 1)
+            ->where('transaksi.id_event', $id_event)
+            ->where('transaksi.created_at', '>=', Carbon::now()->startOfDay())
+            ->get();
+
+        return $query;
+    }
+
     public function pesertaToday($eventId = null)
     {
         $query = DB::table('transaksi')

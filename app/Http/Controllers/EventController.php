@@ -348,8 +348,13 @@ class EventController extends Controller
             'id_event' => $id_event
         ];
 
+        $today = filter_var($request->query('today'), FILTER_VALIDATE_BOOLEAN);
+
         $transaksi = new Transaksi();
-        $transaksi = $transaksi->allPeserta($id_event);
+        $transaksi = $today
+            ? (new Transaksi())->allPesertaToday($id_event)
+            : (new Transaksi())->allPeserta($id_event);
+
 
         if ($request->ajax()) {
             return DataTables::of($transaksi)

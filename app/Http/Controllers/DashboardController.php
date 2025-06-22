@@ -21,7 +21,8 @@ class DashboardController extends Controller
             'event' => $event->totalEvent($eventId),
             'allEvents' => $event->all(),
             'pesertaHariIni' => $transaksi->pesertaToday($eventId),
-            'totalPendaftar' => $transaksi->totalPendaftar($eventId)
+            'totalPendaftar' => $transaksi->totalPendaftar($eventId),
+            'eventId' => $eventId
             // 'user' => $user->totalUser()
         ];
 

@@ -16,7 +16,8 @@
                     <div class="form-group">
                         <label for="event">Pilih Event</label>
                         <div class="d-flex align-items-center">
-                            <select class="form-control mr-2" id="event" name="event">
+                            <select class="form-control mr-2 text-dark" id="event" name="event">
+                                <option value="">Pilih Event</option>
                                 @foreach ($allEvents as $allEvent)
                                     <option class="text-truncate" value="{{ $allEvent->id }}"
                                         {{ request('event') == $allEvent->id ? 'selected' : '' }}>
@@ -31,42 +32,63 @@
             </div>
             <div class="col-md-6"></div>
         </div>
-        <div class="row">
-            <div class="col-md-3 mb-4 stretch-card transparent">
-                <div class="card card-tale">
-                    <div class="card-body">
-                        <p class="mb-4 fs-5 fw-bold">Hari Ini</p>
-                        <p class="fs-30 mb-2">{{ $pesertaHariIni }} Peserta</p>
-                        <p class="fs-5 fw-bolder">Terdaftar Pada Event</p>
+        @if (isset($eventId))
+            <div class="row">
+                <div class="col-md-3 mb-4 stretch-card transparent">
+                    <a href="{{ route('event.eom.peserta', $eventId) }}?today=true" class="card card-tale text-decoration-none text-white">
+                        {{-- <div class="card card-tale"> --}}
+                            <div class="card-body">
+                                <p class="mb-4 fs-5 fw-bold">Hari Ini</p>
+                                <p class="fs-30 mb-2">{{ $pesertaHariIni }} Peserta</p>
+                                <p class="fs-5 fw-bolder">Terdaftar Pada Event</p>
+                            </div>
+                        {{-- </div> --}}
+                    </a>
+                </div>
+                <div class="col-md-3 mb-4 stretch-card transparent">
+                    <a href="{{ route('event.eom.peserta', $eventId) }}" class="card card-dark-blue text-decoration-none text-white">
+                        {{-- <div class="card card-dark-blue"> --}}
+                            <div class="card-body">
+                                <p class="mb-4 fs-5 fw-bold">Total Pendaftar</p>
+                                <p class="fs-30 mb-2">{{ $totalPendaftar }} Peserta</p>
+                                <p>Sudah mendapat BIB</p>
+                            </div>
+                        {{-- </div> --}}
+                    </a>
+                </div>
+                <div class="col-md-3 mb-4 stretch-card transparent">
+                    <a href="{{ route('event.eom.index') }}"
+                        class="text-decoration-none text-white card bg-danger text-light">
+                        <div class="card-body">
+                            <p class="mb-4 fs-5 fw-bold">Total Event</p>
+                            <p class="fs-30 mb-2">{{ $event }} Event</p>
+                            <p>Sudah terbuat</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 mb-4 stretch-card transparent">
+                    <a href="{{ route('list-akun') }}" class="text-decoration-none text-white bg-success text-light">
+                        <div class="card text-light bg-success">
+                            <div class="card-body">
+                                <p class="mb-4 fs-5 fw-bold">Total User</p>
+                                <p class="fs-30 mb-2">{{ DB::table('users')->count() }} User</p>
+                                <p>Terdaftar Pada Web <a href="http://starfitidn.com">starfitidn.com</a></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        @else
+            <div class="row">
+                <div class="col-md-3 mb-4 stretch-card transparent">
+                    <div class="card card-tale">
+                        <div class="card-body">
+                            <p class="mb-4 fs-5 fw-bold">Silakan pilih event terlebih dahulu</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-4 stretch-card transparent">
-                <div class="card card-dark-blue">
-                    <div class="card-body">
-                        <p class="mb-4 fs-5 fw-bold">Total Pendaftar</p>
-                        <p class="fs-30 mb-2">{{ $totalPendaftar }} Peserta</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4 stretch-card transparent">
-                <div class="card text-light bg-danger">
-                    <div class="card-body">
-                        <p class="mb-4 fs-5 fw-bold">Total Event</p>
-                        <p class="fs-30 mb-2">{{ $event }} Event</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4 stretch-card transparent">
-                <div class="card text-light bg-success">
-                    <div class="card-body">
-                        <p class="mb-4 fs-5 fw-bold">Total User</p>
-                        <p class="fs-30 mb-2">{{ DB::table('users')->count() }} User</p>
-                        <p>Terdaftar Pada Web <a href="http://starfitidn.com">starfitidn.com</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endif
     </div>
     <!-- content-wrapper ends -->
 
