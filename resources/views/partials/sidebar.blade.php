@@ -6,7 +6,7 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#data-master" aria-expanded="false"
                 aria-controls="data-master">
                 <i class="icon-layout menu-icon"></i>
@@ -15,9 +15,26 @@
             </a>
             <div class="collapse" id="data-master">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('list-admin') }}">List Admin</a></li>
+                </ul>
+            </div>
+            <div class="collapse" id="data-master">
+                <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('list-akun') }}">List Akun</a></li>
                 </ul>
             </div>
+        </li> --}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('list-admin') }}" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-layout menu-icon"></i>
+                <span class="menu-title">List Admin</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('list-akun') }}" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-layout menu-icon"></i>
+                <span class="menu-title">List Akun</span>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('event.eom.index') }}" aria-expanded="false" aria-controls="ui-basic">

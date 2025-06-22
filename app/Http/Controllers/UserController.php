@@ -20,6 +20,15 @@ class UserController extends Controller
         return view('pages.list-akun', compact('users'), $data);
     }
 
+    public function admin()
+    {
+        $data = [
+            'title' => 'List Users'
+        ];
+        $users = User::where('role', 'admin')->get();
+        return view('pages.list-admin', compact('users'), $data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -58,7 +67,7 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = User::findOrFail($request->id);
-        $user->role = $request->input('currentRole') === 'user' ? 'partner' : 'user';
+        $user->role = $request->input('currentRole') === 'user' ? 'admin' : 'user';
         $user->save();
 
         return response()->json([

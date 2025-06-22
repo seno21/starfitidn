@@ -33,6 +33,7 @@ Route::middleware(IsAdmin::class)->group(function () {
     // })->name('dashboard');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/list-akun', [UserController::class, 'index'])->name('list-akun');
+    Route::get('/list-admin', [UserController::class, 'admin'])->name('list-admin');
     Route::post('/ganti-role', [UserController::class, 'update'])->name('ganti-role');
 
     /*

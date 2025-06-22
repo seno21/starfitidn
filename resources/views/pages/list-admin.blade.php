@@ -6,6 +6,9 @@
                 <h4 class="card-title">List User</h4>
                 {{-- {{dd($users)}} --}}
                 <div class="row">
+                    <a href="{{ route('list-akun') }}" class="btn btn-primary">Tambah Admin</a>
+                </div>
+                <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
                             <table id="order-listing" class="table">
@@ -26,14 +29,14 @@
                                             <td>{{ $user->email }}</td>
                                             <td>
                                                 <label
-                                                    class="badge {{ $user->role == 'admin' ? 'badge-info' : 'badge-warning' }}">
+                                                    class="badge {{ $user->role == 'partner' ? 'badge-info' : 'badge-warning' }}">
                                                     {{ $user->role }}
                                                 </label>
                                             </td>
                                             <td>
                                                 <button class="btn btn-outline-primary change-role-btn"
                                                     data-id="{{ $user->id }}" data-role="{{ $user->role }}">
-                                                    Jadikan Admin
+                                                    Hapus Admin
                                                 </button>
                                             </td>
                                         </tr>
@@ -65,7 +68,7 @@
                     // Show SweetAlert2 confirmation dialog
                     swal({
                         title: 'Konfirmasi Perubahan Role',
-                        text: `Anda yakin ingin mengganti role dari ${selectedUserRole} menjadi ${selectedUserRole === 'user' ? 'admin' : 'user'}?`,
+                        text: `Anda yakin ingin mengganti role dari ${selectedUserRole} menjadi ${selectedUserRole === 'user' ? 'partner' : 'user'}?`,
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3f51b5',
@@ -115,14 +118,14 @@
                                             .textContent = newRole;
                                         tableRow.querySelector('td:nth-child(4) .badge')
                                             .className =
-                                            `badge ${newRole === 'admin' ? 'badge-info' : 'badge-warning'}`;
+                                            `badge ${newRole === 'partner' ? 'badge-info' : 'badge-warning'}`;
 
                                         const button = tableRow.querySelector(
                                             'td:nth-child(5) .change-role-btn');
                                         button.setAttribute('data-role', newRole);
                                         // Show success alert
                                         showSwal('success-message')
-                                        location.reload();
+                                        location.reload()
                                     } else {
                                         throw new Error('Something went wrong');
                                     }

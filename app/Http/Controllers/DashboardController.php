@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $data = [
             'title' => 'Welcome to Admin Dashboard',
             'event' => $event->totalEvent($eventId),
-            'allEvents' => $event->all(),
+            'allEvents' => $event->allEvent(),
             'pesertaHariIni' => $transaksi->pesertaToday($eventId),
             'totalPendaftar' => $transaksi->totalPendaftar($eventId),
             'eventId' => $eventId
