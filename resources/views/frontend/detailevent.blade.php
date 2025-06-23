@@ -210,7 +210,7 @@
         @endauth
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-4 order-1 order-md-0 mt-2 mt-md-0 text-center">
+                <div class="col-md-7 order-1 order-md-0 mt-2 mt-md-0 text-center">
                     <p class="fw-bold fs-3 m-3 shadow rounded border-secondary" style="background: white;">
                         TIKET EVENT
                     </p>
@@ -336,7 +336,8 @@
                                                 @endif
                                             @endif
                                         @else
-                                            <p class="text-danger">Penjualan sudah ditutup</p>
+                                            <p class="text-light fs-5 p-2 badge bg-danger d-block">Penjualan sudah ditutup
+                                            </p>
                                         @endif
                                     </div>
                                 </div>
@@ -401,7 +402,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8 order-0" style="padding-left: 25px;">
+                <div class="col-md-5 order-0" style="padding-left: 25px;">
                     <div class="card p-4 shadow">
                         <div class="top-section"
                             style="background-image: url('{{ asset('storage/' . $event->poster) }}')">
@@ -654,7 +655,7 @@
 
         .card .top-section {
             width: 100%;
-            height: 250px;
+            height: 750px;
             border-radius: 15px;
             background-size: cover;
             background-position: center;
