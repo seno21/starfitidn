@@ -49,12 +49,12 @@
                 <span class="menu-title">Gallery</span>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('profit.index') }}" aria-expanded="false" aria-controls="form-elements">
                 <i class="mdi mdi-account-group menu-icon"></i>
                 <span class="menu-title">Compliment</span>
             </a>
-        </li>
+        </li> --}}
         {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('profit.index') }}" aria-expanded="false" aria-controls="form-elements">
                 <i class="mdi mdi-cash-multiple menu-icon"></i>
