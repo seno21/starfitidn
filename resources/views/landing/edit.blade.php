@@ -21,7 +21,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Thumbnail Konten</label>
+                            <label>Logo</label>
                             <img class="rounded d-block m-3 col-md-4" id="thubnailView"
                                 src="{{ asset('storage/' . $abouts->thumbnail) }}">
                             <input type="file" name="thumbnail" class="file-upload-default" id="thumbnail"

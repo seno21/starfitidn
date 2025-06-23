@@ -21,14 +21,14 @@
                     <div class="tiles dark"></div>
                     <div class="tiles default"></div>
                 </div>
-                <p class="settings-heading mt-2">HEADER SKINS</p>
+                <p class="settings-heading mt-2">Setting Website</p>
                 <div class="color-tiles mx-0 px-4">
 
                     {{-- {{ dd($about->id) }} --}}
                     <a class="btn btn-md btn-primary" href="{{ route('landing.edit', $abouts->id) }}" aria-expanded="false"
                         aria-controls="ui-basic">
                         <i class="ti-settings"></i>
-                        <span class="menu-title">LANDING PAGE</span>
+                        <span class="menu-title">Update Informasi Website</span>
                     </a>
 
                 </div>
