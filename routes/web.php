@@ -70,6 +70,8 @@ Route::middleware(IsAdmin::class)->group(function () {
         Route::resource('img', GalleryController::class);
         Route::get('download/{id}', [GalleryController::class, 'downloadImg'])->name('img.download');
     });
+
+    Route::resource('landing', LandingController::class)->except(['show']);
 });
 
 Route::middleware(IsUser::class)->group(function () {

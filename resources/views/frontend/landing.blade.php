@@ -11,15 +11,11 @@
             <div class="col-md-12">
                 <div id="carouselExample" class="carousel slide justify-content-center align-items-center p-0">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="images/carousel/banner-1.jpeg" class="d-block w-100" alt="banner">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/carousel/banner-2.jpeg" class="d-block w-100" alt="banner">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/carousel/banner-3.jpeg" class="d-block w-100" alt="banner">
-                        </div>
+                        @foreach ($gallerys as $gallery)
+                            <div class="carousel-item active">
+                                <img src="{{ asset('storage/' . $gallery->nama_foto) }}" class="d-block w-100" alt="banner">
+                            </div>
+                        @endforeach
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
                         data-bs-slide="prev">
@@ -44,16 +40,12 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <img src="{{ asset('images/dashboard-logo.png') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('storage/' . $about->thumbnail) }}" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0">
                         <h3>About Us</h3>
                         <p>
-                            Kami adalah penyelenggara acara olahraga yang berdedikasi untuk menciptakan pengalaman yang tak
-                            terlupakan. Dengan keahlian dalam merancang dan mengelola berbagai event, kami memastikan setiap
-                            acara berlangsung dinamis dan penuh energi. Dari kompetisi lokal hingga turnamen besar, kami
-                            mengurus semua detail agar setiap peserta dan penonton menikmati momen luar biasa. Bergabunglah
-                            dengan kami dan rasakan semangat olahraga yang sejati!
+                            {{ $about->konten }}
                         </p>
                         {{-- Tombol Join Partner --}}
                         {{-- <div>

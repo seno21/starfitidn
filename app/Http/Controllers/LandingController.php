@@ -2,16 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Abouts;
 use App\Models\Events;
 use App\Models\Gallerys;
 use App\Models\Tikets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class LandingController extends Controller
 {
     // Method Event Landing - FrontEnd
+    public function edit($id)
+    {
+        $abouts = new Abouts();
+
+        $data = [
+            'title' => 'Landing Page Kontent',
+            'abouts' => $abouts->about($id),
+        ];
+
+        return view('landing.edit', $data);
+    }
+
+
+    public function update(Request $request, Abouts $about)
+    {
+        $request->validate([
+            'thumbnail' => 'nullable|image|mimes:jpeg,jpg,png|max:1024',
+            'konten' => 'required|string'
+        ]);
+
+        $about = Abouts::findOrFail($request->id);
+        $about->konten = $request->konten;
+        if ($request->hasFile('thumbnail')) {
+            if ($about->thumbnail && Storage::exists($about->thumbnail)) {
+                Storage::delete($about->thumbnail);
+            }
+            $about->thumbnail = $request->file('thumbnail')->store('about-img');
+        }
+
+        $about->active = 1;
+        $about->save();
+
+        return redirect()->route('dashboard')->with('success', 'About Us Berhasil Diperbarui');
+    }
+
     public function allGallery()
     {
         $gallerys = new Gallerys();
@@ -23,9 +60,6 @@ class LandingController extends Controller
 
         return view('frontend.gallery', $data);
     }
-
-
-
 
     public function allEvent()
     {
@@ -111,6 +145,7 @@ class LandingController extends Controller
         $events = new Events();
         $auth = new Auth();
         $gallerys = new Gallerys();
+        $about = new Abouts();
 
         // dd($gallerys->all());
 
@@ -118,6 +153,7 @@ class LandingController extends Controller
             'events' => $events->showEventLanding(),
             'auth' => $auth,
             'gallerys' => $gallerys->allGallery(),
+            'about' => $about->about(),
         ];
 
 

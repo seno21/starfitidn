@@ -89,13 +89,13 @@ class EventController extends Controller
         return redirect()->route('event.eom.index')->with('success', 'Event berhasil dibuat');
     }
 
-    public function edit($id)
+    public function edit()
     {
         $events = new Events();
 
         $data = [
             'title' => 'Edit Event',
-            'event' => $events->find($id),
+            'event' => $events->all(),
         ];
 
         return view('event.edit', $data);

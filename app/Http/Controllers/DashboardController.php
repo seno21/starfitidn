@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Abouts;
 use App\Models\Events;
 use App\Models\Transaksi;
 use App\Models\User;
@@ -15,6 +16,7 @@ class DashboardController extends Controller
         $transaksi = new Transaksi();
         // $user = new User();
         $eventId = $request->input('event');
+        $abouts = new Abouts();
 
         $data = [
             'title' => 'Welcome to Admin Dashboard',
@@ -22,7 +24,9 @@ class DashboardController extends Controller
             'allEvents' => $event->allEvent(),
             'pesertaHariIni' => $transaksi->pesertaToday($eventId),
             'totalPendaftar' => $transaksi->totalPendaftar($eventId),
-            'eventId' => $eventId
+            'eventId' => $eventId,
+            'abouts' => $abouts->about()
+
             // 'user' => $user->totalUser()
         ];
 
