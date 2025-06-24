@@ -379,23 +379,30 @@ class EventController extends Controller
         if ($request->ajax()) {
             return DataTables::of($kategoris)
                 ->addColumn('action', function ($kategori) {
+                    // It's generally safer and cleaner to build the URLs directly here
+                    // using PHP's route() helper, as it's evaluated server-side.
+                    $printBibUrl = route('bib.listBIB', ['kategori_id' => $kategori->id]); // Assuming bib.listBIB might need a category ID
+                    $deleteUrl = route('event.eom.removeKategori', $kategori->id);
+
                     return '
-                    <button
-                        type="button"
-                        class="btn btn-sm btn-success edit-kategori"
-                        data-id="' . $kategori->id . '"
-                        data-nama_kategori="' . $kategori->nama_kategori . '"
-                        data-min_usia="' . $kategori->min_usia . '"
-                        data-max_usia="' . $kategori->max_usia . '"
-                        data-start_bib="' . $kategori->start_bib . '"
-                        data-gender="' . $kategori->gender . '">
-                        <i class="mdi mdi-pencil-box-outline"></i>
-                    </button>
-                    <form method="POST" action="' . route('event.eom.removeKategori', $kategori->id) . '" style="display:inline;">
-                        ' . csrf_field() . '
-                        <button type="submit" class="btn btn-sm btn-danger" id="btnDel"><i class="mdi mdi-delete"></i></button>
-                    </form>';
+                        <a href="' . $printBibUrl . '" class="btn btn-sm btn-info" title="Cetak BIB" target="_blank"><i class="mdi mdi-printer"></i></a>
+                        <button
+                            type="button"
+                            class="btn btn-sm btn-success edit-kategori"
+                            data-id="' . $kategori->id . '"
+                            data-nama_kategori="' . htmlspecialchars($kategori->nama_kategori) . '"
+                            data-min_usia="' . $kategori->min_usia . '"
+                            data-max_usia="' . $kategori->max_usia . '"
+                            data-start_bib="' . $kategori->start_bib . '"
+                            data-gender="' . $kategori->gender . '">
+                            <i class="mdi mdi-pencil-box-outline"></i>
+                        </button>
+                        <form method="POST" action="' . $deleteUrl . '" style="display:inline;">
+                            ' . csrf_field() . '
+                            <button type="submit" class="btn btn-sm btn-danger" id="btnDel"><i class="mdi mdi-delete"></i></button>
+                        </form>';
                 })
+                ->rawColumns(['action']) // Important: Tell DataTables these columns contain HTML
                 ->make(true);
         }
 

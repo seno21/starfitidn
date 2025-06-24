@@ -72,6 +72,9 @@ Route::middleware(IsAdmin::class)->group(function () {
     });
 
     Route::resource('landing', LandingController::class)->except(['show']);
+    Route::prefix('bib')->name('bib.')->group(function () {
+        Route::get('list', [CetakController::class, 'listBIB'])->name('listBIB');
+    });
 });
 
 Route::middleware(IsUser::class)->group(function () {

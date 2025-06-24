@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             font-family: sans-serif;
-            background-image: url('{{ public_path('storage/' . $data->img_bib) }}');
+            background-image: url('{{ public_path('storage/'.$image) }}');
             background-size: cover;
             background-position: center;
         }
@@ -32,24 +32,24 @@
         }
 
         .logo {
-            max-height: 100px;
+            height: 40px;
         }
 
         .event-name {
-            font-size: 50px;
+            font-size: 30px;
             font-weight: bold;
             text-align: right;
         }
 
         .no-bib {
-            font-size: 300px;
+            font-size: 200px;
             font-weight: bold;
             text-align: center;
         }
 
         .category,
         .participant-name {
-            font-size: 60px;
+            font-size: 40px;
             font-weight: bold;
             text-align: center;
         }
@@ -57,34 +57,34 @@
 </head>
 
 <body>
-    <table>
-        <!-- Baris 1: Logo & Nama Event -->
+    @foreach($listPeserta as $i => $data)
+    <table @if (!$loop->last) style="page-break-after: always;" @endif>
         <tr>
             <td width="10%">
-                <img src="{{ public_path('storage/logo.png') }}" class="logo" alt="Logo">
+                <img src="{{ public_path('images/logo.png') }}" class="logo" alt="Logo">
             </td>
             <td class="event-name">
-                {{ $data->event_name ?? 'Nama Event' }}
+                {{ $data->nama_event ?? 'Nama Event' }}
             </td>
         </tr>
 
-        <!-- Baris 2: No BIB -->
         <tr>
             <td colspan="2" class="no-bib">
-                {{ $data->no_bib }}
+                {{ $data->no_bib ?? $i }}
             </td>
         </tr>
         <tr>
             <td colspan="2" class="participant-name">
-                {{ $data->name }}
+                {{ $data->name ?? 'Sample Name' }}
             </td>
         </tr>
         <tr>
             <td colspan="2" class="category">
-                {{ $data->kategori_lari ?? 'Kategori Lari' }}
+                {{ $data->nama_kategori ?? 'Kategori Lari' }}
             </td>
         </tr>
     </table>
+    @endforeach
 </body>
 
 </html>
