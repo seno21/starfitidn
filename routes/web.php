@@ -67,7 +67,7 @@ Route::middleware(IsAdmin::class)->group(function () {
 
     // Ini contoh jika middleware nya dalam bentuk array
     Route::prefix('gallery')->name('gallery.')->group(function () {
-        Route::resource('img', GalleryController::class);
+        Route::resource('img', GalleryController::class)->except('show');
         Route::get('download/{id}', [GalleryController::class, 'downloadImg'])->name('img.download');
     });
 

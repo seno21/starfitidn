@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Gallerys;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
     public function create()
     {
+        $gallerys = new Gallerys();
+
         $data = [
-            'title' => 'Welcome to Gallery'
+            'title' => 'Welcome to Gallery',
+            'gallerys' => $gallerys->all()->where('active', 1)
         ];
 
         return view('gallery.create', $data);
@@ -48,5 +52,19 @@ class GalleryController extends Controller
         if (file_exists($filePath)) {
             return response()->download($filePath);
         }
+    }
+
+    public function destroy($id)
+    {
+        // Set active to 0
+        $gallery = Gallerys::find($id);
+
+
+        Storage::delete($gallery->nama_foto);
+        $gallery->active = 0;
+        $gallery->save();
+
+
+        return redirect()->back();
     }
 }
